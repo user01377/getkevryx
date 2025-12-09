@@ -1,0 +1,17 @@
+.navbar {
+    height: 10vh;
+    width: 100%;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar h1 {
+    color: black;
+}
+
+.navbar-logo {
+    height: 100px;
+    width: auto;
+}
