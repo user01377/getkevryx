@@ -19,7 +19,7 @@
 }
 
 .nav-logo {
-    gap: 10px;
+    gap: 6px;
     display: flex;
     align-items: center;
     text-decoration: none; /* removes that underline beneath the logo text */
