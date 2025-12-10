@@ -1,17 +1,83 @@
 .navbar {
-    height: 8vh;
+    height: 70px;
     width: 100%;
-    background-color: wheat;
+    background-color: #f8f5ef;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.navbar h1 {
-    color: black;
+.nav-links {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.nav-logo {
+    gap: 6px;
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* removes that underline beneath the logo text */
 }
 
 .navbar-logo {
-    height: 100px;
+    height: 60px;
     width: auto;
+    filter: invert(100%);
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+.nav-center a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #222;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-center a:hover {
+    color: #444;
+    opacity: 0.7;
+}
+
+.nav-cart {
+    display: flex;
+    align-items: center;
+}
+
+.nav-cart img {
+    height: 26px;
+    width: auto;
+}
+
+@media (max-width: 600px) {
+
+    .nav-center {
+        gap: 20px;
+    }
+
+    .navbar-logo {
+        height: 32px;
+    }
+
+    .nav-center a {
+        font-size: 0.95rem;
+    }
 }

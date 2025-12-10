@@ -1,11 +1,18 @@
 import LandingPage from "./pages/landing-page";
+
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 
 function App() {
   return (
-    <div>
+    <div className="page-wrapper">
       <Navbar />
-      <LandingPage />
+
+      <main className="content">
+        <LandingPage />
+      </main>
+
+      <Footer />
     </div>
   );
 }
