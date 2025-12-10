@@ -8,7 +8,7 @@ export default function Footer() {
         <p className="footer-brand">© 2025 Kevryx. All rights reserved.</p>
 
         <div className="social-icons">
-          <a href="#"><img src="/instagram.svg" alt="GitHub"/></a>
+          <a href="https://github.com/user01377/getkevryx"><img src="/github.svg" alt="GitHub"/></a>
         </div>
       </div>
 
