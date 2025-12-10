@@ -1,19 +1,28 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import LandingPage from "./pages/landing-page";
+import Contact from "./pages/contact-page";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
 function App() {
   return (
-    <div className="page-wrapper">
-      <Navbar />
+    <Router>
+      <div className="page-wrapper">
+        <Navbar />
 
-      <main className="content">
-        <LandingPage />
-      </main>
+        <main>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
