@@ -5,6 +5,7 @@ import "./App.css"
 
 import LandingPage from "./pages/landing-page";
 import Contact from "./pages/contact-page";
+import Mission from "./pages/mission-page";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/mission" element={<Mission />} />
           </Routes>
         </main>
 

@@ -1,9 +1,9 @@
 .contact-page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 }
 
 .contact-page h1 {
