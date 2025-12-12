@@ -7,7 +7,6 @@
     background-color: #f8f5ef;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 1000;
@@ -47,11 +46,11 @@
     font-weight: 700;
     color: #222;
 }
-
 .nav-center {
-    flex: 1;
+    position: absolute; /* we have to absolutely position so it doesnt just center relative to the items in the div */
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
     gap: 35px;
 }
 
@@ -68,6 +67,10 @@
     opacity: 0.7;
 }
 
+.nav-right {
+    margin-left: auto; /* keeps the right nav section to the right */
+}
+
 .nav-cart {
     display: flex;
     align-items: center;
@@ -76,19 +79,4 @@
 .nav-cart img {
     height: 26px;
     width: auto;
-}
-
-@media (max-width: 600px) {
-
-    .nav-center {
-        gap: 20px;
-    }
-
-    .navbar-logo {
-        height: 32px;
-    }
-
-    .nav-center a {
-        font-size: 0.95rem;
-    }
 }
