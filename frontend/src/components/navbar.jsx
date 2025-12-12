@@ -39,10 +39,10 @@ export default function Navbar() {
       </div>
 
       <div className="nav-center">
-        <Link to="/" className="nav-products">Products</Link>
-        <Link to="/mission" className="nav-mission">Mission</Link>
+        <Link to="/" className="nav-products">ALL PRODUCTS</Link>
+        <Link to="/mission" className="nav-mission">MISSION</Link>
         <Link to="/" className="nav-faq">FAQ</Link>
-        <Link to="/contact" className="nav-contact">Contact</Link>
+        <Link to="/contact" className="nav-contact">CONTACT</Link>
       </div>
 
       <div className="nav-right">

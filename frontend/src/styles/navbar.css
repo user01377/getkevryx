@@ -51,7 +51,7 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 35px;
+    gap: 45px;
 }
 
 .nav-center a {
