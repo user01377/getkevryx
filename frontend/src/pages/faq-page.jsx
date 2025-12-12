@@ -45,42 +45,44 @@ export default function FaqPage() {
 
                 {/* FAQ Topic 2 */}
                 <section className="faq-topic">
-                <h1>Account & Billing</h1>
-        
-                <details>
-                    <summary>How Can I Create An Account?</summary>
-                    <div className="content">
-                    <p>No account creation is available at this time. All orders will be tracked via email and confirmation number.</p>
-                    </div>
-                </details>
+                    <h1>Account & Billing</h1>
+            
+                    <details>
+                        <summary>How Can I Create An Account?</summary>
+                        <div className="content">
+                        <p>No account creation is available at this time. All orders will be tracked via email and confirmation number.</p>
+                        </div>
+                    </details>
 
                 </section>
 
                 {/* FAQ Topic 3 */}
                 <section className="faq-topic">
-                <h1>Warranty & Returns</h1>
+                    <h1>Warranty & Returns</h1>
 
-                <details>
-                    <summary>What warranty do your products have?</summary>
-                    <div className="content">
-                    <p>All products from our website come with a one-year warranty, if purchased directly from us. Resellers lose all warranty, though products may still be mailed in and repaired with a discount if proof of purchase is providied.</p>
-                    </div>
-                </details>
+                    <details>
+                        <summary>What warranty do your products have?</summary>
+                        <div className="content">
+                        <p>All products from our website come with a one-year warranty, if purchased directly from us. Resellers lose all warranty, though products may still be mailed in and repaired with a discount if proof of purchase is providied.</p>
+                        </div>
+                    </details>
+                
+
+                    <details>
+                        <summary>What is your return policy?</summary>
+                        <div className="content">
+                            <p>We offer a 30-day full refund return policy for all unopened items. After 30 days, items on record which are purchased from us and do not show significant significant wear may be eligible for a partial refund.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>The clothing item I purchased does not fit me, can I exchange?</summary>
+                        <div className="content">
+                            <p>Absolutely! If you have purchased directly from us and are within the 30-day return policy, contact support before the 30 days and we will exchange your item.</p>
+                        </div>
+                    </details>
+                    
                 </section>
-
-                <details>
-                    <summary>What is your return policy?</summary>
-                    <div className="content">
-                        <p>We offer a 30-day full refund return policy for all unopened items. After 30 days, items on record which are purchased from us and do not show significant significant wear may be eligible for a partial refund.</p>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>The clothing item I purchased does not fit me, can I exchange?</summary>
-                    <div className="content">
-                        <p>Absolutely! If you have purchased directly from us and are within the 30-day return policy, contact support before the 30 days and we will exchange your item.</p>
-                    </div>
-                </details>
 
             </div>
 
