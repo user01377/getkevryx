@@ -24,7 +24,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center center; /* adjusts how the image is weighted to fit, depends on how the images are taken */
 }
 
 .hero-text {

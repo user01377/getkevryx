@@ -7,7 +7,7 @@ export default function FaqPage() {
             
             {/* the banner image */}
             <div className="hero-banner">
-                <img src="https://placecats.com/1600/900" alt="Image Banner" className="hero-image"/>
+                <img src="https://placecats.com/1920/1080" alt="Image Banner" className="hero-image"/>
                 <div className="hero-text">
                     <h1></h1>
                 </div>

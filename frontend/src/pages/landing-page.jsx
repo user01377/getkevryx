@@ -7,7 +7,7 @@ export default function LandingPage() {
 
             {/* the banner image */}
             <div className="">
-                <img src="https://placecats.com/1600/900" alt="Image Banner" className=""/>
+                <img src="https://placecats.com/1920/1080" alt="Image Banner" className=""/>
                 <div className="hero-text">
                     <h1>Kevryx.</h1>
                 </div>
