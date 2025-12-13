@@ -2,14 +2,13 @@
     position: relative;
     width: 100%;
     height: 70px;
-    background-color: #f8f5ef;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
     box-sizing: border-box;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    font-family: "Inter", "Helvetica Neue", sans-serif;
 }
 
 /* left section for logo */
@@ -53,7 +52,7 @@
 
 .nav-center .nav-link {
     position: relative;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #222;
     text-decoration: none;

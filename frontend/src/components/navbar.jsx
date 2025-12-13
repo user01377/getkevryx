@@ -9,15 +9,15 @@ export default function Navbar() {
       <div className="nav-left">
         <Link to="/" className="nav-logo">
           <img src="/logo.svg" alt="Logo" className="navbar-logo" />
-          <span className="logo-text">Kevryx</span>
+          <span className="logo-text">kevryx</span>
         </Link>
       </div>
 
       <div className="nav-center">
-        <Link to="/" className="nav-link">ALL PRODUCTS</Link>
-        <Link to="/mission" className="nav-link">MISSION</Link>
-        <Link to="/faq" className="nav-link">FAQ</Link>
-        <Link to="/contact" className="nav-link">CONTACT</Link>
+        <Link to="/" className="nav-link">all products</Link>
+        <Link to="/mission" className="nav-link">mission</Link>
+        <Link to="/faq" className="nav-link">faq</Link>
+        <Link to="/contact" className="nav-link">contact</Link>
       </div>
 
       <div className="nav-right">
