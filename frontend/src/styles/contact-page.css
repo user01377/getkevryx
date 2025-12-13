@@ -1,76 +1,105 @@
 .contact-page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2rem;
+  min-height: 100vh;
+  padding: 2rem 5%;
+  box-sizing: border-box;
+}
+
+/* Top-left header */
+.contact-header {
+  font-size: 3rem;
+  font-weight: 700;
+  color: black;
+  justify-self: start; /* aligns to the left of the grid */
+  margin: 0;
+}
+
+/* Intro centered above form */
+.contact-intro {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-}
-
-.contact-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
   text-align: center;
+  gap: 1rem;
 }
 
+.contact-subheader {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.contact-subtext {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0;
+  max-width: 600px; /* keeps text from stretching too wide */
+}
+
+/* Centered form */
 .contact-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-width: 600px;
-  background: #ffffff;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  background-color: #ffffff; /* optional if you want a card look */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-form label {
   font-weight: 600;
   margin-bottom: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  color: #374151;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
   font-size: 1rem;
+  background-color: #f9fafb;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
+  border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .contact-form textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 140px;
 }
 
 .contact-form button {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   padding: 0.85rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: #ffffff;
+  background-color: rgba(0,0,0,1);
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .contact-form button:hover {
-  transform: translateY(-2px);
-}
-
-.contact-form button:active {
-  transform: translateY(0);
+  background-color: rgba(0,0,0,0.8);
 }
 
 .contact-form label::after {
   content: " *";
-  color: red;
+  color: #ef4444;
   font-weight: bold;
 }
