@@ -15,7 +15,7 @@ export default function Contact() {
             Currently, our estimated response time is 1-2 business days.
         </p>
         <p className="contact-subtext">
-            Please see the <Link to="/faq" className="contact-faq">FAQ page</Link> before submitting a contact form. Thank You!
+            Please see the <Link to="/faq" className="contact-faq">faq page</Link> before submitting a contact form. Thank You!
         </p>
     </div>
 
