@@ -1,48 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const [hidden, setHidden] = useState(false);
-
-  useEffect(() => {
-    // this implements a smart Navbar, hiding and showing the Navbar
-    // based on how far you scroll
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 20) { // adjusts the amount you need to scroll to hide navbar
-        // scrolling down hides the nav bar
-        setHidden(true);
-      } else {
-        // scrolling up shows navbar
-        setHidden(false);
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav className={`navbar ${hidden ? "hidden" : ""}`}>
+
+    <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="nav-logo">
           <img src="/logo.svg" alt="Logo" className="navbar-logo" />
-          <span className="logo-text">Kevryx</span>
+          <span className="logo-text">kevryx</span>
         </Link>
       </div>
 
       <div className="nav-center">
-        <Link to="/" className="nav-products">ALL PRODUCTS</Link>
-        <Link to="/mission" className="nav-mission">MISSION</Link>
-        <Link to="/faq" className="nav-faq">FAQ</Link>
-        <Link to="/contact" className="nav-contact">CONTACT</Link>
+        <Link to="/" className="nav-link">all products</Link>
+        <Link to="/mission" className="nav-link">mission</Link>
+        <Link to="/faq" className="nav-link">faq</Link>
+        <Link to="/contact" className="nav-link">contact</Link>
       </div>
 
       <div className="nav-right">
@@ -51,5 +26,6 @@ export default function Navbar() {
         </Link>
       </div>
     </nav>
+    
   );
 }

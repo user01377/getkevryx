@@ -9,7 +9,7 @@ export default function LandingPage() {
             <div className="">
                 <img src="https://placecats.com/1920/1080" alt="Image Banner" className=""/>
                 <div className="hero-text">
-                    <h1>Kevryx.</h1>
+                    <h1>kevryx.</h1>
                 </div>
             </div>
 
