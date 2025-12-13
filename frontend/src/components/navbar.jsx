@@ -6,28 +6,25 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    // this implements a smart Navbar, hiding and showing the Navbar
-    // based on how far you scroll
     let lastScrollY = window.scrollY;
-
+    const scrollThreshold = 10; // higher means more pixels needed to hide/show navbar
+  
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 20) { // adjusts the amount you need to scroll to hide navbar
-        // scrolling down hides the nav bar
+  
+      if (currentScrollY > lastScrollY + scrollThreshold) {
         setHidden(true);
-      } else {
-        // scrolling up shows navbar
+      } else if (currentScrollY < lastScrollY - scrollThreshold) {
         setHidden(false);
       }
-
+  
       lastScrollY = currentScrollY;
     };
-
+  
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
     <nav className={`navbar ${hidden ? "hidden" : ""}`}>
