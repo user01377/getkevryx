@@ -37,6 +37,12 @@
   max-width: 600px; /* keeps text from stretching too wide */
 }
 
+.contact-faq {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+
 /* Centered form */
 .contact-form {
   display: flex;
