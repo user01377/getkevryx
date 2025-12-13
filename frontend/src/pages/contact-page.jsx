@@ -5,10 +5,10 @@ export default function Contact() {
   return (
 <main className="contact-page page">
 
-    <h1 className="contact-header">Contact Us</h1>
+    <h1 className="contact-header">CONTACT US</h1>
 
     <div className="contact-intro">
-        <h2 className="contact-subheader">Have A Question For Us?</h2>
+        <h2 className="contact-subheader">have a question for our team?</h2>
         <p className="contact-subtext">
             Our Customer Service Team is actively working on replying to inquiries. 
             Currently, our estimated response time is 1-2 business days.
