@@ -24,27 +24,22 @@ export default function LandingPage() {
         <div className="editorial-grid">
           <div className="editorial-item" style={{ height: "520px" }}>
             <img src="https://placecats.com/millie/600/900" alt="Product 1" />
-            <span className="editorial-caption">Technical Jacket</span>
           </div>
 
           <div className="editorial-item" style={{ height: "420px", marginTop: "4rem" }}>
             <img src="https://placecats.com/601/700" alt="Product 2" />
-            <span className="editorial-caption">Performance Pants</span>
           </div>
 
           <div className="editorial-item" style={{ height: "560px" }}>
             <img src="https://placecats.com/602/850" alt="Product 3" />
-            <span className="editorial-caption">All‑Weather Backpack</span>
           </div>
 
           <div className="editorial-item" style={{ height: "460px", marginTop: "3rem" }}>
             <img src="https://placecats.com/603/720" alt="Product 4" />
-            <span className="editorial-caption">Utility Layer</span>
           </div>
 
           <div className="editorial-item" style={{ height: "540px" }}>
             <img src="https://placecats.com/604/880" alt="Product 5" />
-            <span className="editorial-caption">Lightweight Base</span>
           </div>
         </div>
       </section>
@@ -53,8 +48,14 @@ export default function LandingPage() {
       {/* LARGE SIDE-BY-SIDE IMAGES */}
       <section className="large-images">
         <div className="large-images-grid">
-          <img src="https://placecats.com/poppy/800/900" alt="Left Large Product" />
-          <img src="https://placecats.com/neo_2/801/900" alt="Right Large Product" />
+          <div style={{ position: "relative" }}>
+            <img src="https://placecats.com/poppy/800/900" alt="Left" />
+            <span className="caption top-left">Technical Jacket</span>
+          </div>
+          <div style={{ position: "relative" }}>
+            <img src="https://placecats.com/neo_2/801/900" alt="Right" />
+            <span className="caption bottom-right">Performance Pants</span>
+          </div>
         </div>
       </section>
 
