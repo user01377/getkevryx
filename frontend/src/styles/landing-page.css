@@ -81,7 +81,7 @@
 .editorial-item {
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 1px;
   transition: transform 0.5s ease;
 }
 
@@ -254,5 +254,4 @@
   max-width: 400px;
   object-fit: cover;
   height: auto;
-  border-radius: 4px;
 }
