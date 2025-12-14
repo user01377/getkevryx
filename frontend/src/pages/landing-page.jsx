@@ -71,7 +71,7 @@ export default function LandingPage() {
               Founded in 2025, <strong>kevryx</strong> creates mission-driven apparel for those who carve their own path. 
               More than clothing, our performance gear is built to endure the elements—engineered with purpose, 
               designed to perform, and made to last. Inspired by the Hmong word <em>“kev,”</em> meaning “way” or “path,” 
-              <strong>kevryx</strong> embodies individuality, resilience, and the courage to define your own journey.
+              <strong> kevryx</strong> embodies individuality, resilience, and the courage to define your own journey.
             </p>
             
             <div className="landing-bio-links">
