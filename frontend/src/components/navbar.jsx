@@ -1,11 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  return (
+  const { pathname } = useLocation();
+  const isLanding = pathname === "/";
 
-    <nav className="navbar">
+  // pre-render navbar after threshold
+  const [renderNavbar, setRenderNavbar] = useState(!isLanding);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!isLanding) {
+      setRenderNavbar(true);
+      setVisible(true);
+      return;
+    }
+
+    const threshold = 120; // controls the px needed to render navbar
+
+    const handleScroll = () => {
+      if (!renderNavbar && window.scrollY > threshold) {
+        setRenderNavbar(true);
+      }
+  
+      if (renderNavbar) {
+        setVisible(window.scrollY < threshold);
+      }
+
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isLanding, renderNavbar]);
+
+  // If not yet rendered, return null
+  if (!renderNavbar) return null;
+
+  return (
+    <nav className={`navbar ${visible ? "navbar-visible" : ""}`}>
       <div className="nav-left">
         <Link to="/" className="nav-logo">
           <img src="/logo.svg" alt="Logo" className="navbar-logo" />
@@ -26,6 +59,5 @@ export default function Navbar() {
         </Link>
       </div>
     </nav>
-    
   );
 }
