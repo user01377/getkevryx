@@ -1,3 +1,4 @@
+/* PAGE WRAPPER */
 .terms-conditions {
     display: flex;
     justify-content: center;
@@ -7,7 +8,7 @@
 
 .terms-container {
     width: 100%;
-    max-width: 720px; /* adjustable max-width */
+    max-width: 720px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,52 +37,32 @@
     flex-direction: column;
     gap: 3.5rem;
     line-height: 1.7;
-  }
-  
-  /* Intro paragraph */
-  .terms-intro {
+}
+
+.terms-intro {
     font-size: 1rem;
     color: #222;
-  }
-  
-  /* Individual sections */
-  .terms-section {
+}
+
+/* SECTIONS */
+.terms-section {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-  }
-  
-  /* Section headings */
-  .terms-section h2 {
+}
+
+/* SECTION HEADERS */
+.terms-section h2 {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
     color: #000;
     margin-bottom: 0.5rem;
-  }
-  
-  /* Paragraph text */
-  .terms-section p {
+}
+
+/* TEXT FOR SECTIONS */
+.terms-section p {
     font-size: 0.95rem;
     color: #333;
-  }
-  
-  /* Emphasis */
-  .terms-body strong {
-    font-weight: 500;
-    color: #000;
-  }
-  
-  /* Responsive tightening */
-  @media (max-width: 600px) {
-    .terms-body {
-      padding: 2.5rem 1.25rem 4rem;
-      gap: 3rem;
-    }
-  
-    .terms-section p {
-      font-size: 0.92rem;
-    }
-  }
-  
+}
