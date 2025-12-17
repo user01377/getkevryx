@@ -14,10 +14,6 @@
     text-align: center;
 }
 
-.terms-title {
-    margin-bottom: 3rem;
-}
-
 .terms-title h1 {
     font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 500;
@@ -30,3 +26,62 @@
     font-size: 0.85rem;
     opacity: 0.6;
 }
+
+/* TERMS BODY */
+.terms-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    line-height: 1.7;
+  }
+  
+  /* Intro paragraph */
+  .terms-intro {
+    font-size: 1rem;
+    color: #222;
+  }
+  
+  /* Individual sections */
+  .terms-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  /* Section headings */
+  .terms-section h2 {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Paragraph text */
+  .terms-section p {
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  /* Emphasis */
+  .terms-body strong {
+    font-weight: 500;
+    color: #000;
+  }
+  
+  /* Responsive tightening */
+  @media (max-width: 600px) {
+    .terms-body {
+      padding: 2.5rem 1.25rem 4rem;
+      gap: 3rem;
+    }
+  
+    .terms-section p {
+      font-size: 0.92rem;
+    }
+  }
+  
