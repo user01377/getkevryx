@@ -7,6 +7,7 @@ import LandingPage from "./pages/landing-page";
 import Contact from "./pages/contact-page";
 import Mission from "./pages/mission-page";
 import FaqPage from "./pages/faq-page";
+import PrivacyPolicy from "./pages/privacy-policy";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/mission" element={<Mission />} />
             <Route path="/faq" element={<FaqPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </main>
 

@@ -1,0 +1,55 @@
+.body-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 25px;
+    background-color: white; 
+    color: #333;
+    text-align: left;
+}
+
+/* section headings */
+.body-content h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+/* description text */
+.body-content p {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: #555;
+    display: block;
+    max-width: 95%;
+}
+
+/* spacing between the info containers */
+.mission-container,
+.motto-container,
+.bio-container,
+.why-container {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    position: relative;
+}
+
+/* adds divider */
+.mission-container::after,
+.motto-container::after,
+.why-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+}
+
+.bio-container {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
