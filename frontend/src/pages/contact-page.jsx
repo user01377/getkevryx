@@ -4,44 +4,81 @@ import { Link } from "react-router-dom";
 
 export default function Contact() {
   return (
-<main className="contact-page page">
+    <main className="contact-page page">
+      <div className="contact-container">
 
-    <h1 className="contact-header">CONTACT US</h1>
+        <header className="contact-title">
+          <h1>contact</h1>
+          <p className="contact-status">
+            estimated response time: 1–2 business days
+          </p>
+        </header>
 
-    <div className="contact-intro">
-        <h2 className="contact-subheader">have a question for our team?</h2>
-        <p className="contact-subtext">
-            Our Customer Service Team is actively working on replying to inquiries. 
-            Currently, our estimated response time is 1-2 business days.
-        </p>
-        <p className="contact-subtext">
-            Please see the <Link to="/faq" className="contact-faq">faq page</Link> before submitting a contact form. Thank You!
-        </p>
-    </div>
+        <section className="contact-body">
+          <p className="contact-intro">
+            have a question for our team? before submitting a message, please
+            review our{" "}
+            <Link to="/faq" className="contact-faq">
+              faq page
+            </Link>
+            . if you still need assistance, feel free to reach out below.
+          </p>
 
-    <form className="contact-form">
-        <label htmlFor="subject">Subject</label>
-        <input type="text" id="subject" name="subject" placeholder="Please enter a subject" required />
+          <form className="contact-form">
+            <div className="form-group">
+              <label htmlFor="subject">subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="please enter a subject"
+                required
+              />
+            </div>
 
-        <label htmlFor="name">First Name</label>
-        <input type="text" id="name" name="name" required />
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="name">first name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
 
-        <label htmlFor="lastname">Last Name</label>
-        <input type="text" id="lastname" name="lastname" required />
+              <div className="form-group">
+                <label htmlFor="lastname">last name</label>
+                <input type="text" id="lastname" name="lastname" required />
+              </div>
+            </div>
 
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            <div className="form-group">
+              <label htmlFor="email">email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
 
-        <label htmlFor="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" placeholder="ex. 123-456-6789" />
+            <div className="form-group">
+              <label htmlFor="phone">phone (optional)</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="ex. 123-456-7890"
+              />
+            </div>
 
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+            <div className="form-group">
+              <label htmlFor="message">message</label>
+              <textarea id="message" name="message" rows="5" required />
+            </div>
 
-        <button type="submit">Send</button>
-    </form>
+            <button type="submit">send message</button>
+          </form>
+        </section>
 
-</main>
-
+      </div>
+    </main>
   );
 }
