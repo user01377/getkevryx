@@ -41,7 +41,7 @@ export default function Navbar() {
     <nav className={`navbar ${visible ? "navbar-visible" : ""}`}>
       <div className="nav-left">
         <Link to="/" className="nav-logo">
-          <img src="/logo.svg" alt="Logo" className="navbar-logo" />
+          {/* <img src="/logo-here.svg" alt="Logo" className="navbar-logo" /> */}
           <span className="logo-text">kevryx</span>
         </Link>
       </div>
