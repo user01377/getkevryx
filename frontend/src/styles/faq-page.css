@@ -1,97 +1,68 @@
 .faq-page {
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* FAQ Body */
-.faq-body {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 0 20px;
-    background-color: white; /* matches navbar background */
-    max-width: 1200px;
-}
-
-/* FAQ Topic Header */
-.faq-topic h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #e0dcd5;
-    padding-bottom: 10px;
     color: #222;
 }
 
-/* Hide default marker */
+.faq-body {
+    max-width: 900px;
+    margin: 80px auto 120px;
+    padding: 0 20px;
+}
+
+.faq-topic {
+    margin-bottom: 64px;
+}
+
+.faq-topic h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0dcd5;
+}
+
 summary::-webkit-details-marker {
     display: none;
 }
 
-/* Summary styling */
+details {
+    padding: 18px 0;
+    border-bottom: 1px solid #e0dcd5;
+}
+
 summary {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 500;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     user-select: none;
-    outline: none;
-    position: relative;
 }
 
-/* Plus/Minus icon */
 summary::after {
-    content: '+';
+    content: "+";
     font-size: 1.2rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
 }
 
 details[open] summary::after {
     transform: rotate(45deg);
 }
 
-/* FAQ container */
-details {
-    background-color: #fff;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    padding: 15px 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    overflow: hidden;
-    transition: background-color 0.3s ease;
-}
-
-details[open] {
-    background-color: #f0ece7;
-}
-
-/* Animated answer */
-details > .content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
-}
-
-details[open] > .content {
-    max-height: 1000px; /* large enough for your paragraph */
-    opacity: 1;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-/* Optional: <p> spacing */
-details > .content p {
-    margin: 0;
-    line-height: 1.6;
+.content {
+    margin-top: 12px;
+    max-width: 85%;
+    line-height: 1.7;
     color: #555;
 }
 
+details > .content {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px);}
-    to { opacity: 1; transform: translateY(0);}
+details[open] > .content {
+    opacity: 1;
+    transform: translateY(0);
 }
