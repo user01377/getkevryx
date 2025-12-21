@@ -54,7 +54,7 @@ export default function Navbar() {
       </div>
 
       <div className="nav-right">
-        <Link to="/" className="nav-cart">
+        <Link to="/shopping-cart" className="nav-cart">
           <img src="/shopping-cart.svg" alt="Cart" />
         </Link>
       </div>
