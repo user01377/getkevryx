@@ -1,7 +1,6 @@
 .page {
-    display: block; /* no flex forcing layout */
+    display: block;
     width: 100%;
-    flex-direction: unset; /* just in case */
 }
 
 .hero-banner {
@@ -29,18 +28,23 @@
 
 .hero-text {
     position: absolute;
-    top: 52%; /* slight offset for aesthetics */
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     color: white;
     text-align: center;
-    z-index: 2; /* position above the overlay */
+    z-index: 2;
     pointer-events: none;
-    padding: 0 1rem;
+    padding: 0;
+    margin: 0;
 }
 
 .hero-text h1 {
-    font-size: 4rem;
-    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.55);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 500;
+    text-shadow: 2px 2px 14px rgba(0, 0, 0, 0.55);
     margin: 0;
+    line-height: 1.05;
 }
