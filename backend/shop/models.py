@@ -8,6 +8,10 @@ class Product(models.Model):
     stock = models.IntegerField()
     category = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+    image_url = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.__name + "\n" + self.__description
+        return f"{self.__name } \n {self.__description}"
+    
+    def get_image(self):
+        return self.__image_url
