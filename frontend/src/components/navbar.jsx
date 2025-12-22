@@ -47,7 +47,7 @@ export default function Navbar() {
       </div>
 
       <div className="nav-center">
-        <Link to="/" className="nav-link">all products</Link>
+        <Link to="/all-products" className="nav-link">all products</Link>
         <Link to="/mission" className="nav-link">mission</Link>
         <Link to="/faq" className="nav-link">faq</Link>
         <Link to="/contact" className="nav-link">contact</Link>
