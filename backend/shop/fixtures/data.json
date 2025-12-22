@@ -1,0 +1,30 @@
+[
+    {
+      "name": "Essential Oversized Tee",
+      "description": "Heavyweight cotton oversized t-shirt with a relaxed fit.",
+      "colors": "black,white,stone",
+      "price": "34.00",
+      "stock": 120,
+      "category": "tops",
+      "image_url": "/images/products/oversized-tee.jpg"
+    },
+    {
+      "name": "Relaxed Fit Hoodie",
+      "description": "Midweight fleece hoodie designed for everyday wear.",
+      "colors": "black,grey,forest",
+      "price": "78.00",
+      "stock": 60,
+      "category": "outerwear",
+      "image_url": "/images/products/relaxed-hoodie.jpg"
+    },
+    {
+      "name": "Straight Leg Utility Pant",
+      "description": "Durable straight-leg pants with a clean, minimal silhouette.",
+      "colors": "black,olive,khaki",
+      "price": "96.00",
+      "stock": 45,
+      "category": "bottoms",
+      "image_url": "/images/products/utility-pant.jpg"
+    }
+  ]
+  

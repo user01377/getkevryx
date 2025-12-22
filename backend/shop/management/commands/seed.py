@@ -1,44 +1,30 @@
+import json
+import os
 from django.core.management.base import BaseCommand
 from shop.models import Product
-
-BASELINE_PRODUCTS = [
-    {
-        "name": "Essential Oversized Tee",
-        "description": "Heavyweight cotton oversized t-shirt with a relaxed fit.",
-        "colors": "black,white,stone",
-        "price": "34.00",
-        "stock": 120,
-        "category": "tops",
-        "image_url": "/images/products/oversized-tee.jpg",
-    },
-    {
-        "name": "Relaxed Fit Hoodie",
-        "description": "Midweight fleece hoodie designed for everyday wear.",
-        "colors": "black,grey,forest",
-        "price": "78.00",
-        "stock": 60,
-        "category": "outerwear",
-        "image_url": "/images/products/relaxed-hoodie.jpg",
-    },
-    {
-        "name": "Straight Leg Utility Pant",
-        "description": "Durable straight-leg pants with a clean, minimal silhouette.",
-        "colors": "black,olive,khaki",
-        "price": "96.00",
-        "stock": 45,
-        "category": "bottoms",
-        "image_url": "/images/products/utility-pant.jpg",
-    },
-]
+from django.conf import settings
 
 class Command(BaseCommand):
-    help = "Seed baseline product data for development and demo environments"
+    help = "Seed baseline product data from JSON file"
 
     def handle(self, *args, **options):
+        # Path to JSON file
+        json_file_path = os.path.join(
+            settings.BASE_DIR, "shop", "fixtures", "data.json"
+        )
+
+        if not os.path.exists(json_file_path):
+            self.stdout.write(self.style.ERROR(f"JSON file not found: {json_file_path}"))
+            return
+
+        # Load JSON data
+        with open(json_file_path, "r") as f:
+            products = json.load(f)
+
         created_count = 0
         updated_count = 0
 
-        for product in BASELINE_PRODUCTS:
+        for product in products:
             obj, created = Product.objects.update_or_create(
                 name=product["name"],
                 defaults={
@@ -50,14 +36,11 @@ class Command(BaseCommand):
                     "image_url": product["image_url"],
                 },
             )
-
             if created:
                 created_count += 1
             else:
                 updated_count += 1
 
         self.stdout.write(
-            self.style.SUCCESS(
-                f"Seed complete: {created_count} created, {updated_count} updated"
-            )
+            self.style.SUCCESS(f"Seed complete: {created_count} created, {updated_count} updated")
         )
