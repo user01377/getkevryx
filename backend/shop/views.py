@@ -48,3 +48,23 @@ def add_to_cart(request):
         item.save()
 
     return JsonResponse({"success": True})
+
+def get_cart(request):
+    
+    cart = get_or_create_cart(request)
+
+    items = cart.items.select_related("product")
+
+    data = []
+    for item in items:
+        data.append({
+            "id": item.id,
+            "productId": item.product.id,
+            "name": item.product.name,
+            "price": str(item.product.price),
+            "image_url": item.product.image_url,
+            "quantity": item.quantity,
+            "added_at": item.added_at.isoformat()
+        })
+
+    return JsonResponse({"items": data})
