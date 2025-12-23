@@ -1,30 +1,110 @@
 [
-    {
-      "name": "Essential Oversized Tee",
-      "description": "Heavyweight cotton oversized t-shirt with a relaxed fit.",
-      "colors": "black,white,stone",
-      "price": "34.00",
-      "stock": 120,
-      "category": "tops",
-      "image_url": "/images/products/oversized-tee.jpg"
-    },
-    {
-      "name": "Relaxed Fit Hoodie",
-      "description": "Midweight fleece hoodie designed for everyday wear.",
-      "colors": "black,grey,forest",
-      "price": "78.00",
-      "stock": 60,
-      "category": "outerwear",
-      "image_url": "/images/products/relaxed-hoodie.jpg"
-    },
-    {
-      "name": "Straight Leg Utility Pant",
-      "description": "Durable straight-leg pants with a clean, minimal silhouette.",
-      "colors": "black,olive,khaki",
-      "price": "96.00",
-      "stock": 45,
-      "category": "bottoms",
-      "image_url": "/images/products/utility-pant.jpg"
-    }
-  ]
-  
+  {
+    "name": "Heavyweight Cotton Base Tee",
+    "description": "Structured heavyweight cotton t-shirt designed for durability and daily wear in cool conditions.",
+    "colors": "black,ash,stone",
+    "price": "36.00",
+    "stock": 140,
+    "category": "base-layers",
+    "image_url": "/images/products/heavyweight-base-tee.jpg"
+  },
+  {
+    "name": "Merino Blend Base Layer Tee",
+    "description": "Lightweight merino blend t-shirt offering temperature regulation and odor resistance for extended wear.",
+    "colors": "black,heather,olive",
+    "price": "58.00",
+    "stock": 90,
+    "category": "base-layers",
+    "image_url": "/images/products/merino-base-tee.jpg"
+  },
+  {
+    "name": "Midweight Fleece Pullover",
+    "description": "Breathable fleece mid-layer designed for warmth during low-output activities and cool weather use.",
+    "colors": "black,graphite,forest",
+    "price": "84.00",
+    "stock": 65,
+    "category": "mid-layers",
+    "image_url": "/images/products/midweight-fleece-pullover.jpg"
+  },
+  {
+    "name": "Thermal Insulated Hoodie",
+    "description": "Synthetic insulated hoodie providing consistent warmth with improved moisture resistance.",
+    "colors": "black,deep-olive,slate",
+    "price": "148.00",
+    "stock": 40,
+    "category": "insulation",
+    "image_url": "/images/products/thermal-insulated-hoodie.jpg"
+  },
+  {
+    "name": "Lightweight Wind Shell Jacket",
+    "description": "Ultralight wind-resistant shell designed for high-output activities and variable alpine conditions.",
+    "colors": "black,smoke,terrain",
+    "price": "118.00",
+    "stock": 55,
+    "category": "shells",
+    "image_url": "/images/products/lightweight-wind-shell.jpg"
+  },
+  {
+    "name": "Waterproof Hard Shell Jacket",
+    "description": "Fully waterproof, seam-sealed shell engineered for protection in sustained wet and windy conditions.",
+    "colors": "black,graphite,navy",
+    "price": "248.00",
+    "stock": 30,
+    "category": "shells",
+    "image_url": "/images/products/waterproof-hard-shell.jpg"
+  },
+  {
+    "name": "Heavy Down Insulated Shell",
+    "description": "High-loft down insulated shell designed for maximum warmth in cold, static environments.",
+    "colors": "black,deep-forest,iron",
+    "price": "368.00",
+    "stock": 18,
+    "category": "insulation",
+    "image_url": "/images/products/heavy-down-shell.jpg"
+  },
+  {
+    "name": "Soft Shell Utility Jacket",
+    "description": "Abrasion-resistant soft shell offering stretch, breathability, and weather resistance for active use.",
+    "colors": "black,olive,carbon",
+    "price": "168.00",
+    "stock": 42,
+    "category": "shells",
+    "image_url": "/images/products/soft-shell-jacket.jpg"
+  },
+  {
+    "name": "Straight Leg Technical Pant",
+    "description": "Durable technical pant with a clean silhouette, designed for movement and long-term wear.",
+    "colors": "black,olive,khaki",
+    "price": "104.00",
+    "stock": 50,
+    "category": "bottoms",
+    "image_url": "/images/products/technical-pant.jpg"
+  },
+  {
+    "name": "Lightweight Trail Pant",
+    "description": "Breathable, quick-drying pant built for warm-weather hiking and high-output movement.",
+    "colors": "black,stone,forest",
+    "price": "92.00",
+    "stock": 58,
+    "category": "bottoms",
+    "image_url": "/images/products/trail-pant.jpg"
+  },
+  {
+    "name": "Insulated Technical Vest",
+    "description": "Core-focused synthetic insulated vest for added warmth without restricting mobility.",
+    "colors": "black,graphite,olive",
+    "price": "128.00",
+    "stock": 36,
+    "category": "insulation",
+    "image_url": "/images/products/insulated-vest.jpg"
+  },
+  {
+    "name": "All-Season Beanie",
+    "description": "Low-profile insulated beanie designed for warmth and comfort across a range of conditions.",
+    "colors": "black,grey,forest",
+    "price": "32.00",
+    "stock": 110,
+    "category": "accessories",
+    "image_url": "/images/products/all-season-beanie.jpg"
+  }
+]
