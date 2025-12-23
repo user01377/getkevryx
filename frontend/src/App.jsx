@@ -10,6 +10,7 @@ import FaqPage from "./pages/faq-page";
 import PrivacyPolicy from "./pages/privacy-policy";
 import TermsConditions from "./pages/terms-conds";
 import ShoppingCart from "./pages/shopping-cart";
+import AllProducts from "./pages/all-products";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/all-products" element={<AllProducts />} />
           </Routes>
         </main>
 
