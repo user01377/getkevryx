@@ -1,6 +1,6 @@
 from django.db import models
 
-class Product(models.Model):
+class Products(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     colors = models.TextField(blank=True)
