@@ -68,3 +68,24 @@ def get_cart(request):
         })
 
     return JsonResponse({"items": data})
+
+@csrf_exempt
+def update_cart_item(request, item_id):
+    cart = get_or_create_cart(request)
+
+    try:
+        item = CartItem.objects.get(id=item_id, cart=cart)
+    except CartItem.DoesNotExist:
+        return JsonResponse({"error": "Item not found"}, status=404)
+
+    if request.method == "PATCH":
+        data = json.loads(request.body)
+        item.quantity = int(data.get("quantity", item.quantity))
+        item.save()
+        return JsonResponse({"success": True})
+    
+    elif request.method == "DELETE":
+        item.delete()
+        return JsonResponse({"success": True})
+    
+    return JsonResponse({"error": "Method not allowed"}, status=405)
