@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../styles/all-products.css";
 
 export default function ProductsGrid() {
@@ -21,12 +22,16 @@ export default function ProductsGrid() {
       <div className="products-grid">
 
         {products.map((p) => (
-          <div key={p.id} className="product-card">
+          <Link
+            key={p.id}
+            to={`/all-products/${p.slug}`} // link to the product page for that specific garment
+            className="product-card"
+          >
             <img src={p.image_url} alt={p.name} className="product-image" />
             <h3 className="product-name">{p.name}</h3>
             <p className="product-description">{p.description}</p>
             <span className="product-price">${p.price}</span>
-          </div>
+          </Link>
         ))}
 
       </div>
