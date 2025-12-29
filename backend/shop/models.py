@@ -57,9 +57,9 @@ class CartItem(models.Model):
     )
 
     quantity = models.PositiveIntegerField()
-
+    size = models.CharField(max_length=255)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "cart_items"
-        unique_together = ("cart", "product")
+        unique_together = ("cart", "product", "size")
