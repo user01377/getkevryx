@@ -12,6 +12,8 @@
 }
 
 .product-card {
+  text-decoration: none;
+  color: black;
   background-color: #ffffff;
   padding: 2rem;
   text-align: center;

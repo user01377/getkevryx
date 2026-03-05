@@ -7,6 +7,29 @@ def product_list(request):
     products = Product.objects.all().values()
     return JsonResponse(list(products), safe=False)
 
+def product_view(request, slug):
+    # returns the product details based on its slug
+    try:
+        product = Product.objects.get(slug=slug)
+    except Product.DoesNotExist:
+        return JsonResponse({"error": "Product not found"}, status=404)
+
+    data = {
+        "id": product.id,
+        "name": product.name,
+        "slug": product.slug,
+        "description": product.description,
+        "price": str(product.price),
+        "image_url": product.image_url,
+        "colors": product.colors,
+        "category": product.category,
+        "stock": product.stock,
+        "created_at": product.created_at.isoformat(),
+    }
+
+    return JsonResponse(data)
+
+
 def get_or_create_cart(request):
     # helper which authenticates session existence, and returns cart
     if not request.session.session_key:
