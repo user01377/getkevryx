@@ -1,10 +1,10 @@
-from fastapi import FastAPI
 import time
+from fastapi import FastAPI
+from sqlalchemy import text
 from contextlib import asynccontextmanager
 from app.routes import router
 from app.database import Base, engine
-from app import models
-from sqlalchemy import text
+from app import models, seed
 
 def wait_for_db(engine, retries=10):
     for i in range(retries):
@@ -22,9 +22,11 @@ def wait_for_db(engine, retries=10):
 async def lifespan(app: FastAPI):
     wait_for_db(engine)
     
-    print("creating tables..")
+    print("Creating tables..")
     Base.metadata.create_all(bind=engine)
-    print("created tables")
+
+    print("seeding database..")
+    seed.seed_products()
 
     yield
 
