@@ -32,7 +32,8 @@ function App() {
             <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
             <Route path="/all-products" element={<AllProducts />} />
-            <Route path="/all-products/:slug" element={<GarmentPage />} />
+            <Route path="/all-products/:id" element={<GarmentPage />} />
+            {/* change to :slug when feature implemented */}
           </Routes>
         </main>
 

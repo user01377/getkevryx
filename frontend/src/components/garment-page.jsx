@@ -3,28 +3,39 @@ import { useEffect, useState } from "react";
 import "../styles/garment-page.css";
 
 export default function GarmentPage() {
-  const { slug } = useParams();
+  const { id } = useParams();
+
   const [product, setProduct] = useState(null);
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/products/${slug}/`)
-      .then(res => res.json())
-      .then(data => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`http://localhost:8000/products/${id}`);
+        const json = await res.json();
+
+        const data = json.data ?? json;
+
         setProduct(data);
-        if (data.colors && data.colors.length > 0) {
-          setSelectedColor(data.colors.split(",")[0].trim());
+
+        if (data.colors) {
+          const firstColor = data.colors.split(",")[0].trim();
+          setSelectedColor(firstColor);
         }
-      })
-      .catch(console.error);
-  }, [slug]);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   if (!product) return <p className="loading">Loading...</p>;
 
   const colorsArray = product.colors ? product.colors.split(",").map(c => c.trim()) : [];
 
-  console.log(colorsArray);
+  // console.log(colorsArray);
   
   return (
     <main className="product-page">
