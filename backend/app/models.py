@@ -19,11 +19,11 @@ class Cart(Base):
     __tablename__ = "shopping_carts"
 
     id = Column(Integer, primary_key=True)
-    session_id = Column(String(255), nullable=False, index=True)
+    session_id = Column(String, unique=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    items = relationship("CartItem", back_populates="cart")
+    items = relationship("CartItem", back_populates="cart", order_by="CartItem.added_at.asc()")
 
 class CartItem(Base):
     __tablename__ = "items_in_cart"
