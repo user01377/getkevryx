@@ -1,4 +1,4 @@
-# the file that contains the router for the urls when api is called
+# the file that contains the routes for the api, endpoints are logic are defined here
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
