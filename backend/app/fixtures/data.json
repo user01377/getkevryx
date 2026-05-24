@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Obsidian Heavyweight Hoodie",
+    "description": "Premium oversized hoodie crafted from ultra-soft heavyweight cotton with a structured fit and minimalist detailing.",
+    "price": 120.00,
+    "stock": 18,
+    "category": "hoodies"
+  },
+  {
+    "name": "Ivory Essential Tee",
+    "description": "Luxury everyday t-shirt made from breathable combed cotton with a tailored premium silhouette.",
+    "price": 48.00,
+    "stock": 35,
+    "category": "tshirts"
+  },
+  {
+    "name": "Midnight Cargo Pants",
+    "description": "Relaxed-fit cargo pants featuring durable premium fabric, matte black hardware, and utility-inspired pockets.",
+    "price": 98.00,
+    "stock": 14,
+    "category": "pants"
+  },
+  {
+    "name": "Ash Layered Crewneck",
+    "description": "Midweight crewneck sweatshirt with dropped shoulders and elevated neutral-tone styling.",
+    "price": 88.00,
+    "stock": 20,
+    "category": "sweatshirts"
+  },
+  {
+    "name": "Noir Signature Cap",
+    "description": "Structured premium cap with embroidered minimalist branding and adjustable metal clasp closure.",
+    "price": 42.00,
+    "stock": 40,
+    "category": "accessories"
+  },
+  {
+    "name": "Stonewashed Denim Jacket",
+    "description": "Premium vintage-inspired denim jacket with oversized fit and custom washed detailing.",
+    "price": 145.00,
+    "stock": 10,
+    "category": "jackets"
+  },
+  {
+    "name": "Monarch Wool Overcoat",
+    "description": "Luxury full-length overcoat crafted from heavyweight wool blend with clean tailored lines.",
+    "price": 240.00,
+    "stock": 6,
+    "category": "outerwear"
+  },
+  {
+    "name": "Slate Relaxed Shorts",
+    "description": "Premium relaxed-fit shorts designed with heavyweight fleece and minimal branding.",
+    "price": 58.00,
+    "stock": 25,
+    "category": "shorts"
+  },
+  {
+    "name": "Eclipse Zip Hoodie",
+    "description": "Washed zip-up hoodie featuring oversized proportions, double-lined hood, and premium metal zipper.",
+    "price": 130.00,
+    "stock": 12,
+    "category": "hoodies"
+  },
+  {
+    "name": "Aura Knit Beanie",
+    "description": "Soft ribbed knit beanie with minimalist luxury aesthetic and premium winter comfort.",
+    "price": 36.00,
+    "stock": 50,
+    "category": "accessories"
+  }
+]
