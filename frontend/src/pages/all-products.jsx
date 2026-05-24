@@ -4,17 +4,35 @@ import "../styles/all-products.css";
 
 export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/products/")
-      .then((res) => res.json())
-      .then((data) => {
-        // sorting cards by their prices, can change/adjust
-        const sorted = data.sort((a, b) => a.price - b.price);
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/products");
+        const json = await res.json();
+
+        const list = json.data ?? [];
+
+        const sorted = [...list].sort(
+          (a, b) => parseFloat(a.price) - parseFloat(b.price)
+        );
+
         setProducts(sorted);
-      })
-      .catch((err) => console.error(err));
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
+
+  if (loading) return <div className="products-container">Loading...</div>;
+  if (error) return <div className="products-container">{error}</div>;
 
   return (
     <div className="products-container">
@@ -24,13 +42,17 @@ export default function ProductsGrid() {
         {products.map((p) => (
           <Link
             key={p.id}
-            to={`/all-products/${p.slug}`} // link to the product page for that specific garment
+            to={`/all-products/${p.id}`}
             className="product-card"
           >
-            <img src={p.image_url} alt={p.name} className="product-image" />
+            <div className="product-image-placeholder" />
+
             <h3 className="product-name">{p.name}</h3>
             <p className="product-description">{p.description}</p>
-            <span className="product-price">${p.price}</span>
+
+            <span className="product-price">
+              ${parseFloat(p.price).toFixed(2)}
+            </span>
           </Link>
         ))}
 
