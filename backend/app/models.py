@@ -47,7 +47,7 @@ class OrderPlaced(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    items = relationship("AllOrderedItems", back_populates="order")
+    items = relationship("OrderItem", back_populates="order")
 
 class OrderItem(Base):
     __tablename__ = "all_ordered_items"
