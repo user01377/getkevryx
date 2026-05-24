@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 import time
 from contextlib import asynccontextmanager
-from routes import router
-from database import Base, engine
-import models
+from app.routes import router
+from app.database import Base, engine
+from app import models
 from sqlalchemy import text
 
 def wait_for_db(engine, retries=10):

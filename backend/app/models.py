@@ -3,7 +3,7 @@
 from sqlalchemy import Column, Integer, String, Text, Numeric, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from database import Base
+from app.database import Base
 
 class Product(Base):
     __tablename__ = "products"
