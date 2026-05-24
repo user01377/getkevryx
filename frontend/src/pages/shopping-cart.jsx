@@ -8,11 +8,12 @@ export default function ShoppingCart() {
   // fetch cart route
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/cart/", {
+      const res = await fetch("http://localhost:8000/cart", {
         credentials: "include",
       });
+
       const data = await res.json();
-      setCartItems(data.items);
+      setCartItems(data?.items || []);
       setLoading(false);
     } catch (err) {
       console.error("Failed to fetch cart:", err);
@@ -27,7 +28,7 @@ export default function ShoppingCart() {
   // update quantity route
   const updateQuantity = async (itemId, newQuantity) => {
     try {
-      await fetch(`http://localhost:8000/api/cart/item/${itemId}/`, {
+      await fetch(`http://localhost:8000/cart/item/${itemId}/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -42,7 +43,7 @@ export default function ShoppingCart() {
   // Remove item
   const removeItem = async (itemId) => {
     try {
-      await fetch(`http://localhost:8000/api/cart/item/${itemId}/`, {
+      await fetch(`http://localhost:8000/cart/item/${itemId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -54,7 +55,8 @@ export default function ShoppingCart() {
 
   // Calculate total
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + parseFloat(item.price) * item.quantity,
+    (sum, item) =>
+      sum + parseFloat(item.product.price) * item.quantity,
     0
   );
 
@@ -77,7 +79,7 @@ export default function ShoppingCart() {
                 />
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
-                  <p>${item.price}</p>
+                  <p>${item.product.price}</p>
                   <div className="quantity-control">
                     <button
                       onClick={() =>
@@ -99,7 +101,7 @@ export default function ShoppingCart() {
                   </button>
                 </div>
                 <div className="item-total">
-                  ${(parseFloat(item.price) * item.quantity).toFixed(2)}
+                  ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
                 </div>
               </div>
             ))}
