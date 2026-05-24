@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
 from app.database import get_db
 from app.models import Product, Cart, CartItem
-from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut
+from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem
 
 router = APIRouter()
 
@@ -145,3 +145,67 @@ def add_to_cart(
     db.refresh(item)
 
     return item
+
+@router.patch("/cart/item/{item_id}")
+def update_item(
+    item_id: int,
+    payload: UpdateCartItem,
+    db: Session = Depends(get_db),
+    session_id: str | None = Cookie(default=None)
+):
+
+    if not session_id:
+        raise HTTPException(status_code=400, detail="No session")
+
+    if payload.quantity <= 0 or payload.quantity > 10:
+        raise HTTPException(status_code=400, detail="Invalid Quantity")
+
+    cart = get_or_create_cart(db, session_id)
+
+    item = (
+        db.query(CartItem)
+        .filter(
+            CartItem.id == item_id,
+            CartItem.cart_id == cart.id
+        )
+        .first()
+    )
+
+    if not item:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+
+    item.quantity = payload.quantity
+
+    db.commit()
+    db.refresh(item)
+
+    return item
+
+@router.delete("/cart/item/{item_id}")
+def delete_item(
+    item_id: int,
+    db: Session = Depends(get_db),
+    session_id: str | None = Cookie(default=None)
+):
+
+    if not session_id:
+        raise HTTPException(status_code=400, detail="No session")
+
+    cart = get_or_create_cart(db, session_id)
+
+    item = (
+        db.query(CartItem)
+        .filter(
+            CartItem.id == item_id,
+            CartItem.cart_id == cart.id
+        )
+        .first()
+    )
+
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found in cart")
+
+    db.delete(item)
+    db.commit()
+
+    return {"message": "Item removed"}

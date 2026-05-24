@@ -41,3 +41,6 @@ class CartItemOut(BaseModel):
 
 class CartOut(BaseModel):
     items: list[CartItemOut]
+
+class UpdateCartItem(BaseModel):
+    quantity: int
