@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, Cookie
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
 from app.database import get_db
-from app.models import *
-from app.schema import *
+from app.models import Product, Cart, CartItem
+from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut
 
 router = APIRouter()
 
@@ -55,6 +55,9 @@ def get_item(product_id: int, db: Session = Depends(get_db)):
     return product
 
 def get_or_create_cart(db, session_id: str):
+    '''
+    checks whether or not the session exists, if it does not exist it will create a new session and then return it.
+    '''
     cart = (
         db.query(Cart)
         .filter(Cart.session_id == session_id)
@@ -76,7 +79,7 @@ def get_or_create_cart(db, session_id: str):
 def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(default=None)):
 
     if not session_id:
-        return {"items": []}
+        return CartOut(items=[])
     
     cart = (
         db.query(Cart)
@@ -86,7 +89,7 @@ def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(defa
     )
 
     if not cart:
-        return {"items": []}
+        return CartOut(items=[])
 
     return CartOut(items=cart.items)
 
