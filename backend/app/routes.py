@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from app.database import get_db
 from app.models import *
-from app.schema import ProductListResponse
+from app.schema import ProductListResponse, ProductOut
 
 router = APIRouter()
 
@@ -42,3 +42,11 @@ def get_products(db: Session = Depends(get_db)):
         data=products,
         count=len(products)
     )
+
+@router.get("/products/{product_id}", response_model=ProductOut)
+def get_item(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(Product).filter(Product.id == product_id).first()
+    if not product:
+         raise HTTPException(status_code=404, detail="Product not found")
+
+    return product
