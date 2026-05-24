@@ -1,5 +1,4 @@
 # start and sets up database connection
-# will probably need to call seed.py here
 
 import os
 from dotenv import load_dotenv
