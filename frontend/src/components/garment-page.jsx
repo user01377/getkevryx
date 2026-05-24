@@ -31,6 +31,28 @@ export default function GarmentPage() {
     fetchProduct();
   }, [id]);
 
+  
+  const handleAddToCart = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          product_id: product.id,
+          quantity,
+        }),
+      });
+
+      const data = await res.json();
+      console.log("Cart updated:", data);
+    } catch (err) {
+      console.error("Failed to add to cart:", err);
+    }
+  };
+
   if (!product) return <p className="loading">Loading...</p>;
 
   const colorsArray = product.colors ? product.colors.split(",").map(c => c.trim()) : [];
@@ -95,7 +117,7 @@ export default function GarmentPage() {
           </div>
 
           {/* Add to Cart */}
-          <button className="add-to-cart-btn">Add to Cart</button>
+          <button className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
           
         </div>
 
