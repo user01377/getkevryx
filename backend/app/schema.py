@@ -17,3 +17,27 @@ class ProductOut(BaseModel):
 class ProductListResponse(BaseModel):
     data: list[ProductOut]
     count: int
+
+class AddToCart(BaseModel):
+    product_id: int
+    quantity: int = 1
+
+class CartItemAddOut(BaseModel):
+    id: int
+    product_id: int
+    quantity: int
+
+    class Config:
+        from_attributes = True
+        
+class CartItemOut(BaseModel):
+    id: int
+    product_id: int
+    quantity: int
+    product: ProductOut
+
+    class Config:
+        from_attributes = True
+
+class CartOut(BaseModel):
+    items: list[CartItemOut]
