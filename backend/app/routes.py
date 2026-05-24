@@ -1,6 +1,7 @@
 # the file that contains the routes for the api, endpoints are logic are defined here
 
-from fastapi import APIRouter, Depends, HTTPException, Cookie
+from fastapi import APIRouter, Depends, HTTPException, Cookie, Response
+from uuid import uuid4
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
 from app.database import get_db
@@ -95,14 +96,26 @@ def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(defa
 
 # adds item to cart
 @router.post("/cart/add", response_model=CartItemAddOut)
-def add_to_cart(payload: AddToCart, db: Session = Depends(get_db), session_id: str | None = Cookie(default=None)):
+def add_to_cart(
+    payload: AddToCart,
+    response: Response,
+    db: Session = Depends(get_db),
+    session_id: str | None = Cookie(default=None)
+):
 
     if not session_id:
-        raise HTTPException(status_code=400, detail="No session")
+        session_id = str(uuid4())
+        response.set_cookie(
+            key="session_id",
+            value=session_id,
+            httponly=True,
+            samesite="lax",
+            max_age=60 * 60 * 24 * 30 # 30 day cookie age
+        )
 
     if payload.quantity <= 0:
         raise HTTPException(status_code=400, detail="Quantity must be > 0")
-    
+
     product = db.query(Product).filter(Product.id == payload.product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
