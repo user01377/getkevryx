@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from app.database import get_db
 from app.models import *
+from app.schema import ProductListResponse
 
 router = APIRouter()
 
@@ -28,6 +29,16 @@ def db_health(db: Session = Depends(get_db)):
             }
         )
     
-@router.get("/products")
-def get_all_products(db: Session = Depends(get_db)):
-    return db.query(Product).all()
+@router.get("/products", response_model=ProductListResponse)
+def get_products(db: Session = Depends(get_db)):
+
+    products = (
+        db.query(Product)
+        .order_by(Product.id.asc())
+        .all()
+    )
+
+    return ProductListResponse(
+        data=products,
+        count=len(products)
+    )
