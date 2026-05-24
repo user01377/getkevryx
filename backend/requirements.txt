@@ -1,7 +1,11 @@
-Django==6.0
-asgiref==3.11.0
-sqlparse==0.5.4
-python-dotenv==1.2.1
-django-cors-headers==4.9.0
+fastapi
+uvicorn[standard]
 
-psycopg[binary]==3.1.18
+sqlalchemy
+psycopg2-binary
+
+pydantic
+pydantic-settings
+
+python-dotenv
+python-multipart
