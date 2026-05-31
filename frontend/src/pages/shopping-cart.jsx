@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/shopping-cart.css";
+import { Link } from "react-router-dom";
 
 export default function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
@@ -111,6 +112,8 @@ export default function ShoppingCart() {
           </div>
         )}
       </div>
+
+      <p className="checkout-link"><Link to="/checkout">Checkout</Link></p>
     </main>
   );
 }

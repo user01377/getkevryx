@@ -12,6 +12,7 @@ import TermsConditions from "./pages/terms-conds";
 import ShoppingCart from "./pages/shopping-cart";
 import AllProducts from "./pages/all-products";
 import GarmentPage from "./components/garment-page";
+import CheckoutPage from "./pages/checkout";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/all-products" element={<AllProducts />} />
             <Route path="/all-products/:id" element={<GarmentPage />} />
             {/* change to :slug when feature implemented */}
