@@ -1,7 +1,7 @@
 .shopping-page {
     display: flex;
     justify-content: center;
-    padding: 2rem;
+    padding: 6rem 1.5rem;
     font-family: "Helvetica Neue", sans-serif;
     color: #333;
   }
@@ -77,4 +77,3 @@
     font-size: 1.5rem;
     font-weight: bold;
   }
-  
