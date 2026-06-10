@@ -46,7 +46,7 @@ def get_products(db: Session = Depends(get_db)):
         count=len(products)
     )
 
-# queries a single product from database
+# queries a specific product from database
 @router.get("/products/{product_id}", response_model=ProductOut)
 def get_item(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()
@@ -57,7 +57,7 @@ def get_item(product_id: int, db: Session = Depends(get_db)):
 
 def get_or_create_cart(db, session_id: str):
     '''
-    checks whether or not the session exists, if it does not exist it will create a new session and then return it.
+    helper func, checks whether or not the session exists, if it does not exist it will create a new session and then return it.
     '''
     cart = (
         db.query(Cart)
@@ -75,7 +75,9 @@ def get_or_create_cart(db, session_id: str):
 
     return cart
 
-# fetches the cart based on session
+"""
+all api routes for cart related actions
+"""
 @router.get("/cart", response_model=CartOut)
 def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(default=None)):
 
@@ -94,7 +96,6 @@ def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(defa
 
     return CartOut(items=cart.items)
 
-# adds item to cart
 @router.post("/cart/add", response_model=CartItemAddOut)
 def add_to_cart(
     payload: AddToCart,
@@ -209,3 +210,5 @@ def delete_item(
     db.commit()
 
     return {"message": "Item removed"}
+
+@router.post("/checkout")
