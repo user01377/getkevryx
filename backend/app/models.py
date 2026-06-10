@@ -41,7 +41,17 @@ class OrderPlaced(Base):
     __tablename__ = "orders_placed"
     
     id = Column(Integer, primary_key=True)
+
+    # customer information columns
+    first = Column(String(255), nullable=False, index=True)
+    last = Column(String(255), nullable=False, index=True)
     email = Column(String(255), nullable=False, index=True)
+
+    address = Column(String(255), nullable=False)
+    city = Column(String(255), nullable=False)
+    state = Column(String(255), nullable=False)
+    zipcode = Column(String(20), nullable=False)
+
     order_total = Column(Numeric(10,2), nullable=False)
     order_complete = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -56,7 +66,7 @@ class OrderItem(Base):
     order_id = Column(Integer, ForeignKey("orders_placed.id"), index=True)
     product_id = Column(Integer, ForeignKey("products.id"), index=True)
     quantity = Column(Integer, default=1, nullable=False)
-    price = Column(Numeric(10,2))
+    total = Column(Numeric(10,2))
 
     order = relationship("OrderPlaced", back_populates="items")
     product = relationship("Product")
