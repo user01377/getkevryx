@@ -53,7 +53,8 @@ class OrderPlaced(Base):
     zipcode = Column(String(20), nullable=False)
 
     order_total = Column(Numeric(10,2), nullable=False)
-    order_complete = Column(Boolean, default=False, nullable=False)
+    order_status = Column(String(255), default="processing", nullable=False, index=True)
+    # processing, shipped, out for delivery, fulfilled.
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
