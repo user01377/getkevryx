@@ -5,8 +5,8 @@ from uuid import uuid4
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
 from app.database import get_db
-from app.models import Product, Cart, CartItem
-from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem
+from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
+from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn
 
 router = APIRouter()
 
@@ -212,3 +212,61 @@ def delete_item(
     return {"message": "Item removed"}
 
 @router.post("/checkout")
+def checkout(
+    payload: CheckoutIn,
+    db: Session = Depends(get_db),
+    session_id: str | None = Cookie(default=None)
+):
+    if not session_id:
+        raise HTTPException(status_code=400, detail="No session")
+
+    cart = (
+        db.query(Cart)
+        .options(joinedload(Cart.items).joinedload(CartItem.product))
+        .filter(Cart.session_id == session_id)
+        .first()
+    )
+
+    if not cart or not cart.items:
+        raise HTTPException(status_code=400, detail="Cart is empty")
+    
+    total = 0
+    for item in cart.items:
+        total += item.quantity * item.product.price
+    
+    # cretae and add the order to table
+    order = OrderPlaced(
+        first=payload.first,
+        last=payload.last,
+        email=payload.email,
+        address=payload.address,
+        city=payload.city,
+        state=payload.state,
+        zipcode=payload.zipcode,
+        order_total=total,
+        order_complete=False
+    )
+
+    db.add(order)
+    db.flush()
+
+    # add items into all ordered items table
+    for item in cart.items:
+        db.add(OrderItem(
+            order_id=order.id,
+            product_id=item.product_id,
+            quantity=item.quantity,
+            unit_price=item.product.price
+        ))
+
+    # clear the users cart
+    for item in cart.items:
+        db.delete(item)
+
+    db.commit()
+
+    return {
+        "order_id": order.id,
+        "total": total,
+        "status": "created"
+    }
