@@ -1,6 +1,6 @@
 # this file validates api requests from users
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from decimal import Decimal
 
 class ProductOut(BaseModel):
@@ -44,3 +44,13 @@ class CartOut(BaseModel):
 
 class UpdateCartItem(BaseModel):
     quantity: int
+
+class CheckoutIn(BaseModel):
+    first: str
+    last: str
+    email: EmailStr
+
+    address: str
+    city: str
+    state: str
+    zipcode: str

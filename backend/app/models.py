@@ -66,7 +66,7 @@ class OrderItem(Base):
     order_id = Column(Integer, ForeignKey("orders_placed.id"), index=True)
     product_id = Column(Integer, ForeignKey("products.id"), index=True)
     quantity = Column(Integer, default=1, nullable=False)
-    total = Column(Numeric(10,2))
+    unit_price = Column(Numeric(10,2), nullable=False)
 
     order = relationship("OrderPlaced", back_populates="items")
     product = relationship("Product")
