@@ -234,7 +234,7 @@ def checkout(
     for item in cart.items:
         total += item.quantity * item.product.price
     
-    # cretae and add the order to table
+    # create object and add the order to table
     order = OrderPlaced(
         first=payload.first,
         last=payload.last,
@@ -243,8 +243,7 @@ def checkout(
         city=payload.city,
         state=payload.state,
         zipcode=payload.zipcode,
-        order_total=total,
-        order_complete=False
+        order_total=total
     )
 
     db.add(order)
