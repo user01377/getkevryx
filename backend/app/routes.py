@@ -7,6 +7,7 @@ from sqlalchemy import text
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
 from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut
+from datetime import datetime, timedelta, timezone
 
 router = APIRouter()
 
@@ -270,6 +271,34 @@ def checkout(
         "status": "created"
     }
 
+# constant base num for order status changes
+SHIPPED = 1
+OUT_FOR_DELIVERY = 3
+FULFILLED = 6
+
+# helper to calculate the expected state
+def order_state_change(created_at):
+    delta = datetime.now(timezone.utc) - created_at
+
+    if delta >= timedelta(minutes=FULFILLED):
+        return "fulfilled"
+    elif delta >= timedelta(minutes=OUT_FOR_DELIVERY):
+        return "out for delivery"
+    elif delta >= timedelta(minutes=SHIPPED):
+        return "shipped"
+    
+    return "processing"
+
+# helper to compare expected status vs curr status, db writes
+def reconcile_order(order):
+    new_state = order_state_change(order.created_at)
+
+    if new_state != order.order_status:
+        order.order_status = new_state
+        return True
+    
+    return False
+
 @router.post("/order-info", response_model=list[OrderOut])
 def get_order_info(
     payload: TrackOrderIn,
@@ -283,6 +312,13 @@ def get_order_info(
 
     if not orders:
         return []
+    
+    changed=False
+    for order in orders:
+        changed |= reconcile_order(order)
+    
+    if changed:
+        db.commit()
 
     return [
         OrderOut(
