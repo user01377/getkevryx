@@ -221,21 +221,32 @@ def checkout(
     if not session_id:
         raise HTTPException(status_code=400, detail="No session")
 
-    cart = (
-        db.query(Cart)
-        .options(joinedload(Cart.items).joinedload(CartItem.product))
+    cart_id = (
+        db.query(Cart.id)
         .filter(Cart.session_id == session_id)
-        .first()
+        .scalar()
     )
 
-    if not cart or not cart.items:
+    if not cart_id:
+        raise HTTPException(status_code=400, detail="Cart not found")
+
+    cart_items = (
+        db.query(
+            CartItem.product_id,
+            CartItem.quantity,
+            Product.price
+        )
+        .join(Cart, Cart.id == CartItem.cart_id)
+        .join(Product, Product.id == CartItem.product_id)
+        .filter(CartItem.cart_id == cart_id)
+        .all()
+    )
+
+    if not cart_items:
         raise HTTPException(status_code=400, detail="Cart is empty")
-    
-    total = 0
-    for item in cart.items:
-        total += item.quantity * item.product.price
-    
-    # create object and add the order to table
+
+    total = sum(qty * price for _, qty, price in cart_items)
+
     order = OrderPlaced(
         first=payload.first,
         last=payload.last,
@@ -250,18 +261,18 @@ def checkout(
     db.add(order)
     db.flush()
 
-    # add items into all ordered items table
-    for item in cart.items:
-        db.add(OrderItem(
+    db.bulk_save_objects([
+        OrderItem(
             order_id=order.id,
-            product_id=item.product_id,
-            quantity=item.quantity,
-            unit_price=item.product.price
-        ))
+            product_id=product_id,
+            quantity=quantity,
+            unit_price=price
+        )
+        for product_id, quantity, price in cart_items
+    ])
 
     # clear the users cart
-    for item in cart.items:
-        db.delete(item)
+    db.query(CartItem).filter(CartItem.cart_id == cart_id).delete(synchronize_session=False)
 
     db.commit()
 
@@ -304,36 +315,38 @@ def get_order_info(
     payload: TrackOrderIn,
     db: Session = Depends(get_db)
 ):
+
     orders = (
         db.query(OrderPlaced)
+        .options(
+            joinedload(OrderPlaced.items)
+            .joinedload(OrderItem.product)
+        )
         .filter(OrderPlaced.email == payload.email)
         .all()
     )
 
     if not orders:
         return []
-    
-    changed=False
-    for order in orders:
-        changed |= reconcile_order(order)
-    
-    if changed:
-        db.commit()
 
-    return [
-        OrderOut(
-            id=order.id,
-            status=order.order_status,
-            created_at=order.created_at,
-            total=float(order.order_total),
-            items=[
-                OrderItemOut(
-                    product=item.product.name,
-                    quantity=item.quantity,
-                    price=float(item.unit_price)
-                )
-                for item in order.items
-            ]
+    result = []
+
+    for order in orders:
+        result.append(
+            OrderOut(
+                id=order.id,
+                status=order_state_change(order.created_at),
+                created_at=order.created_at,
+                total=float(order.order_total),
+                items=[
+                    OrderItemOut(
+                        product=item.product.name,
+                        quantity=item.quantity,
+                        price=float(item.unit_price)
+                    )
+                    for item in order.items
+                ]
+            )
         )
-        for order in orders
-    ]
+
+    return result
