@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
-from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn
+from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut
 
 router = APIRouter()
 
@@ -269,3 +269,35 @@ def checkout(
         "total": total,
         "status": "created"
     }
+
+@router.post("/order-info", response_model=list[OrderOut])
+def get_order_info(
+    payload: TrackOrderIn,
+    db: Session = Depends(get_db)
+):
+    orders = (
+        db.query(OrderPlaced)
+        .filter(OrderPlaced.email == payload.email)
+        .all()
+    )
+
+    if not orders:
+        return []
+
+    return [
+        OrderOut(
+            id=order.id,
+            status=order.order_status,
+            created_at=order.created_at,
+            total=float(order.order_total),
+            items=[
+                OrderItemOut(
+                    product=item.product.name,
+                    quantity=item.quantity,
+                    price=float(item.unit_price)
+                )
+                for item in order.items
+            ]
+        )
+        for order in orders
+    ]

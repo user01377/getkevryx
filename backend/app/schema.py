@@ -1,6 +1,7 @@
 # this file validates api requests from users
 
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
 from decimal import Decimal
 
 class ProductOut(BaseModel):
@@ -54,3 +55,19 @@ class CheckoutIn(BaseModel):
     city: str
     state: str
     zipcode: str
+
+class TrackOrderIn(BaseModel):
+    email: EmailStr
+
+class OrderItemOut(BaseModel):
+    product: str
+    quantity: int
+    price: float
+
+
+class OrderOut(BaseModel):
+    id: int
+    status: str
+    created_at: datetime
+    total: float
+    items: list[OrderItemOut]
