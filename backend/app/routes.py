@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Cookie, Response
 from uuid import uuid4
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import text
+from sqlalchemy import text, update
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
 from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut
@@ -221,66 +221,96 @@ def checkout(
     if not session_id:
         raise HTTPException(status_code=400, detail="No session")
 
-    cart_id = (
-        db.query(Cart.id)
-        .filter(Cart.session_id == session_id)
-        .scalar()
-    )
-
-    if not cart_id:
-        raise HTTPException(status_code=400, detail="Cart not found")
-
-    cart_items = (
-        db.query(
-            CartItem.product_id,
-            CartItem.quantity,
-            Product.price
+    try:
+        cart = (
+            db.query(Cart)
+            .filter(Cart.session_id == session_id)
+            .first()
         )
-        .join(Cart, Cart.id == CartItem.cart_id)
-        .join(Product, Product.id == CartItem.product_id)
-        .filter(CartItem.cart_id == cart_id)
-        .all()
-    )
 
-    if not cart_items:
-        raise HTTPException(status_code=400, detail="Cart is empty")
+        if not cart:
+            raise HTTPException(status_code=400, detail="Cart not found")
 
-    total = sum(qty * price for _, qty, price in cart_items)
-
-    order = OrderPlaced(
-        first=payload.first,
-        last=payload.last,
-        email=payload.email,
-        address=payload.address,
-        city=payload.city,
-        state=payload.state,
-        zipcode=payload.zipcode,
-        order_total=total
-    )
-
-    db.add(order)
-    db.flush()
-
-    db.bulk_save_objects([
-        OrderItem(
-            order_id=order.id,
-            product_id=product_id,
-            quantity=quantity,
-            unit_price=price
+        cart_items = (
+            db.query(CartItem)
+            .filter(CartItem.cart_id == cart.id)
+            .all()
         )
-        for product_id, quantity, price in cart_items
-    ])
 
-    # clear the users cart
-    db.query(CartItem).filter(CartItem.cart_id == cart_id).delete(synchronize_session=False)
+        if not cart_items:
+            raise HTTPException(status_code=400, detail="Cart is empty")
 
-    db.commit()
+        product_ids = [i.product_id for i in cart_items]
 
-    return {
-        "order_id": order.id,
-        "total": total,
-        "status": "created"
-    }
+        products = (
+            db.query(Product)
+            .filter(Product.id.in_(product_ids))
+            .with_for_update()
+            .all()
+        )
+
+        product_map = {p.id: p for p in products}
+
+        total = 0
+        order_items = []
+
+        for item in cart_items:
+            product = product_map.get(item.product_id)
+
+            if not product:
+                raise HTTPException(400, f"Product {item.product_id} not found")
+
+            if product.stock < item.quantity:
+                raise HTTPException(400, f"Insufficient stock for product {product.id}")
+
+            product.stock -= item.quantity
+            total += item.quantity * product.price
+
+        order = OrderPlaced(
+            first=payload.first,
+            last=payload.last,
+            email=payload.email,
+            address=payload.address,
+            city=payload.city,
+            state=payload.state,
+            zipcode=payload.zipcode,
+            order_total=total
+        )
+
+        db.add(order)
+        db.flush()
+
+        for item in cart_items:
+            order_items.append(
+                OrderItem(
+                    order_id=order.id,
+                    product_id=item.product_id,
+                    quantity=item.quantity,
+                    unit_price=product_map[item.product_id].price
+                )
+            )
+
+        db.add_all(order_items)
+
+        db.query(CartItem).filter(
+            CartItem.cart_id == cart.id
+        ).delete(synchronize_session=False)
+
+        db.commit()
+
+        return {
+            "order_id": order.id,
+            "total": total,
+            "status": "created"
+        }
+
+    except HTTPException:
+        db.rollback()
+        raise
+
+    except Exception:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="Checkout failed")
 
 # constant base num for order status changes
 SHIPPED = 1
