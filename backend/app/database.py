@@ -14,7 +14,10 @@ DATABASE_URL = f"postgresql://{user}:{password}@postgres:5432/kevryx"
 
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True
+    pool_size=20,
+    max_overflow=40,
+    pool_timeout=60,
+    pool_pre_ping=True,
 )
 
 SessionLocal = sessionmaker(
