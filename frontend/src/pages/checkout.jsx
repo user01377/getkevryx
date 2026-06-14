@@ -58,9 +58,10 @@ export default function Checkout() {
         credentials: "include",
         body: JSON.stringify(formData),
       });
+      const data = await res.json();
 
       if (!res.ok) {
-        throw new Error("Failed to place order");
+        throw new Error(data.detail || "Failed to place order");
       }
 
       const data = await res.json();
@@ -71,7 +72,7 @@ export default function Checkout() {
 
     } catch (err) {
       console.error(err);
-      alert("Failed to place order");
+      alert(err.message);
     } finally {
       setSubmitting(false);
     }
