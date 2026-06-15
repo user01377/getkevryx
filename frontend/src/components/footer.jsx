@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <p className="footer-brand">© 2025 kevryx. All rights reserved.</p>
+        <p className="footer-brand">© 2026 kevryx. All rights reserved.</p>
 
         <div className="social-icons">
           <a href="https://github.com/user01377/getkevryx"><img src="/github.svg" alt="GitHub"/></a>
