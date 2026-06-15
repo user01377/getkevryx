@@ -312,34 +312,6 @@ def checkout(
         db.rollback()
         raise HTTPException(status_code=500, detail="Checkout failed")
 
-# constant base num for order status changes
-SHIPPED = 1
-OUT_FOR_DELIVERY = 3
-FULFILLED = 6
-
-# helper to calculate the expected state
-def order_state_change(created_at):
-    delta = datetime.now(timezone.utc) - created_at
-
-    if delta >= timedelta(minutes=FULFILLED):
-        return "fulfilled"
-    elif delta >= timedelta(minutes=OUT_FOR_DELIVERY):
-        return "out for delivery"
-    elif delta >= timedelta(minutes=SHIPPED):
-        return "shipped"
-    
-    return "processing"
-
-# helper to compare expected status vs curr status, db writes
-def reconcile_order(order):
-    new_state = order_state_change(order.created_at)
-
-    if new_state != order.order_status:
-        order.order_status = new_state
-        return True
-    
-    return False
-
 @router.post("/order-info", response_model=list[OrderOut])
 def get_order_info(
     payload: TrackOrderIn,
@@ -365,7 +337,7 @@ def get_order_info(
         result.append(
             OrderOut(
                 id=order.id,
-                status=order_state_change(order.created_at),
+                status=(order.order_status),
                 created_at=order.created_at,
                 total=float(order.order_total),
                 items=[
