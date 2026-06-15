@@ -22,7 +22,7 @@ export default function ProductsGrid() {
         setProducts(sorted);
       } catch (err) {
         console.error(err);
-        setError("Failed to load products");
+        setError("Unable to resolve products. Please Try Again Later.");
       } finally {
         setLoading(false);
       }
@@ -31,8 +31,40 @@ export default function ProductsGrid() {
     fetchProducts();
   }, []);
 
-  if (loading) return <div className="products-container">Loading...</div>;
-  if (error) return <div className="products-container">{error}</div>;
+  if (loading) {
+  return (
+    <div className="products-container">
+      <div className="products-grid">
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className="product-card skeleton-card">
+            <div className="skeleton-image" />
+            <div className="skeleton-line title" />
+            <div className="skeleton-line text" />
+            <div className="skeleton-line price" />
+          </div>
+        ))}
+      </div>
+    </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="products-container">
+        <div className="products-error">
+          <h2>Unable to load products</h2>
+          <p>Please try refreshing the page.</p>
+
+          <button
+            className="products-error-btn"
+            onClick={() => window.location.reload()}
+          >
+            Refresh
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="products-container">
