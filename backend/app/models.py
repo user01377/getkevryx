@@ -1,9 +1,10 @@
 # this file defines our actual database table looks like
 
-from sqlalchemy import Column, Integer, String, Text, Numeric, Boolean, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Numeric, Boolean, DateTime, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database import Base
+import enum
 
 class Product(Base):
     __tablename__ = "products"
@@ -37,6 +38,12 @@ class CartItem(Base):
     cart = relationship("Cart", back_populates="items")
     product = relationship("Product")
 
+class OrderStatus(str, enum.Enum):
+    PROCESSING = "processing"
+    SHIPPED = "shipped"
+    OUT_FOR_DELIVERY = "out_for_delivery"
+    FULFILLED = "fulfilled"
+
 class OrderPlaced(Base):
     __tablename__ = "orders_placed"
     
@@ -53,7 +60,7 @@ class OrderPlaced(Base):
     zipcode = Column(String(20), nullable=False)
 
     order_total = Column(Numeric(10,2), nullable=False)
-    order_status = Column(String(255), default="processing", nullable=False, index=True)
+    order_status = Column(Enum(OrderStatus), default=OrderStatus.PROCESSING, nullable=False, index=True)
     # processing, shipped, out for delivery, fulfilled.
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
