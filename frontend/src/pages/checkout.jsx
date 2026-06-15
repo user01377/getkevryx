@@ -58,13 +58,12 @@ export default function Checkout() {
         credentials: "include",
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.detail || "Failed to place order");
       }
-
-      const data = await res.json();
 
       alert("Order placed successfully!");
 
