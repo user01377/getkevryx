@@ -7,6 +7,11 @@ from app.routes import router
 from app.database import Base, engine
 from app import models, seed
 
+from apscheduler.schedulers.background import BackgroundScheduler
+from app.jobs import restock, status_updater
+
+scheduler = BackgroundScheduler()
+
 def wait_for_db(engine, retries=10):
     for i in range(retries):
         try:
@@ -23,14 +28,19 @@ def wait_for_db(engine, retries=10):
 async def lifespan(app: FastAPI):
     wait_for_db(engine)
     
-    print("Creating tables..")
+    # create tables
     Base.metadata.create_all(bind=engine)
 
-    print("seeding database..")
+    # seed database
     seed.seed_products()
+
+    scheduler.add_job(restock.restock_products, "interval", seconds=30)
+    scheduler.add_job(status_updater.update_order_status, "interval", seconds=30)
+    scheduler.start()
 
     yield
 
+    scheduler.shutdown()
     # add shutdown logic here
 
 
