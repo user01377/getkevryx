@@ -1,72 +1,72 @@
 [
   {
-    "name": "Obsidian Heavyweight Hoodie",
-    "description": "Premium oversized hoodie crafted from ultra-soft heavyweight cotton with a structured fit and minimalist detailing.",
-    "price": 120.00,
-    "stock": 18,
-    "category": "hoodies"
-  },
-  {
-    "name": "Ivory Essential Tee",
-    "description": "Luxury everyday t-shirt made from breathable combed cotton with a tailored premium silhouette.",
-    "price": 48.00,
-    "stock": 35,
-    "category": "tshirts"
-  },
-  {
-    "name": "Midnight Cargo Pants",
-    "description": "Relaxed-fit cargo pants featuring durable premium fabric, matte black hardware, and utility-inspired pockets.",
-    "price": 98.00,
-    "stock": 14,
-    "category": "pants"
-  },
-  {
-    "name": "Ash Layered Crewneck",
-    "description": "Midweight crewneck sweatshirt with dropped shoulders and elevated neutral-tone styling.",
-    "price": 88.00,
-    "stock": 20,
-    "category": "sweatshirts"
-  },
-  {
-    "name": "Noir Signature Cap",
-    "description": "Structured premium cap with embroidered minimalist branding and adjustable metal clasp closure.",
-    "price": 42.00,
-    "stock": 40,
-    "category": "accessories"
-  },
-  {
-    "name": "Stonewashed Denim Jacket",
-    "description": "Premium vintage-inspired denim jacket with oversized fit and custom washed detailing.",
-    "price": 145.00,
-    "stock": 10,
-    "category": "jackets"
-  },
-  {
-    "name": "Monarch Wool Overcoat",
-    "description": "Luxury full-length overcoat crafted from heavyweight wool blend with clean tailored lines.",
-    "price": 240.00,
-    "stock": 6,
+    "name": "Apex Shell Jacket",
+    "description": "Lightweight waterproof shell designed for alpine conditions with breathable GORE-TEX-inspired fabric and sealed seams.",
+    "price": 220.00,
+    "stock": 300,
     "category": "outerwear"
   },
   {
-    "name": "Slate Relaxed Shorts",
-    "description": "Premium relaxed-fit shorts designed with heavyweight fleece and minimal branding.",
-    "price": 58.00,
-    "stock": 25,
-    "category": "shorts"
+    "name": "Summit Insulated Hoodie",
+    "description": "Midweight insulated hoodie built for cold-weather layering with thermal lining and wind-resistant outer shell.",
+    "price": 180.00,
+    "stock": 600,
+    "category": "top"
   },
   {
-    "name": "Eclipse Zip Hoodie",
-    "description": "Washed zip-up hoodie featuring oversized proportions, double-lined hood, and premium metal zipper.",
+    "name": "Traverse Technical Tee",
+    "description": "Moisture-wicking performance tee designed for hiking and high-output activity with quick-dry fabric.",
+    "price": 65.00,
+    "stock": 600,
+    "category": "top"
+  },
+  {
+    "name": "Ridge Trek Pants",
+    "description": "Durable stretch hiking pants with reinforced knees, water-resistant coating, and articulated fit for mobility.",
+    "price": 140.00,
+    "stock": 500,
+    "category": "bottom"
+  },
+  {
+    "name": "Backcountry Cargo Pants",
+    "description": "Rugged utility cargo pants designed for outdoor expeditions with multiple weatherproof storage pockets.",
+    "price": 150.00,
+    "stock": 500,
+    "category": "bottom"
+  },
+  {
+    "name": "Stormline Lightweight Shell",
+    "description": "Packable windbreaker designed for unpredictable weather with ultra-light ripstop fabric.",
     "price": 130.00,
-    "stock": 12,
-    "category": "hoodies"
+    "stock": 300,
+    "category": "outerwear"
   },
   {
-    "name": "Aura Knit Beanie",
-    "description": "Soft ribbed knit beanie with minimalist luxury aesthetic and premium winter comfort.",
-    "price": 36.00,
-    "stock": 50,
-    "category": "accessories"
+    "name": "Alpine Down Jacket",
+    "description": "High-loft insulated down jacket built for extreme cold with compressible fill and weather-resistant shell.",
+    "price": 320.00,
+    "stock": 300,
+    "category": "outerwear"
+  },
+  {
+    "name": "Trail Fleece Midlayer",
+    "description": "Breathable fleece midlayer optimized for hiking and layering in variable mountain conditions.",
+    "price": 110.00,
+    "stock": 600,
+    "category": "top"
+  },
+  {
+    "name": "Summit Utility Shorts",
+    "description": "Lightweight outdoor shorts designed for warm-weather trekking with durable stretch fabric.",
+    "price": 85.00,
+    "stock": 500,
+    "category": "bottom"
+  },
+  {
+    "name": "Alpine Knit Beanie",
+    "description": "Warm merino-blend beanie designed for alpine environments with moisture control and thermal retention.",
+    "price": 45.00,
+    "stock": 200,
+    "category": "accessory"
   }
 ]

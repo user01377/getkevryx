@@ -11,7 +11,7 @@ RESTOCK_THRESHOLD = {
 
 RESTOCK_AMOUNT = {
     "top": 600,
-    "bottom": 600,
+    "bottom": 500,
     "outerwear": 300,
     "accessory": 200
 }
