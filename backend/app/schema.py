@@ -43,6 +43,18 @@ class CartItemOut(BaseModel):
 class CartOut(BaseModel):
     items: list[CartItemOut]
 
+class CartSummaryItemOut(BaseModel):
+    product: str
+    quantity: int
+    price: Decimal
+
+class CartSummaryOut(BaseModel):
+    items: list[CartSummaryItemOut]
+    subtotal: Decimal
+    shipping: Decimal
+    tax: Decimal
+    total: Decimal
+
 class UpdateCartItem(BaseModel):
     quantity: int
 
@@ -62,7 +74,7 @@ class TrackOrderIn(BaseModel):
 class OrderItemOut(BaseModel):
     product: str
     quantity: int
-    price: float
+    price: Decimal
 
 
 class OrderOut(BaseModel):
