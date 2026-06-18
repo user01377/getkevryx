@@ -61,14 +61,13 @@
   font-size: 0.75rem;
   letter-spacing: 2px;
   font-weight: 600;
-  margin-bottom: 0.75rem;
   color: #777;
 }
 
-.quantity-control {
+.section .quantity-control {
   display: inline-flex;
   align-items: center;
-
+  margin-top: 0.75rem;
   border: 1px solid #ddd;
   width: fit-content;
 }
