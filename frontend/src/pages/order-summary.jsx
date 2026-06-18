@@ -18,6 +18,7 @@ export default function OrderSummaryPage() {
         const data = await res.json();
 
         setOrder(data);
+        setSummary(data.summary);
       } finally {
         setLoading(false);
       }
@@ -77,15 +78,28 @@ export default function OrderSummaryPage() {
               <span className="status">{order.status}</span>
             </div>
 
+            <div className="summary-break" />
+
             <div className="summary-row">
-              <span>Total</span>
-              <span className="total">${Number(order.total).toFixed(2)}</span>
+              <span>Subtotal</span>
+              <span>${Number(order.subtotal).toFixed(2)}</span>
             </div>
 
-            <Link to="/" className="continue-btn">
-              Homepage
-            </Link>
+            <div className="summary-row">
+              <span>Shipping</span>
+              <span>${Number(order.shipping).toFixed(2)}</span>
+            </div>
 
+            <div className="summary-row">
+              <span>Tax</span>
+              <span>${Number(order.tax).toFixed(2)}</span>
+            </div>
+
+            <div className="summary-row total">
+              <span>Total</span>
+              <span>${Number(order.total).toFixed(2)}</span>
+            </div>
+            
           </aside>
 
         </div>
