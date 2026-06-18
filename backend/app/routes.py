@@ -9,8 +9,8 @@ from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
 from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut, CartSummaryOut, CartSummaryItemOut
 from decimal import Decimal
 
-SHIPPING_RATE = Decimal("0.1")
-TAX_RATE = Decimal("0.08")
+SHIPPING_RATE = Decimal("0.122")
+TAX_RATE = Decimal("0.0815")
 
 router = APIRouter()
 
