@@ -9,7 +9,7 @@ export default function Mission() {
             <div className="hero-banner">
                 <img src="https://placecats.com/1920/1080" alt="Image Banner" className="hero-image"/>
                 <div className="hero-text">
-                    <h1></h1>
+                    <h1>MISSION</h1>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@ export default function Mission() {
             <div className="body-content">
 
                 <div className="mission-container">
-                    <h1>mission</h1>
+                    <h1>our mission</h1>
                     <p><strong>kevryx</strong> is built for those who carve their own way. Clothing should be more than fashion; it should withstand the environments we face every day, no matter how extreme. We design purpose-driven performance apparel engineered for the elements. At <strong>kevryx</strong>, we don’t chase trends — we chase performance.</p>
                 </div>
 
