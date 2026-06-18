@@ -6,6 +6,12 @@ from sqlalchemy.sql import func
 from app.database import Base
 import enum
 
+class ProductCategory(str, enum.Enum):
+    TOP = "top"
+    BOTTOM = "bottom"
+    OUTERWEAR = "outerwear"
+    ACCESSORY = "accessory"
+
 class Product(Base):
     __tablename__ = "products"
 
@@ -14,7 +20,7 @@ class Product(Base):
     description = Column(Text)
     price = Column(Numeric(10,2), nullable=False)
     stock = Column(Integer, default=0)
-    category = Column(String(100), index=True)
+    category = Column(Enum(ProductCategory), index=True)
 
 class Cart(Base):
     __tablename__ = "shopping_carts"
