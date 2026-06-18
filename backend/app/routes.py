@@ -7,7 +7,7 @@ from sqlalchemy import text, update
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
 from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut
-from datetime import datetime, timedelta, timezone
+from decimal import Decimal
 
 router = APIRouter()
 
@@ -352,3 +352,47 @@ def get_order_info(
         )
 
     return result
+
+@router.get("/order-summary/{id}", response_model=OrderOut)
+def get_order_summary(
+    id: int,
+    db: Session = Depends(get_db),
+):
+    order = (
+        db.query(OrderPlaced)
+        .options(
+            joinedload(OrderPlaced.items)
+            .joinedload(OrderItem.product)
+        )
+        .filter(OrderPlaced.id == id)
+        .first()
+    )
+
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    SHIPPING_RATE = Decimal(0.1)
+    TAX_RATE = Decimal(0.08)
+
+    order_subtotal = order.order_total
+    order_shipping = order.order_total * SHIPPING_RATE
+    order_tax = order.order_total * TAX_RATE
+    order_total = order_subtotal + order_shipping + order_tax
+    
+    return OrderOut(
+        id=order.id,
+        status=order.order_status,
+        created_at=order.created_at,
+        subtotal=float(order_subtotal),
+        shipping=float(order_shipping),
+        tax=float(order_tax),
+        total=float(order_total),
+        items=[
+            OrderItemOut(
+                product=item.product.name,
+                quantity=item.quantity,
+                price=float(item.unit_price)
+            )
+            for item in order.items
+        ]
+    )
