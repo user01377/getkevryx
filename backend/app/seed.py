@@ -4,6 +4,7 @@ from app.models import Product
 
 # this path only works inside docker containers
 FIXTURE_PATH = "./app/fixtures/data.json"
+# FIXTURE_PATH = "./app/fixtures/stress-test.json"
 
 def load_products():
     with open(FIXTURE_PATH, "r") as file:
