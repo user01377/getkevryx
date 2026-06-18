@@ -69,5 +69,8 @@ class OrderOut(BaseModel):
     id: int
     status: str
     created_at: datetime
-    total: float
+    subtotal: Decimal
+    shipping: Decimal
+    tax: Decimal
+    total: Decimal
     items: list[OrderItemOut]
