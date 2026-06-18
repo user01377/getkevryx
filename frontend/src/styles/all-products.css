@@ -18,7 +18,6 @@
   padding: 2rem;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 3px solid darkgray;
 }
 
 .product-image {
@@ -26,24 +25,33 @@
   height: 400px;
   margin-bottom: 1rem;
   object-fit: cover;
+  border-radius: none;
 }
 
 .product-name {
+  width: 70%;
+  margin: 0 auto 0.5rem auto;
+
   font-size: 1.3rem;
   font-weight: 500;
-  margin-bottom: 0.5rem;
 }
 
 .product-description {
+  width: 100%;
+  margin: 0 auto 1rem auto;
+
   font-size: 1rem;
-  color: #555555;
-  margin-bottom: 1rem;
 }
 
 .product-price {
+  display: inline-block;
+
   font-size: 1.15rem;
   font-weight: 600;
-  color: #000000;
+}
+
+.product-card:hover {
+  border: 1px solid darkgray;
 }
 
 .products-error {
