@@ -18,6 +18,7 @@
   padding: 2rem;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .product-image {
@@ -52,6 +53,7 @@
 
 .product-card:hover {
   border: 1px solid darkgray;
+  transform: translateY(-10px);
 }
 
 .products-error {

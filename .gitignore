@@ -212,3 +212,5 @@ __marimo__/
 # Project Specific Assets
 project_assets
 .res-dock
+long-stress.js
+stress.js
