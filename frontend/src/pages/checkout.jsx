@@ -5,7 +5,7 @@ import "../styles/checkout.css";
 export default function Checkout() {
   const navigate = useNavigate();
 
-  const [cartItems, setCartItems] = useState([]);
+  const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -22,11 +22,12 @@ export default function Checkout() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:8000/cart", {
+        const res = await fetch("http://localhost:8000/cart/summary", {
           credentials: "include",
         });
+
         const data = await res.json();
-        setCartItems(data?.items || []);
+        setSummary(data);
       } finally {
         setLoading(false);
       }
@@ -39,16 +40,6 @@ export default function Checkout() {
       [e.target.name]: e.target.value,
     }));
   };
-
-  const subtotal = cartItems.reduce(
-    (sum, item) =>
-      sum + parseFloat(item.product?.price || 0) * item.quantity,
-    0
-  );
-
-  const shipping = subtotal * 0.1;
-  const tax = subtotal * 0.08;
-  const total = subtotal + shipping + tax;
 
   const placeOrder = async (e) => {
     e.preventDefault();
@@ -75,6 +66,8 @@ export default function Checkout() {
   };
 
   if (loading) return <p className="loading">Loading checkout...</p>;
+
+  if (!summary) return <p className="loading">Cart is empty.</p>;
 
   return (
     <main className="checkout-page">
@@ -112,22 +105,22 @@ export default function Checkout() {
           <h2 className="summary-title">Order Summary</h2>
 
           <div className="summary-items">
-            {cartItems.map((item) => (
-              <div key={item.id} className="summary-item">
+            {summary.items.map((item, idx) => (
+              <div key={idx} className="summary-item">
 
                 <img
-                  src={`https://cataas.com/cat?width=120&height=160&random=${item.product?.id}`}
-                  alt={item.product?.name}
+                  src={`https://cataas.com/cat?width=120&height=160&random=${idx}`}
+                  alt={item.product}
                   className="summary-image"
                 />
 
                 <div className="summary-info">
-                  <p className="summary-name">{item.product?.name}</p>
+                  <p className="summary-name">{item.product}</p>
                   <p className="summary-qty">Qty: {item.quantity}</p>
                 </div>
 
                 <p className="summary-price">
-                  ${(parseFloat(item.product?.price || 0) * item.quantity).toFixed(2)}
+                  ${(Number(item.price) * item.quantity).toFixed(2)}
                 </p>
 
               </div>
@@ -138,22 +131,22 @@ export default function Checkout() {
 
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${Number(summary.subtotal).toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
             <span>Shipping</span>
-            <span>${shipping.toFixed(2)}</span>
+            <span>${Number(summary.shipping).toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
             <span>Tax</span>
-            <span>${tax.toFixed(2)}</span>
+            <span>${Number(summary.tax).toFixed(2)}</span>
           </div>
 
           <div className="summary-row total">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>${Number(summary.total).toFixed(2)}</span>
           </div>
 
         </aside>
