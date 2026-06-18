@@ -14,6 +14,7 @@ import AllProducts from "./pages/all-products";
 import GarmentPage from "./components/garment-page";
 import CheckoutPage from "./pages/checkout";
 import TrackOrder from "./pages/track-order";
+import OrderSummaryPage from "./pages/order-summary";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -38,6 +39,7 @@ function App() {
             <Route path="/all-products" element={<AllProducts />} />
             <Route path="/all-products/:id" element={<GarmentPage />} />
             {/* change to :slug when feature implemented */}
+            <Route path="/order/:id" element={<OrderSummaryPage />} />
           </Routes>
         </main>
 
