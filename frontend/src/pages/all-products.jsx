@@ -78,7 +78,7 @@ export default function ProductsGrid() {
             className="product-card"
           >
             <img
-              src={`https://cataas.com/cat?width=400&height=600&random=${p.id}`}
+              src={`https://cataas.com/cat?width=800&height=1200&random=${p.id}`}
               alt={p.name}
               className="product-image"
             />
