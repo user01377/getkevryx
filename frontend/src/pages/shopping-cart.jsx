@@ -64,56 +64,95 @@ export default function ShoppingCart() {
   if (loading) return <p>Loading cart...</p>;
 
   return (
-    <main className="shopping-page page">
-      <div className="cart-container">
-        <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
+  <main className="shopping-page page">
+    <div className="cart-container">
+      <h1>Your shopping cart</h1>
+
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <>
           <div className="cart-items">
             {cartItems.map((item) => (
               <div key={item.id} className="cart-item">
+
                 <img
-                  src={item.image_url}
-                  alt={item.name}
+                  src={`https://cataas.com/cat?width=400&height=600&random=${item.product.id}`}
+                  alt={item.product.name}
                   className="cart-item-image"
                 />
-                <div className="cart-item-details">
-                  <h3>{item.name}</h3>
-                  <p>${item.product.price}</p>
-                  <div className="quantity-control">
+
+                <div className="cart-item-content">
+
+                  <div className="cart-item-info">
+                    <h3 className="cart-item-name">
+                      {item.product.name}
+                    </h3>
+
+                    <p className="cart-item-price">
+                      ${parseFloat(item.product.price).toFixed(2)}
+                    </p>
+                  </div>
+
+                  <div className="cart-item-actions">
+                    <span className="section-label">QUANTITY</span>
+                    
+                    <div className="quantity-control">
+                      <button
+                        className="qty-btn"
+                        onClick={() =>
+                          updateQuantity(
+                            item.id,
+                            Math.max(1, item.quantity - 1)
+                          )
+                        }
+                      >
+                        −
+                      </button>
+
+                      <span className="qty-number">
+                        {item.quantity}
+                      </span>
+                
+                      <button
+                        className="qty-btn"
+                        onClick={() =>
+                          updateQuantity(
+                            item.id,
+                            item.quantity + 1
+                          )
+                        }
+                      >
+                        +
+                      </button>
+
+                    </div>
+
                     <button
-                      onClick={() =>
-                        updateQuantity(item.id, Math.max(1, item.quantity - 1))
-                      }
+                      className="remove-btn"
+                      onClick={() => removeItem(item.id)}
                     >
-                      -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                      +
+                      Remove
                     </button>
                   </div>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeItem(item.id)}
-                  >
-                    Remove
-                  </button>
+
                 </div>
+
                 <div className="item-total">
-                  ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
+                  $
+                  {(parseFloat(item.product.price) * item.quantity).toFixed(2)}
                 </div>
+
               </div>
             ))}
-            <div className="cart-total">
-              <h2>Total: ${totalPrice.toFixed(2)}</h2>
-            </div>
           </div>
-        )}
-      </div>
 
-      <p className="checkout-link"><Link to="/checkout">Checkout</Link></p>
-    </main>
-  );
+          <p className="checkout-link">
+            <Link to="/checkout">Checkout</Link>
+          </p>
+        </>
+      )}
+    </div>
+  </main>
+);
 }
