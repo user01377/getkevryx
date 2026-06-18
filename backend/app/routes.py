@@ -6,8 +6,11 @@ from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text, update
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
-from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut
+from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut, CartSummaryOut, CartSummaryItemOut
 from decimal import Decimal
+
+SHIPPING_RATE = Decimal("0.1")
+TAX_RATE = Decimal("0.08")
 
 router = APIRouter()
 
@@ -96,6 +99,58 @@ def get_cart(db: Session = Depends(get_db), session_id: str | None = Cookie(defa
         return CartOut(items=[])
 
     return CartOut(items=cart.items)
+
+@router.get("/cart/summary", response_model=CartSummaryOut)
+def cart_summary(
+    db: Session = Depends(get_db),
+    session_id: str | None = Cookie(default=None)
+):
+
+    if not session_id:
+        return CartSummaryOut(
+            items=[],
+            subtotal=Decimal("0"),
+            shipping=Decimal("0"),
+            tax=Decimal("0"),
+            total=Decimal("0")
+        )
+
+    cart = (
+        db.query(Cart)
+        .options(joinedload(Cart.items).joinedload(CartItem.product))
+        .filter(Cart.session_id == session_id)
+        .first()
+    )
+
+    if not cart:
+        return CartSummaryOut(
+            items=[],
+            subtotal=Decimal("0"),
+            shipping=Decimal("0"),
+            tax=Decimal("0"),
+            total=Decimal("0")
+        )
+
+    subtotal = sum(Decimal(str(item.quantity)) * item.product.price for item in cart.items)
+
+    shipping = subtotal * SHIPPING_RATE
+    tax = subtotal * TAX_RATE
+    total = subtotal + shipping + tax
+
+    return CartSummaryOut(
+        items=[
+            CartSummaryItemOut(
+                product=item.product.name,
+                quantity=item.quantity,
+                price=item.product.price
+            )
+            for item in cart.items
+        ],
+        subtotal=subtotal,
+        shipping=shipping,
+        tax=tax,
+        total=total
+    )
 
 @router.post("/cart/add", response_model=CartItemAddOut)
 def add_to_cart(
@@ -334,17 +389,26 @@ def get_order_info(
     result = []
 
     for order in orders:
+
+        subtotal = order.order_total
+        shipping = order.order_total * SHIPPING_RATE
+        tax = order.order_total * TAX_RATE
+        total = subtotal + shipping + tax
+
         result.append(
             OrderOut(
                 id=order.id,
                 status=(order.order_status),
                 created_at=order.created_at,
-                total=float(order.order_total),
+                subtotal=subtotal,
+                shipping=shipping,
+                tax=tax,
+                total=total,
                 items=[
                     OrderItemOut(
                         product=item.product.name,
                         quantity=item.quantity,
-                        price=float(item.unit_price)
+                        price=item.unit_price
                     )
                     for item in order.items
                 ]
@@ -370,28 +434,25 @@ def get_order_summary(
 
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
-    
-    SHIPPING_RATE = Decimal(0.1)
-    TAX_RATE = Decimal(0.08)
 
-    order_subtotal = order.order_total
-    order_shipping = order.order_total * SHIPPING_RATE
-    order_tax = order.order_total * TAX_RATE
-    order_total = order_subtotal + order_shipping + order_tax
+    subtotal = order.order_total
+    shipping = order.order_total * SHIPPING_RATE
+    tax = order.order_total * TAX_RATE
+    total = subtotal + shipping + tax
     
     return OrderOut(
         id=order.id,
         status=order.order_status,
         created_at=order.created_at,
-        subtotal=float(order_subtotal),
-        shipping=float(order_shipping),
-        tax=float(order_tax),
-        total=float(order_total),
+        subtotal=subtotal,
+        shipping=shipping,
+        tax=tax,
+        total=total,
         items=[
             OrderItemOut(
                 product=item.product.name,
                 quantity=item.quantity,
-                price=float(item.unit_price)
+                price=item.unit_price
             )
             for item in order.items
         ]
