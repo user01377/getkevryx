@@ -3,9 +3,9 @@ from datetime import datetime, timezone, timedelta
 from app.database import SessionLocal
 from app.models import OrderPlaced, OrderStatus
 
-SHIPPED_TIME = 1
-OUT_FOR_DELIVERY_TIME = 2
-FULFILLED_TIME = 3
+SHIPPED_TIME = 2
+OUT_FOR_DELIVERY_TIME = 5
+FULFILLED_TIME = 10
 
 def get_order_status(created_at):
     delta = datetime.now(timezone.utc) - created_at
@@ -23,7 +23,10 @@ def update_order_status():
     db = SessionLocal()
 
     try:
-        orders = db.query(OrderPlaced).all()
+        orders = (
+        db.query(OrderPlaced)
+        .filter(OrderPlaced.order_status != OrderStatus.FULFILLED)
+        .all())
 
         changed = False
 
