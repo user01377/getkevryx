@@ -1,33 +1,50 @@
 from app.database import SessionLocal
 from app.models import Product
 
-RESTOCK_THRESHOLD = 400
-RESTOCK_AMOUNT = 1000
+# all amounts are based on category
+RESTOCK_THRESHOLD = {
+    "top": 125,
+    "bottom": 125,
+    "outerwear": 75,
+    "accessory": 75
+}
+
+RESTOCK_AMOUNT = {
+    "top": 600,
+    "bottom": 600,
+    "outerwear": 300,
+    "accessory": 200
+}
 
 def restock_products():
     db = SessionLocal()
 
     try:
-        products = (
-            db.query(Product)
-            .filter(Product.stock < RESTOCK_THRESHOLD)
-            .all()
-        )
+        products = db.query(Product).all()
 
-        if not products:
-            print("No products need restocking.")
-            return
+        changed = False
 
         for product in products:
-            old_stock = product.stock
-            product.stock = RESTOCK_AMOUNT
+            category = product.category.value
 
-            print(
-                f"Restocked {product.name} "
-                f"from {old_stock} -> {product.stock}"
-            )
+            threshold = RESTOCK_THRESHOLD.get(category)
+            restock_amount = RESTOCK_AMOUNT.get(category)
 
-        db.commit()
+            if product.stock < threshold:
+                old_stock = product.stock
+                product.stock = restock_amount
+
+                print(
+                    f"Restocked {product.name} "
+                    f"({category}) {old_stock} -> {product.stock}"
+                )
+
+                changed = True
+
+        if changed:
+            db.commit()
+        else:
+            print("No products need restocking.")
 
     except Exception as e:
         db.rollback()
