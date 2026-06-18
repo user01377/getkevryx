@@ -33,9 +33,10 @@ async def lifespan(app: FastAPI):
 
     # seed database
     seed.seed_products()
-
-    scheduler.add_job(restock.restock_products, "interval", seconds=30)
-    scheduler.add_job(status_updater.update_order_status, "interval", seconds=30)
+    
+    # add/start jobs
+    scheduler.add_job(restock.restock_products, "interval", seconds=120)
+    scheduler.add_job(status_updater.update_order_status, "interval", seconds=60)
     scheduler.start()
 
     yield
