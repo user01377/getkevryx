@@ -77,7 +77,11 @@ export default function ProductsGrid() {
             to={`/all-products/${p.id}`}
             className="product-card"
           >
-            <div className="product-image-placeholder" />
+            <img
+              src={`https://cataas.com/cat?width=400&height=600&random=${p.id}`}
+              alt={p.name}
+              className="product-image"
+            />
 
             <h3 className="product-name">{p.name}</h3>
             <p className="product-description">{p.description}</p>
