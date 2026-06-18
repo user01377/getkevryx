@@ -20,23 +20,18 @@ export default function Checkout() {
   });
 
   useEffect(() => {
-    fetchCart();
+    (async () => {
+      try {
+        const res = await fetch("http://localhost:8000/cart", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        setCartItems(data?.items || []);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
-
-  const fetchCart = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/cart", {
-        credentials: "include",
-      });
-
-      const data = await res.json();
-      setCartItems(data?.items || []);
-    } catch (err) {
-      console.error("Failed to fetch cart:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -45,6 +40,16 @@ export default function Checkout() {
     }));
   };
 
+  const subtotal = cartItems.reduce(
+    (sum, item) =>
+      sum + parseFloat(item.product?.price || 0) * item.quantity,
+    0
+  );
+
+  const shipping = subtotal * 0.1;
+  const tax = subtotal * 0.08;
+  const total = subtotal + shipping + tax;
+
   const placeOrder = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -52,143 +57,106 @@ export default function Checkout() {
     try {
       const res = await fetch("http://localhost:8000/checkout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.detail || "Failed to place order");
-      }
-
-      alert("Order placed successfully!");
+      if (!res.ok) throw new Error(data.detail || "Checkout failed");
 
       navigate(`/order/${data.order_id}`);
-
     } catch (err) {
-      console.error(err);
       alert(err.message);
     } finally {
       setSubmitting(false);
     }
   };
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
-    0
-  );
-
-  if (loading) return <p>Loading checkout...</p>;
+  if (loading) return <p className="loading">Loading checkout...</p>;
 
   return (
-    <main className="checkout-page page">
+    <main className="checkout-page">
       <div className="checkout-container">
 
-        <div className="checkout-form-section">
-          <h1>Checkout</h1>
+        {/* LEFT */}
+        <div className="checkout-left">
+          <h1 className="checkout-title">Checkout</h1>
 
           <form onSubmit={placeOrder} className="checkout-form">
 
             <div className="form-row">
-              <input
-                type="text"
-                name="first"
-                placeholder="First Name"
-                value={formData.first}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="text"
-                name="last"
-                placeholder="Last Name"
-                value={formData.last}
-                onChange={handleChange}
-                required
-              />
+              <input name="first" placeholder="First Name" onChange={handleChange} required />
+              <input name="last" placeholder="Last Name" onChange={handleChange} required />
             </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="text"
-              name="address"
-              placeholder="Street Address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-            />
+            <input name="email" placeholder="Email" onChange={handleChange} required />
+            <input name="address" placeholder="Address" onChange={handleChange} required />
 
             <div className="form-row">
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="text"
-                name="state"
-                placeholder="State"
-                value={formData.state}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="text"
-                name="zipcode"
-                placeholder="ZIP Code"
-                value={formData.zipcode}
-                onChange={handleChange}
-                required
-              />
+              <input name="city" placeholder="City" onChange={handleChange} required />
+              <input name="state" placeholder="State" onChange={handleChange} required />
+              <input name="zipcode" placeholder="ZIP" onChange={handleChange} required />
             </div>
 
-            <button type="submit" className="place-order-btn" disabled={submitting}>
+            <button className="place-order-btn" disabled={submitting}>
               {submitting ? "Placing Order..." : "Place Order"}
             </button>
+
           </form>
         </div>
-        
-        <div className="order-summary">
-          <h2>Order Summary</h2>
 
-          {cartItems.map((item) => (
-            <div key={item.id} className="summary-item">
-              <div>
-                <strong>{item.product.name}</strong>
-                <p>Qty: {item.quantity}</p>
+        {/* RIGHT */}
+        <aside className="checkout-right">
+          <h2 className="summary-title">Order Summary</h2>
+
+          <div className="summary-items">
+            {cartItems.map((item) => (
+              <div key={item.id} className="summary-item">
+
+                <img
+                  src={`https://cataas.com/cat?width=120&height=160&random=${item.product?.id}`}
+                  alt={item.product?.name}
+                  className="summary-image"
+                />
+
+                <div className="summary-info">
+                  <p className="summary-name">{item.product?.name}</p>
+                  <p className="summary-qty">Qty: {item.quantity}</p>
+                </div>
+
+                <p className="summary-price">
+                  ${(parseFloat(item.product?.price || 0) * item.quantity).toFixed(2)}
+                </p>
+
               </div>
-
-              <span>
-                ${(item.product.price * item.quantity).toFixed(2)}
-              </span>
-            </div>
-          ))}
-
-          <hr />
-
-          <div className="summary-total">
-            <strong>Total</strong>
-            <strong>${subtotal.toFixed(2)}</strong>
+            ))}
           </div>
-        </div>
+
+          <div className="summary-break" />
+
+          <div className="summary-row">
+            <span>Subtotal</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+
+          <div className="summary-row">
+            <span>Shipping</span>
+            <span>${shipping.toFixed(2)}</span>
+          </div>
+
+          <div className="summary-row">
+            <span>Tax</span>
+            <span>${tax.toFixed(2)}</span>
+          </div>
+
+          <div className="summary-row total">
+            <span>Total</span>
+            <span>${total.toFixed(2)}</span>
+          </div>
+
+        </aside>
 
       </div>
     </main>
