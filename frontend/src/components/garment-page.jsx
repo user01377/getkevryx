@@ -6,7 +6,6 @@ export default function GarmentPage() {
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
-  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -19,10 +18,6 @@ export default function GarmentPage() {
 
         setProduct(data);
 
-        if (data.colors) {
-          const firstColor = data.colors.split(",")[0].trim();
-          setSelectedColor(firstColor);
-        }
       } catch (err) {
         console.error(err);
       }
@@ -54,10 +49,6 @@ export default function GarmentPage() {
   };
 
   if (!product) return <p className="loading">Loading...</p>;
-
-  const colorsArray = product.colors ? product.colors.split(",").map(c => c.trim()) : [];
-
-  // console.log(colorsArray);
   
   return (
     <main className="product-page">
@@ -65,42 +56,27 @@ export default function GarmentPage() {
 
         {/* Product Image */}
         <div className="product-image-wrapper">
-          <img src={product.image_url} alt={product.name} className="product-image" />
+          <img
+            src={`https://cataas.com/cat?width=800&height=1200&random=${product.id}`}
+            alt={product.name}
+            className="product-image"
+          />
         </div>
 
         <div className="product-details">
+          <h1 className="garment-name">{product.name}</h1>
 
-           <h1 className="garment-name">{product.name}</h1>
+          <div className="garment-price">
+            ${parseFloat(product.price).toFixed(2)}
+          </div>
 
-            {/* Selected Color Display */}
-            {selectedColor && (
-              <p className="selected-color">
-                Color: <span className="color-name">{selectedColor}</span>
-              </p>
-            )}
+          <p className="garment-description">
+            {product.description}
+          </p>
 
-            <span className="product-price">${product.price}</span>
-            <p className="product-description">{product.description}</p>
+          <div className="section">
+            <span className="section-label">QUANTITY</span>
 
-          {/* Color Buttons */}
-          {colorsArray.length > 0 && (
-            <div className="colors">
-              {colorsArray.map(color => (
-                <button
-                  key={color}
-                  className={`color-btn ${selectedColor === color ? "selected" : ""}`}
-                  style={{ backgroundColor: color.toLowerCase() }}
-                  onClick={() => setSelectedColor(color)}
-                >
-                  {selectedColor === color ? "✓" : ""}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Quantity Selector */}
-          <div className="quantity-selector-row">
-            <strong className="selector-label">Quantity:</strong>
             <div className="quantity-control">
               <button
                 type="button"
