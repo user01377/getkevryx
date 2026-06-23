@@ -11,7 +11,7 @@ export default function GarmentPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/products/${id}`);
+        const res = await fetch(`/api/products/${id}`);
         const json = await res.json();
 
         const data = json.data ?? json;
@@ -29,7 +29,7 @@ export default function GarmentPage() {
   
   const handleAddToCart = async () => {
     try {
-      const res = await fetch("http://localhost:8000/cart/add", {
+      const res = await fetch("/api/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,7 +10,7 @@ export default function TrackOrder() {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:8000/order-info", {
+      const response = await fetch("/api/order-info", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

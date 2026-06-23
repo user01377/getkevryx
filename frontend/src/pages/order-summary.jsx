@@ -11,7 +11,7 @@ export default function OrderSummaryPage() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch(`http://localhost:8000/order-summary/${id}`, {
+        const res = await fetch(`/api/order-summary/${id}`, {
           credentials: "include",
         });
 

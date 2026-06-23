@@ -10,7 +10,7 @@ export default function ProductsGrid() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:8000/products");
+        const res = await fetch("/api/products");
         const json = await res.json();
 
         const list = json.data ?? [];

@@ -22,7 +22,7 @@ export default function Checkout() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:8000/cart/summary", {
+        const res = await fetch("/api/cart/summary", {
           credentials: "include",
         });
 
@@ -46,7 +46,7 @@ export default function Checkout() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:8000/checkout", {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

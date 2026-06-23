@@ -9,7 +9,7 @@ export default function ShoppingCart() {
   // fetch cart route
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:8000/cart", {
+      const res = await fetch("/api/cart", {
         credentials: "include",
       });
 
@@ -29,7 +29,7 @@ export default function ShoppingCart() {
   // update quantity route
   const updateQuantity = async (itemId, newQuantity) => {
     try {
-      await fetch(`http://localhost:8000/cart/item/${itemId}/`, {
+      await fetch(`/api/cart/item/${itemId}/`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -44,7 +44,7 @@ export default function ShoppingCart() {
   // Remove item
   const removeItem = async (itemId) => {
     try {
-      await fetch(`http://localhost:8000/cart/item/${itemId}`, {
+      await fetch(`/api/cart/item/${itemId}`, {
         method: "DELETE",
         credentials: "include",
       });
