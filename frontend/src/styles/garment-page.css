@@ -1,0 +1,123 @@
+.product-page {
+  margin: calc(1rem + 70px) auto;
+  padding: 2rem;
+}
+
+.product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+}
+
+.product-image-wrapper {
+  width: 100%;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #e5e5e5;
+  box-shadow: none;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+.garment-name {
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.garment-price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+.garment-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 2.5rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: #777;
+}
+
+.section .quantity-control {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.75rem;
+  border: 1px solid #ddd;
+  width: fit-content;
+}
+
+.qty-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  transition: background 0.2s ease;
+}
+
+.qty-btn:hover {
+  background: gray;
+}
+
+.qty-number {
+  width: 50px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.add-to-cart-btn {
+  margin-top: 1rem;
+
+  width: 100%;
+  height: 54px;
+
+  background: #111;
+  color: white;
+
+  border: none;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: #222;
+}

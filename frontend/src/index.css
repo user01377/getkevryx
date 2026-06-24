@@ -3,5 +3,10 @@ html, body, #root {
     width: 100%;
     margin: 0;
     padding: 0;
-  }
-  
+    background-color: white;
+    box-sizing: border-box;
+}
+
+* {
+    font-family: 'Helvetica Neue', sans-serif;
+}

@@ -1,6 +1,13 @@
-Django==6.0
-asgiref==3.11.0
-sqlparse==0.5.4
-python-dotenv==1.2.1
+fastapi
+uvicorn[standard]
+apscheduler
 
-psycopg[binary]==3.1.18
+sqlalchemy
+psycopg2-binary
+
+pydantic
+pydantic[email]
+pydantic-settings
+
+python-dotenv
+python-multipart

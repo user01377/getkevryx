@@ -1,0 +1,156 @@
+.checkout-page {
+  margin: calc(1rem + 70px) auto;
+  padding: 2rem;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 4rem;
+}
+
+/* LEFT */
+.checkout-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-title {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.checkout-form input {
+  padding: 0.9rem 1rem;
+  border: 1px solid #e5e5e5;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.checkout-form input:focus {
+  border-color: #111;
+}
+
+/* BUTTON */
+.place-order-btn {
+  margin-top: 1rem;
+  height: 52px;
+  width: 100%;
+
+  background: #111;
+  color: #fff;
+
+  border: none;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.place-order-btn:hover {
+  background: #222;
+}
+
+/* RIGHT */
+.checkout-right {
+  border: 1px solid #e5e5e5;
+  padding: 2rem;
+  height: fit-content;
+  position: sticky;
+  top: 120px;
+}
+
+.summary-title {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+/* ITEMS */
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.summary-image {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #e5e5e5;
+}
+
+.summary-name {
+  font-weight: 500;
+}
+
+.summary-qty {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.summary-price {
+  font-weight: 500;
+}
+
+/* DIVIDER */
+.summary-break {
+  margin: 1.5rem 0;
+  border-top: 1px solid #eee;
+}
+
+/* ROWS */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.summary-row.total {
+  margin-top: 0.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-right {
+    position: static;
+  }
+}

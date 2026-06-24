@@ -1,0 +1,70 @@
+/* PAGE WRAPPER */
+.privacy-policy {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 6rem 1.5rem;
+}
+
+/* CONTAINER */
+.privacy-container {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.privacy-title h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+.privacy-updated {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* BODY */
+.privacy-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.privacy-intro {
+  font-size: 1rem;
+  color: #222;
+}
+
+/* SECTIONS */
+.privacy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* SECTION HEADERS */
+.privacy-section h2 {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+/* TEXT FOR SECTIONS */
+.privacy-section p {
+  font-size: 0.95rem;
+  color: #333;
+}

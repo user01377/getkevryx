@@ -1,0 +1,126 @@
+.track-page {
+  max-width: 1200px;
+  margin: calc(1rem + 70px) auto;
+  padding: 2rem;
+  color: #1a1a1a;
+}
+
+/* TITLE (matches checkout/cart hierarchy) */
+.track-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+  letter-spacing: 2px;
+}
+
+/* FORM */
+.track-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.track-form input {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e5e5e5;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.track-form input:focus {
+  border-color: #111;
+}
+
+.track-form button {
+  width: 220px;
+  background: #111;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.track-form button:hover {
+  background: #222;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* ORDERS */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* CARD (mirrors cart-item / checkout summary) */
+.order-card {
+  border: 1px solid #e5e5e5;
+  padding: 2rem;
+}
+
+/* HEADER */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-header h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+/* STATUS BADGE */
+.status {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #ddd;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* optional status styling */
+.status.pending { color: #b08900; }
+.status.shipped { color: #1b6ef3; }
+.status.delivered { color: #0a7a2f; }
+
+/* META */
+.order-meta {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* ITEMS */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .track-form {
+    flex-direction: column;
+  }
+
+  .track-form button {
+    width: 100%;
+    height: 52px;
+  }
+}

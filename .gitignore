@@ -206,5 +206,11 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# MacOs
+# macOS
 .DS_Store
+
+# Project Specific Assets
+project_assets
+.res-dock
+long-stress.js
+stress.js
