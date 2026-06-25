@@ -1,9 +1,8 @@
 services:
-  web:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend
     volumes:
       - ./backend:/app
     ports:
@@ -30,9 +29,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend
     ports:
       - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
