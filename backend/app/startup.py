@@ -13,7 +13,7 @@ from app.seed import seed_products
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.jobs import restock, status_updater
 
-def wait_for_db(engine, retries=10):
+def wait_for_db(retries=10):
     for i in range(retries):
         try:
             with engine.connect() as conn:
@@ -25,7 +25,7 @@ def wait_for_db(engine, retries=10):
 
     raise Exception("DB offline")
 
-def create_tables():
+def init_database_tables():
     Base.metadata.create_all(bind=engine)
 
 scheduler = BackgroundScheduler()
@@ -33,10 +33,10 @@ scheduler = BackgroundScheduler()
 # THE MAIN APP STARTUP FUNCTION TO BE IMPORTED AND CALLED FROM MAIN.PY
 def startup_backend():
     # wait for db to become online and queryable
-    wait_for_db(engine)
+    wait_for_db()
 
     # create tables
-    create_tables()
+    init_database_tables()
 
     # seed database
     seed_products()
@@ -47,4 +47,5 @@ def startup_backend():
     scheduler.start()
 
 def shutdown_scheduler():
-    scheduler.shutdown()
+    if scheduler.running:
+        scheduler.shutdown()
