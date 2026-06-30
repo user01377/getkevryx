@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build backend image
-        run: docker build -t kevryx-backend:test backend
+        run: docker build --target test -t kevryx-backend:test backend
 
       - name: Ruff
         run: docker run --rm kevryx-backend:test ruff check .
