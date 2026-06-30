@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from app.routes import router
 from app.startup import startup_backend, shutdown_scheduler
 
+
 def create_app(enable_lifespan: bool = True):
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -15,10 +16,11 @@ def create_app(enable_lifespan: bool = True):
 
         if enable_lifespan:
             shutdown_scheduler()
-        
+
     app = FastAPI(lifespan=lifespan)
 
-    origins = os.getenv("CORS_ORIGINS").split(",")
+    origins = os.getenv("CORS_ORIGINS", "")
+    origins = origins.split(",") if origins else []
 
     app.add_middleware(
         CORSMiddleware,
@@ -31,5 +33,6 @@ def create_app(enable_lifespan: bool = True):
     app.include_router(router)
 
     return app
+
 
 app = create_app()

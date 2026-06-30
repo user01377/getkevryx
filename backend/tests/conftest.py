@@ -23,6 +23,7 @@ TestingSessionLocal = sessionmaker(
     bind=engine,
 )
 
+
 def override_get_db():
     db = TestingSessionLocal()
     try:
@@ -43,6 +44,7 @@ def db():
     db.close()
 
     Base.metadata.drop_all(bind=engine)
+
 
 @pytest.fixture(scope="function")
 def seed_products(db):
@@ -68,6 +70,7 @@ def seed_products(db):
     db.commit()
 
     return db
+
 
 @pytest.fixture(scope="function")
 def client(seed_products):

@@ -7,8 +7,8 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 load_dotenv()
 
-user = os.getenv('POSTGRES_USER')
-password = os.getenv('POSTGRES_PASSWORD')
+user = os.getenv("POSTGRES_USER")
+password = os.getenv("POSTGRES_PASSWORD")
 
 DATABASE_URL = f"postgresql://{user}:{password}@postgres:5432/kevryx"
 
@@ -20,13 +20,10 @@ engine = create_engine(
     pool_pre_ping=True,
 )
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
 
 def get_db():
     db = SessionLocal()

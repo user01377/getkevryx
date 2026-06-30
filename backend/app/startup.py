@@ -1,7 +1,7 @@
 """
 This file contains all necessary start tasks for backend container
 
-This code used to be directly inside 
+This code used to be directly inside
 of main.py and the fastapi lifespan function,
 but was moved here for modularity and SOC.
 """
@@ -13,6 +13,7 @@ from app.seed import seed_products
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.jobs import restock, status_updater
 
+
 def wait_for_db(retries=10):
     for i in range(retries):
         try:
@@ -21,14 +22,17 @@ def wait_for_db(retries=10):
                 return
         except Exception:
             print("db unresponsive, retrying..")
-            time.sleep(2 ** i)
+            time.sleep(2**i)
 
     raise Exception("DB offline")
+
 
 def init_database_tables():
     Base.metadata.create_all(bind=engine)
 
+
 scheduler = BackgroundScheduler()
+
 
 # THE MAIN APP STARTUP FUNCTION TO BE IMPORTED AND CALLED FROM MAIN.PY
 def startup_backend():
@@ -40,11 +44,12 @@ def startup_backend():
 
     # seed database
     seed_products()
-    
+
     # add/start background jobs
     scheduler.add_job(restock.restock_products, "interval", seconds=120)
     scheduler.add_job(status_updater.update_order_status, "interval", seconds=60)
     scheduler.start()
+
 
 def shutdown_scheduler():
     if scheduler.running:

@@ -7,6 +7,7 @@ SHIPPED_TIME = 2
 OUT_FOR_DELIVERY_TIME = 5
 FULFILLED_TIME = 10
 
+
 def get_order_status(created_at):
     delta = datetime.now(timezone.utc) - created_at
 
@@ -19,14 +20,16 @@ def get_order_status(created_at):
 
     return OrderStatus.PROCESSING
 
+
 def update_order_status():
     db = SessionLocal()
 
     try:
         orders = (
-        db.query(OrderPlaced)
-        .filter(OrderPlaced.order_status != OrderStatus.FULFILLED)
-        .all())
+            db.query(OrderPlaced)
+            .filter(OrderPlaced.order_status != OrderStatus.FULFILLED)
+            .all()
+        )
 
         changed = False
 
@@ -38,10 +41,7 @@ def update_order_status():
             if old_status != new_status:
                 order.order_status = new_status
 
-                print(
-                    f"Order #{order.id}: "
-                    f"{old_status} -> {new_status}"
-                )
+                print(f"Order #{order.id}: {old_status} -> {new_status}")
 
                 changed = True
 
