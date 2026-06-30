@@ -1,6 +1,6 @@
 # this file validates api requests from users
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
 from decimal import Decimal
 
@@ -13,8 +13,7 @@ class ProductOut(BaseModel):
     stock: int
     category: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ProductListResponse(BaseModel):
@@ -32,8 +31,7 @@ class CartItemAddOut(BaseModel):
     product_id: int
     quantity: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class CartItemOut(BaseModel):
@@ -42,8 +40,7 @@ class CartItemOut(BaseModel):
     quantity: int
     product: ProductOut
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class CartOut(BaseModel):
