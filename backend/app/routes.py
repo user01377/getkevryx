@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Cookie, Response
 from uuid import uuid4
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy import text, update
+from sqlalchemy import text
 from app.database import get_db
 from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
 from app.schema import ProductOut, ProductListResponse, AddToCart, CartItemAddOut, CartOut, UpdateCartItem, CheckoutIn, TrackOrderIn, OrderOut, OrderItemOut, CartSummaryOut, CartSummaryItemOut
