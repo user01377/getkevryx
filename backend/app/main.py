@@ -19,7 +19,8 @@ def create_app(enable_lifespan: bool = True):
 
     app = FastAPI(lifespan=lifespan)
 
-    origins = os.getenv("CORS_ORIGINS").split(",")
+    origins = os.getenv("CORS_ORIGINS", "")
+    origins = origins.split(",") if origins else []
 
     app.add_middleware(
         CORSMiddleware,
