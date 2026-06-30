@@ -2,19 +2,10 @@ from app.database import SessionLocal
 from app.models import Product
 
 # all amounts are based on category
-RESTOCK_THRESHOLD = {
-    "top": 125,
-    "bottom": 125,
-    "outerwear": 75,
-    "accessory": 75
-}
+RESTOCK_THRESHOLD = {"top": 125, "bottom": 125, "outerwear": 75, "accessory": 75}
 
-RESTOCK_AMOUNT = {
-    "top": 600,
-    "bottom": 500,
-    "outerwear": 300,
-    "accessory": 200
-}
+RESTOCK_AMOUNT = {"top": 600, "bottom": 500, "outerwear": 300, "accessory": 200}
+
 
 def restock_products():
     db = SessionLocal()

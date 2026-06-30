@@ -2,6 +2,7 @@
 Tests the GET /products endpoint.
 """
 
+
 def test_get_products_returns_all_products(client):
     response = client.get("/products")
 

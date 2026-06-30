@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from decimal import Decimal
 
+
 class ProductOut(BaseModel):
     id: int
     name: str
@@ -15,13 +16,16 @@ class ProductOut(BaseModel):
     class Config:
         from_attributes = True
 
+
 class ProductListResponse(BaseModel):
     data: list[ProductOut]
     count: int
 
+
 class AddToCart(BaseModel):
     product_id: int
     quantity: int = 1
+
 
 class CartItemAddOut(BaseModel):
     id: int
@@ -30,7 +34,8 @@ class CartItemAddOut(BaseModel):
 
     class Config:
         from_attributes = True
-        
+
+
 class CartItemOut(BaseModel):
     id: int
     product_id: int
@@ -40,13 +45,16 @@ class CartItemOut(BaseModel):
     class Config:
         from_attributes = True
 
+
 class CartOut(BaseModel):
     items: list[CartItemOut]
+
 
 class CartSummaryItemOut(BaseModel):
     product: str
     quantity: int
     price: Decimal
+
 
 class CartSummaryOut(BaseModel):
     items: list[CartSummaryItemOut]
@@ -55,8 +63,10 @@ class CartSummaryOut(BaseModel):
     tax: Decimal
     total: Decimal
 
+
 class UpdateCartItem(BaseModel):
     quantity: int
+
 
 class CheckoutIn(BaseModel):
     first: str
@@ -68,8 +78,10 @@ class CheckoutIn(BaseModel):
     state: str
     zipcode: str
 
+
 class TrackOrderIn(BaseModel):
     email: EmailStr
+
 
 class OrderItemOut(BaseModel):
     product: str
