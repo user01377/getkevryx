@@ -39,6 +39,8 @@ jobs:
 
       - name: Run tests
         run: pytest -q --strict-markers
+        env:
+          PYTHONPATH: .
 
   frontend:
     name: Frontend Build
