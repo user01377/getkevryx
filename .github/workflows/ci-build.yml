@@ -44,8 +44,9 @@ jobs:
     
   image-build:
     name: Building Docker Images
-    runs-on: ubuntu-latest
     needs: [backend, frontend]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -58,28 +59,38 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get Commit SHA
-        id: vars
-        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
       - name: Build Backend Runtime Image
         run: |
           docker build \
-            -t ghcr.io/user01377/kevryx-backend:${{ steps.vars.outputs.sha }} \
+            -t ghcr.io/user01377/kevryx-backend:${{ github.sha }} \
             -t ghcr.io/user01377/kevryx-backend:latest \
             backend
 
       - name: Build Frontend Runtime Image
         run: |
           docker build \
-            -t ghcr.io/user01377/kevryx-frontend:${{ steps.vars.outputs.sha }} \
+            -t ghcr.io/user01377/kevryx-frontend:${{ github.sha }} \
             -t ghcr.io/user01377/kevryx-frontend:latest \
             frontend
 
       - name: Push Images
-        if: github.ref == 'refs/heads/main'
         run: |
-          docker push ghcr.io/user01377/kevryx-backend:${{ steps.vars.outputs.sha }}
+          docker push ghcr.io/user01377/kevryx-backend:${{ github.sha }}
           docker push ghcr.io/user01377/kevryx-backend:latest
-          docker push ghcr.io/user01377/kevryx-frontend:${{ steps.vars.outputs.sha }}
+          docker push ghcr.io/user01377/kevryx-frontend:${{ github.sha }}
           docker push ghcr.io/user01377/kevryx-frontend:latest
+
+    outputs:
+      sha: ${{ github.sha }}
+      
+
+  trigger-cd:
+    needs: image-build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/user01377/kevryx/actions/workflows/cd.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"sha\":\"${{ needs.image-build.outputs.sha }}\"}}"
