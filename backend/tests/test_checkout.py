@@ -20,7 +20,7 @@ def test_checkout_requires_session(client, seed_products):
     )
 
     assert response.status_code == 400
-    assert response.json()["detail"] == "No session"
+    assert response.json()["detail"] == "Cart is empty"
 
 
 def test_checkout_empty_cart(client, seed_products):
