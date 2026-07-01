@@ -25,7 +25,9 @@ jobs:
 
       - name: Stop old containers
         run: docker compose down
+        working-directory: /home/macser/getkevryx
 
       - name: Start updated stack
         run: |
           SHA=${{ github.event.workflow_run.head_sha }} docker compose up -d
+        working-directory: /home/macser/getkevryx
