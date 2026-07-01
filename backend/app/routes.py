@@ -269,7 +269,6 @@ def checkout(
     try:
         cart = db.query(Cart).filter(Cart.session_id == session_id).first()
 
-
         if not cart or not cart.items:
             raise HTTPException(status_code=400, detail="Cart is empty")
 

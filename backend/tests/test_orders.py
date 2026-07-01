@@ -4,6 +4,7 @@ Tests the all /orders endpoint.
 
 from decimal import Decimal
 
+
 def add_to_cart(client, product_id=1, quantity=2):
     return client.post(
         "/cart/add",
@@ -27,6 +28,7 @@ def checkout(client):
             "zipcode": "12345",
         },
     )
+
 
 def test_checkout_creates_order_and_persists_items(client):
     """
@@ -58,6 +60,7 @@ def test_checkout_creates_order_and_persists_items(client):
 
     assert Decimal(order["subtotal"]) == Decimal("50.00")
 
+
 def test_order_summary_not_found(client):
     res = client.get("/order-summary/9999")
     assert res.status_code == 404
@@ -86,6 +89,7 @@ def test_order_summary_math_consistency(client):
     assert shipping > 0
     assert tax > 0
     assert total == subtotal + shipping + tax
+
 
 def test_order_info_returns_orders(client):
     """

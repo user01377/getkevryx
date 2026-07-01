@@ -4,6 +4,7 @@ Tests the GET /products endpoint.
 
 from decimal import Decimal
 
+
 def test_get_products(client):
     response = client.get("/products")
 

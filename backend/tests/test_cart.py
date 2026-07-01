@@ -4,11 +4,13 @@ Tests the all /cart endpoints.
 
 from decimal import Decimal
 
+
 def test_empty_cart(client):
     response = client.get("/cart")
 
     assert response.status_code == 200
     assert response.json()["items"] == []
+
 
 def test_add_to_cart(client):
     response = client.post(
@@ -25,6 +27,7 @@ def test_add_to_cart(client):
 
     assert body["product_id"] == 1
     assert body["quantity"] == 2
+
 
 def test_get_cart_after_add(client):
     client.post(
@@ -45,6 +48,7 @@ def test_get_cart_after_add(client):
 
     assert items[0]["quantity"] == 2
     assert items[0]["product"]["name"] == "Test Shirt"
+
 
 def test_add_existing_item_increases_quantity(client):
     client.post(
@@ -70,6 +74,7 @@ def test_add_existing_item_increases_quantity(client):
     assert len(items) == 1
     assert items[0]["quantity"] == 5
 
+
 def test_add_invalid_product(client):
     response = client.post(
         "/cart/add",
@@ -82,6 +87,7 @@ def test_add_invalid_product(client):
     assert response.status_code == 404
     assert response.json()["detail"] == "Product not found"
 
+
 def test_add_invalid_quantity(client):
     response = client.post(
         "/cart/add",
@@ -93,6 +99,7 @@ def test_add_invalid_quantity(client):
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Quantity must be > 0"
+
 
 def test_add_multiple_products(client):
     client.post(
@@ -120,6 +127,7 @@ def test_add_multiple_products(client):
     assert items[0]["product"]["name"] == "Test Shirt"
     assert items[1]["product"]["name"] == "Test Hoodie"
 
+
 def test_empty_cart_summary(client):
     response = client.get("/cart/summary")
 
@@ -132,6 +140,7 @@ def test_empty_cart_summary(client):
     assert Decimal(summary["shipping"]) == Decimal("0")
     assert Decimal(summary["tax"]) == Decimal("0")
     assert Decimal(summary["total"]) == Decimal("0")
+
 
 def test_cart_summary(client):
     client.post(
@@ -155,6 +164,7 @@ def test_cart_summary(client):
     assert Decimal(summary["tax"]) == Decimal("8.150000")
     assert Decimal(summary["total"]) == Decimal("120.350000")
 
+
 def test_update_cart_item(client):
     client.post(
         "/cart/add",
@@ -172,6 +182,7 @@ def test_update_cart_item(client):
 
     assert cart["items"][0]["quantity"] == 5
 
+
 def test_update_invalid_quantity(client):
     client.post(
         "/cart/add",
@@ -185,6 +196,7 @@ def test_update_invalid_quantity(client):
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Invalid Quantity"
+
 
 def test_update_nonexistent_item(client):
     client.post(
@@ -200,6 +212,7 @@ def test_update_nonexistent_item(client):
     assert response.status_code == 404
     assert response.json()["detail"] == "Cart item not found"
 
+
 def test_delete_cart_item(client):
     client.post(
         "/cart/add",
@@ -213,6 +226,7 @@ def test_delete_cart_item(client):
     cart = client.get("/cart").json()
 
     assert cart["items"] == []
+
 
 def test_delete_nonexistent_item(client):
     client.post(

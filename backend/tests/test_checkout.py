@@ -3,7 +3,6 @@ Tests for /checkout endpoint
 """
 
 
-
 def test_checkout_requires_session(client, seed_products):
     response = client.post(
         "/checkout",
