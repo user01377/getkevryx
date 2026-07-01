@@ -1,0 +1,30 @@
+name: CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy to Server
+    runs-on: self-hosted
+
+    steps:
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u user01377 --password-stdin
+
+      - name: Pulling Backend Image
+        run: docker pull ghcr.io/user01377/kevryx-backend:${{ inputs.sha }}
+
+      - name: Pulling Frontend Image
+        run: docker pull ghcr.io/user01377/kevryx-frontend:${{ inputs.sha }}
+
+      - name: Stopping Old Containers
+        run: |
+          docker compose down
+
+      - name: Starting Updated Containers
+        run: |
+          SHA=${{ inputs.sha }} docker compose up -d
