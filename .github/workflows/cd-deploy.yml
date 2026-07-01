@@ -24,7 +24,7 @@ jobs:
         run: docker pull ghcr.io/user01377/kevryx-frontend:${{ github.event.workflow_run.head_sha }}
 
       - name: Stop old containers
-        run: docker compose down
+        run: docker compose down --remove-orphans
         working-directory: /home/macser/getkevryx
 
       - name: Start updated stack
