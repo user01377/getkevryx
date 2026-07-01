@@ -278,8 +278,9 @@ def checkout(
     try:
         cart = db.query(Cart).filter(Cart.session_id == session_id).first()
 
+
         if not cart:
-            raise HTTPException(status_code=400, detail="Cart not found")
+            raise HTTPException(status_code=400, detail="Cart is empty")
 
         cart_items = db.query(CartItem).filter(CartItem.cart_id == cart.id).all()
 
