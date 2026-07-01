@@ -13,6 +13,8 @@ jobs:
     name: Deploy to Server
     runs-on: self-hosted
 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
       - name: Login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u user01377 --password-stdin
