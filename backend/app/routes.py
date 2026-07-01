@@ -89,9 +89,6 @@ def get_cart(
     db: Session = Depends(get_db), session_id: str | None = Cookie(default=None)
 ):
 
-    if not session_id:
-        return CartOut(items=[])
-
     cart = (
         db.query(Cart)
         .options(joinedload(Cart.items).joinedload(CartItem.product))
@@ -214,9 +211,6 @@ def update_item(
     session_id: str | None = Cookie(default=None),
 ):
 
-    if not session_id:
-        raise HTTPException(status_code=400, detail="No session")
-
     if payload.quantity <= 0 or payload.quantity > 10:
         raise HTTPException(status_code=400, detail="Invalid Quantity")
 
@@ -246,9 +240,6 @@ def delete_item(
     session_id: str | None = Cookie(default=None),
 ):
 
-    if not session_id:
-        raise HTTPException(status_code=400, detail="No session")
-
     cart = get_or_create_cart(db, session_id)
 
     item = (
@@ -273,19 +264,16 @@ def checkout(
     session_id: str | None = Cookie(default=None),
 ):
     if not session_id:
-        raise HTTPException(status_code=400, detail="No session")
+        raise HTTPException(status_code=400, detail="Cart is empty")
 
     try:
         cart = db.query(Cart).filter(Cart.session_id == session_id).first()
 
 
-        if not cart:
+        if not cart or not cart.items:
             raise HTTPException(status_code=400, detail="Cart is empty")
 
         cart_items = db.query(CartItem).filter(CartItem.cart_id == cart.id).all()
-
-        if not cart_items:
-            raise HTTPException(status_code=400, detail="Cart is empty")
 
         product_ids = [i.product_id for i in cart_items]
 
