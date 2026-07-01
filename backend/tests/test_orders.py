@@ -2,7 +2,6 @@
 Tests the all /orders endpoint.
 """
 
-import pytest
 from decimal import Decimal
 
 def add_to_cart(client, product_id=1, quantity=2):

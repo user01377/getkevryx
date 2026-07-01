@@ -2,6 +2,8 @@
 Tests the all /cart endpoints.
 """
 
+from decimal import Decimal
+
 def test_empty_cart(client):
     response = client.get("/cart")
 
@@ -117,8 +119,6 @@ def test_add_multiple_products(client):
 
     assert items[0]["product"]["name"] == "Test Shirt"
     assert items[1]["product"]["name"] == "Test Hoodie"
-
-from decimal import Decimal
 
 def test_empty_cart_summary(client):
     response = client.get("/cart/summary")
