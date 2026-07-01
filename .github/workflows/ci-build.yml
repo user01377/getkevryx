@@ -79,18 +79,3 @@ jobs:
           docker push ghcr.io/user01377/kevryx-backend:latest
           docker push ghcr.io/user01377/kevryx-frontend:${{ github.sha }}
           docker push ghcr.io/user01377/kevryx-frontend:latest
-
-    outputs:
-      sha: ${{ github.sha }}
-      
-
-  trigger-cd:
-    needs: image-build
-    runs-on: ubuntu-latest
-    
-    steps:
-      - run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/user01377/kevryx/actions/workflows/cd-deploy.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"sha\":\"${{ needs.image-build.outputs.sha }}\"}}"
