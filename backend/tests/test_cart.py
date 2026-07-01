@@ -1,5 +1,5 @@
 """
-Tests the GET /cart endpoint.
+Tests the all /cart endpoints.
 """
 
 def test_empty_cart(client):
