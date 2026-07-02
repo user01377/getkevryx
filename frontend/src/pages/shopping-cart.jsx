@@ -29,7 +29,7 @@ export default function ShoppingCart() {
   // update quantity route
   const updateQuantity = async (itemId, newQuantity) => {
     try {
-      await fetch(`/api/cart/item/${itemId}/`, {
+      await fetch(`/api/cart/item/${itemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
