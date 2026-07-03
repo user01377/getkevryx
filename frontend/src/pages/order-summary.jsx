@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../styles/order-summary.css";
 
 export default function OrderSummaryPage() {
@@ -18,7 +18,6 @@ export default function OrderSummaryPage() {
         const data = await res.json();
 
         setOrder(data);
-        setSummary(data.summary);
       } finally {
         setLoading(false);
       }
