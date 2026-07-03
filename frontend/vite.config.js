@@ -14,6 +14,6 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
-    setupFiles: "./setupTests.js",
+    setupFiles: "./vite.test.config.js",
   },
 });
