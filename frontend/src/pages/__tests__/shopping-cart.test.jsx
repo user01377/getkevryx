@@ -13,7 +13,7 @@ describe("ShoppingCart", () => {
   });
 
   test("shows loading while fetching", () => {
-    vi.restoreAllMocks.fetch = vi.fn(() => new Promise(() => {}));
+    global.fetch = vi.fn(() => new Promise(() => {}));
 
     render(
       <MemoryRouter>
@@ -25,7 +25,7 @@ describe("ShoppingCart", () => {
   });
 
   test("shows empty cart message", async () => {
-    vi.restoreAllMocks.fetch = vi.fn().mockResolvedValue({
+    global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         items: [],
@@ -44,7 +44,7 @@ describe("ShoppingCart", () => {
   });
 
   test("renders items returned from the API", async () => {
-    vi.restoreAllMocks.fetch = vi.fn().mockResolvedValue({
+    global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         items: [
@@ -76,7 +76,7 @@ describe("ShoppingCart", () => {
   });
 
   test("updates quantity when + is clicked", async () => {
-    vi.restoreAllMocks.fetch = vi
+    global.fetch = vi
       .fn()
       // Initial GET
       .mockResolvedValueOnce({
@@ -130,7 +130,7 @@ describe("ShoppingCart", () => {
 
     await userEvent.click(plusButton);
 
-    expect(vi.restoreAllMocks.fetch).toHaveBeenCalledWith(
+    expect(global.fetch).toHaveBeenCalledWith(
       "/api/cart/item/1",
       expect.objectContaining({
         method: "PATCH",
@@ -141,7 +141,7 @@ describe("ShoppingCart", () => {
   });
 
   test("removes an item", async () => {
-    vi.restoreAllMocks.fetch = vi
+    global.fetch = vi
       .fn()
       // initial GET
       .mockResolvedValueOnce({
@@ -187,7 +187,7 @@ describe("ShoppingCart", () => {
   
     await user.click(removeBtn);
   
-    expect(vi.restoreAllMocks.fetch).toHaveBeenCalledWith(
+    expect(global.fetch).toHaveBeenCalledWith(
       "/api/cart/item/1",
       expect.objectContaining({
         method: "DELETE",
