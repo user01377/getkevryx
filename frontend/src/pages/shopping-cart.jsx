@@ -54,13 +54,6 @@ export default function ShoppingCart() {
     }
   };
 
-  // Calculate total
-  const totalPrice = cartItems.reduce(
-    (sum, item) =>
-      sum + parseFloat(item.product.price) * item.quantity,
-    0
-  );
-
   if (loading) return <p>Loading cart...</p>;
 
   return (
