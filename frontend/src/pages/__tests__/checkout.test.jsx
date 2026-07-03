@@ -18,7 +18,7 @@ describe("Checkout page", () => {
   beforeEach(() => {
     mockNavigate.mockReset();
 
-    global.fetch = vi.fn();
+    globalThis.fetch = vi.fn();
     window.alert = vi.fn();
   });
 
@@ -38,7 +38,7 @@ describe("Checkout page", () => {
   };
 
   it("shows loading first", async () => {
-    global.fetch.mockImplementation(
+    globalThis.fetch.mockImplementation(
       () =>
         new Promise(() => {})
     );
@@ -53,7 +53,7 @@ describe("Checkout page", () => {
   });
 
   it("renders summary after fetch", async () => {
-    global.fetch.mockResolvedValueOnce({
+    globalThis.fetch.mockResolvedValueOnce({
       json: async () => mockSummary,
     });
 
@@ -70,7 +70,7 @@ describe("Checkout page", () => {
   });
 
   it("updates form fields", async () => {
-    global.fetch.mockResolvedValueOnce({
+    globalThis.fetch.mockResolvedValueOnce({
       json: async () => mockSummary,
     });
 
@@ -89,7 +89,7 @@ describe("Checkout page", () => {
   });
 
   it("submits checkout and navigates on success", async () => {
-    global.fetch
+    globalThis.fetch
       .mockResolvedValueOnce({
         json: async () => mockSummary,
       })
@@ -124,7 +124,7 @@ describe("Checkout page", () => {
   });
 
   it("shows alert on checkout failure", async () => {
-    global.fetch
+    globalThis.fetch
       .mockResolvedValueOnce({
         json: async () => mockSummary,
       })

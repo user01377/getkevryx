@@ -5,12 +5,12 @@ import ProductsGrid from "../all-products";
 
 describe("ProductsGrid", () => {
   beforeEach(() => {
-    global.fetch = vi.fn();
+    globalThis.fetch = vi.fn();
     vi.clearAllMocks();
   });
 
   test("shows loading skeleton initially", () => {
-    global.fetch.mockImplementation(() => new Promise(() => {}));
+    globalThis.fetch.mockImplementation(() => new Promise(() => {}));
 
     render(
       <MemoryRouter>
@@ -27,7 +27,7 @@ describe("ProductsGrid", () => {
 
 
   test("renders products sorted by price (low to high)", async () => {
-    global.fetch.mockResolvedValueOnce({
+    globalThis.fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
         data: [
@@ -54,7 +54,7 @@ describe("ProductsGrid", () => {
   });
 
   test("shows error message when fetch fails", async () => {
-    global.fetch.mockRejectedValueOnce(new Error("API failure"));
+    globalThis.fetch.mockRejectedValueOnce(new Error("API failure"));
 
     render(
       <MemoryRouter>
@@ -72,7 +72,7 @@ describe("ProductsGrid", () => {
   });
 
   test("renders product links correctly", async () => {
-    global.fetch.mockResolvedValueOnce({
+    globalThis.fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
         data: [
@@ -93,7 +93,7 @@ describe("ProductsGrid", () => {
   });
 
   test("formats price correctly", async () => {
-    global.fetch.mockResolvedValueOnce({
+    globalThis.fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
         data: [
