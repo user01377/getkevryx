@@ -13,7 +13,7 @@ describe("ShoppingCart", () => {
   });
 
   test("shows loading while fetching", () => {
-    global.fetch = vi.fn(() => new Promise(() => {}));
+    globalThis.fetch = vi.fn(() => new Promise(() => {}));
 
     render(
       <MemoryRouter>
@@ -25,7 +25,7 @@ describe("ShoppingCart", () => {
   });
 
   test("shows empty cart message", async () => {
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         items: [],
@@ -44,7 +44,7 @@ describe("ShoppingCart", () => {
   });
 
   test("renders items returned from the API", async () => {
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
         items: [
@@ -76,7 +76,7 @@ describe("ShoppingCart", () => {
   });
 
   test("updates quantity when + is clicked", async () => {
-    global.fetch = vi
+    globalThis.fetch = vi
       .fn()
       // Initial GET
       .mockResolvedValueOnce({
@@ -130,7 +130,7 @@ describe("ShoppingCart", () => {
 
     await userEvent.click(plusButton);
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       "/api/cart/item/1",
       expect.objectContaining({
         method: "PATCH",
@@ -141,7 +141,7 @@ describe("ShoppingCart", () => {
   });
 
   test("removes an item", async () => {
-    global.fetch = vi
+    globalThis.fetch = vi
       .fn()
       // initial GET
       .mockResolvedValueOnce({
@@ -187,7 +187,7 @@ describe("ShoppingCart", () => {
   
     await user.click(removeBtn);
   
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       "/api/cart/item/1",
       expect.objectContaining({
         method: "DELETE",
