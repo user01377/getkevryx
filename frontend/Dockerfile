@@ -1,12 +1,17 @@
-# Build stage
-FROM node:22-alpine AS build
-
+FROM node:22-alpine AS base
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm ci
 
 COPY . .
+
+FROM base AS test
+
+CMD ["npm", "run", "lint"]
+
+FROM base AS build
 
 RUN npm run build
 
