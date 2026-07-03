@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/contact-page.css";
 import { Link } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/shopping-cart.css";
 import { Link } from "react-router-dom";
 
