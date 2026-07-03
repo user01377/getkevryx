@@ -12,25 +12,24 @@ export default defineConfig([
       "node_modules/**",
     ],
   },
-  
-  js.configs.recommended,
 
+  js.configs.recommended,
   pluginReact.configs.flat.recommended,
-  { files: ["**/*.{js,jsx,mjs,cjs}"],
+  pluginReact.configs.flat["jsx-runtime"],
+
+  {
+    files: ["**/*.{js,jsx,mjs,cjs}"],
     languageOptions: {
-      globals: globals.browser,
+      sourceType: "module",
+      ecmaVersion: "latest",
+      globals: {
+        ...globals.browser,
+      },
     },
     settings: {
       react: {
         version: "detect",
       },
-    },
-  },
-
-  {
-    files: ["**/*.js"],
-    languageOptions: {
-      sourceType: "script",
     },
   },
 ]);
