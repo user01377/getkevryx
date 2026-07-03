@@ -41,6 +41,12 @@ jobs:
 
       - name: Build frontend image
         run: docker build -t kevryx-frontend:test frontend
+
+      - name: Linting Stage
+        run: docker run --rm kevryx-frontend:test npm run lint
+      
+      - name: Tests
+        run: docker run --rm kevryx-frontend:test npm run test -- --run
     
   image-build:
     name: Building Docker Images
