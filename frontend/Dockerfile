@@ -9,7 +9,8 @@ COPY . .
 
 FROM base AS test
 
-CMD ["npm", "run", "lint"]
+RUN npm run lint
+RUN npm test -- --run
 
 FROM base AS build
 

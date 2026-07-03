@@ -41,7 +41,7 @@ jobs:
 
       - name: Build frontend image
         run: docker build --target test -t kevryx-frontend:test frontend
-    
+      
   image-build:
     name: Building Docker Images
     needs: [backend, frontend]
