@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/faq-page.css";
 
 export default function FaqPage() {

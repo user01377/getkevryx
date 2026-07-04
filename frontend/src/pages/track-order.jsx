@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/track-order.css";
 
 export default function TrackOrder() {

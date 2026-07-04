@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/shopping-cart.css";
 import { Link } from "react-router-dom";
 
@@ -53,13 +53,6 @@ export default function ShoppingCart() {
       console.error("Error removing item:", err);
     }
   };
-
-  // Calculate total
-  const totalPrice = cartItems.reduce(
-    (sum, item) =>
-      sum + parseFloat(item.product.price) * item.quantity,
-    0
-  );
 
   if (loading) return <p>Loading cart...</p>;
 
