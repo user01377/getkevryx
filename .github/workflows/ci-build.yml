@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Frontend Test Image
-        run: docker build -t kevryx-frontend:test frontend
+        run: docker build --target test kevryx-frontend:test frontend
       
       - name: Run Linting
         run: docker run --rm kevryx-frontend:test npm run lint
