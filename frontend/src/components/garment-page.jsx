@@ -7,6 +7,8 @@ export default function GarmentPage() {
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastLeaving, setToastLeaving] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,11 +42,23 @@ export default function GarmentPage() {
           quantity,
         }),
       });
-
-      const data = await res.json();
-      console.log("Cart updated:", data);
+  
+      if (!res.ok) throw new Error();
+  
+      setToastVisible(true);
+      setToastLeaving(false);
+  
+      setTimeout(() => {
+        setToastLeaving(true);
+      }, 1800);
+  
+      setTimeout(() => {
+        setToastVisible(false);
+        setToastLeaving(false);
+      }, 2100);
+  
     } catch (err) {
-      console.error("Failed to add to cart:", err);
+      console.error(err);
     }
   };
 
@@ -98,6 +112,21 @@ export default function GarmentPage() {
         </div>
 
       </div>
+
+      {toastVisible && (
+        <div className={`toast ${toastLeaving ? "toast-hide" : ""}`}>
+          <img
+            src={`https://cataas.com/cat?width=800&height=1200&random=${product.id}`}
+            className="toast-image"
+            alt=""
+          />
+
+          <div className="toast-text">
+            <p className="toast-title">Item Added</p>
+          </div>
+        </div>
+      )}
+      
     </main>
   );
 }
