@@ -56,6 +56,8 @@ export default function GarmentPage() {
         setToastVisible(false);
         setToastLeaving(false);
       }, 2100);
+
+      window.dispatchEvent(new Event("cart-updated"));
   
     } catch (err) {
       console.error(err);
