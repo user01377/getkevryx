@@ -1,3 +1,33 @@
+.hero-text {
+    position: absolute;
+    inset: 0;
+    left: clamp(2rem, 6vw, 7rem);
+    bottom: clamp(2rem, 8vw, 6rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+    
+    z-index: 2;
+}
+
+.hero-top {
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    letter-spacing: 0.3rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.hero-text h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
 .body-content {
     max-width: 1200px;
     margin: 0 auto;
