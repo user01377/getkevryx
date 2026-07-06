@@ -26,8 +26,8 @@ export default function Mission() {
                 </div>
 
                 <div className="why-container">
-                    <h1>why `&quot;`kevryx`&quot;`</h1>
-                    <p><strong>kevryx</strong> originates from the Hmong word `&quot;`<em>kev</em>,`&quot;` meaning `&quot;`way`&quot;` or `&quot;`path.`&quot;`</p>
+                    <h1>why &quot;kevryx&quot;</h1>
+                    <p><strong>kevryx</strong> originates from the Hmong word &quot;<em>kev</em>,&quot; meaning &quot;way&quot; or &quot;path.&quot;</p>
                     <p>Our name represents the idea that everyone walks their own journey — shaped by culture, environment, experiences, and identity. At <strong>kevryx</strong>, we create clothing that reflects that individuality. Your path defines you — not anyone else.</p>
                 </div>
 
