@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 76px;
 
     display: flex;
     align-items: center;
@@ -54,9 +54,12 @@
 }
 
 .logo-text {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: "Satoshi";
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 500;
     color: #222;
+    letter-spacing: 0.16em;
 }
 
 /* center section for the links to pages */
@@ -66,13 +69,18 @@
     top: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 35px;
+    gap: 57px;
 }
 
 .nav-center .nav-link {
     position: relative;
-    font-size: 1.2rem;
-    font-weight: 500;
+    
+    font-family: "Satoshi";
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+
     color: black;
     text-decoration: none;
     padding-bottom: 4px;
@@ -85,7 +93,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: black;
     transform: scaleX(0);
     transform-origin: left;
@@ -134,6 +142,8 @@
 }
 
 .cart-badge {
+    font-family: "Inter";
+
     position: absolute;
     inset: 0;
 
@@ -141,11 +151,11 @@
     align-items: center;
     justify-content: center;
 
-    transform: translateY(4px);
+    transform: translateY(6px);
 
     color: #111;
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 350;
     line-height: 1;
 
     pointer-events: none;
