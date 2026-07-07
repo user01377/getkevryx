@@ -36,6 +36,9 @@ export default function ShoppingCart() {
         body: JSON.stringify({ quantity: newQuantity }),
       });
       fetchCart();
+
+      window.dispatchEvent(new Event("cart-updated"));
+
     } catch (err) {
       console.error("Error updating quantity:", err);
     }
@@ -49,6 +52,9 @@ export default function ShoppingCart() {
         credentials: "include",
       });
       fetchCart();
+
+      window.dispatchEvent(new Event("cart-updated"));
+
     } catch (err) {
       console.error("Error removing item:", err);
     }
