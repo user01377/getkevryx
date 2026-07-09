@@ -74,7 +74,7 @@ export default function LandingPage() {
             </p>
             
             <div className="landing-bio-links">
-              <Link to="/">all products</Link>
+              <Link to="/all-products">all products</Link>
               <Link to="/mission">our mission</Link>
               <Link to="https://github.com/user01377/getkevryx">github</Link>
             </div>
