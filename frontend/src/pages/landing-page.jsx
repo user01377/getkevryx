@@ -74,8 +74,8 @@ export default function LandingPage() {
             </p>
             
             <div className="landing-bio-links">
-              <Link to="/all-products">all products</Link>
-              <Link to="/mission">our mission</Link>
+              <Link to="/all-products" onClick={() => window.scrollTo(0, 0)}>all products</Link>
+              <Link to="/mission" onClick={() => window.scrollTo(0, 0)}>our mission</Link>
               <Link to="https://github.com/user01377/getkevryx">github</Link>
             </div>
             
