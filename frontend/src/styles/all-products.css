@@ -30,11 +30,14 @@
 }
 
 .product-name {
+  font-family: sans-serif;
   width: 70%;
   margin: 0 auto 0.5rem auto;
 
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 400;
+
+  letter-spacing: .009em;
 }
 
 .product-description {
@@ -42,6 +45,7 @@
   margin: 0 auto 1rem auto;
 
   font-size: 1rem;
+  opacity: .65;
 }
 
 .product-price {
