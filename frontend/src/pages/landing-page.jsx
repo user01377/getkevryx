@@ -13,7 +13,7 @@ export default function LandingPage() {
         />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <h1 className="brand">k  e  v  r  y  x</h1>
+          <h1 className="brand">kevryx</h1>
           <p className="tagline">for those who make their own way</p>
         </div>
       </section>
@@ -64,13 +64,13 @@ export default function LandingPage() {
           {/* Text content */}
           <div className="landing-bio-text">
             <h3>
-              kevryx is dedicated to crafting performance gear that empowers your journey, wherever you may go.
+              Dedicated to crafting performance gear that empowers your journey, wherever you may go.
             </h3>
             <p>
-              Founded in 2025, <strong>kevryx</strong> creates mission-driven apparel for those who carve their own path. 
+              Founded in 2025, <strong className="kevryx-brand">kevryx</strong> creates mission-driven apparel for those who carve their own path. 
               More than clothing, our performance gear is built to endure the elements—engineered with purpose, 
               designed to perform, and made to last. Inspired by the Hmong word <em>“kev,”</em> meaning “way” or “path,” 
-              <strong> kevryx</strong> embodies individuality, resilience, and the courage to define your own journey.
+              <strong className="kevryx-brand"> kevryx</strong> embodies individuality, resilience, and the courage to define your own journey.
             </p>
             
             <div className="landing-bio-links">
@@ -91,8 +91,8 @@ export default function LandingPage() {
       <div className="statement-inner">
         <h2>fabricated for your journey.</h2>
         <p>
-          <strong>kevryx</strong> crafts mission-driven gear for those with relentless passion and unwavering determination. 
-          Wherever your journey takes you, kevryx is built to be by your side. Every detail serves a purpose—nothing is added without reason.
+          <strong className="kevryx-brand">kevryx</strong> crafts mission-driven gear for those with relentless passion and unwavering determination. 
+          Wherever your journey takes you, <strong className="kevryx-brand">kevryx</strong> is built to be by your side. Every detail serves a purpose—nothing is added without reason.
         </p>
       </div>
     </section>
