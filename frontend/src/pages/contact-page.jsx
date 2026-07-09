@@ -7,7 +7,7 @@ export default function Contact() {
       <div className="contact-container">
 
         <header className="contact-title">
-          <h1>contact</h1>
+          <h1>contact us</h1>
           <p className="contact-status">
             estimated response time: 1–2 business days
           </p>
