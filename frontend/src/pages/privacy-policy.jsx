@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
         <section className="privacy-body">
 
           <p className="privacy-intro">
-            your privacy is important to us. this privacy policy explains how
+            Your privacy is important to us. this privacy policy explains how
             information is collected, used, and protected when you visit this
             website.
           </p>
@@ -21,8 +21,8 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>information we collect</h2>
             <p>
-              this website does not knowingly collect personal information such
-              as names, addresses, or payment details. limited technical data
+              This website does not knowingly collect personal information such
+              as names, addresses, or payment details. Limited technical data
               may be collected automatically for performance and analytics
               purposes.
             </p>
@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>how information is used</h2>
             <p>
-              any collected information is used solely to improve site
+              Any collected information is used solely to improve site
               functionality, performance, and user experience.
             </p>
           </div>
@@ -39,8 +39,8 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>cookies</h2>
             <p>
-              this site may use minimal cookies or similar technologies to
-              ensure proper functionality. you can disable cookies through
+              This site may use minimal cookies or similar technologies to
+              ensure proper functionality. You can disable cookies through
               your browser settings.
             </p>
           </div>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>third-party links</h2>
             <p>
-              this website may contain links to external sites. we are not
+              This website may contain links to external sites. We are not
               responsible for their privacy practices or content.
             </p>
           </div>
@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>changes to this policy</h2>
             <p>
-              this privacy policy may be updated occasionally. changes will
+              This privacy policy may be updated occasionally. Changes will
               be reflected on this page with a revised date.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
           <div className="privacy-section">
             <h2>contact</h2>
             <p>
-              if you have questions about this privacy policy, please reach
+              If you have questions about this privacy policy, please reach
               out using the contact information on this website.
             </p>
           </div>
