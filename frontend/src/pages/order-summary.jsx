@@ -57,7 +57,7 @@ export default function OrderSummaryPage() {
             {/* INFO */}
             <div className="order-item-info">
                 <p className="order-item-name">{item.product}</p>
-                <p className="order-item-qty">Qty {item.quantity}</p>
+                <p className="order-item-qty">Qty: {item.quantity}</p>
             </div>
 
             {/* PRICE */}
