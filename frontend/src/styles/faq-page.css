@@ -13,8 +13,12 @@
 }
 
 .faq-topic h2 {
+    font-family: "Satoshi";
     font-size: 1.8rem;
     font-weight: 500;
+
+    text-transform: uppercase;
+
     margin-bottom: 28px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e0dcd5;
@@ -53,7 +57,7 @@ details[open] summary::after {
     margin-top: 12px;
     max-width: 85%;
     line-height: 1.7;
-    color: #555;
+    color: rgba(17, 17, 17, .75);
 }
 
 details > .content {

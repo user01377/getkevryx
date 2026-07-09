@@ -30,26 +30,11 @@
     object-position: center center; /* adjusts how the image is weighted to fit, depends on how the images are taken */
 }
 
-.hero-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    text-align: center;
-    z-index: 2;
-    pointer-events: none;
-    padding: 0;
-    margin: 0;
-}
-
 .hero-text h1 {
     font-family: "Manrope", sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.05;
-    letter-spacing: 0.08em;
+}
+
+.kevryx-brand {
+    font-family: "Satoshi";
+    text-transform: uppercase;
 }

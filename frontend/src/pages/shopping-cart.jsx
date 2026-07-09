@@ -36,6 +36,9 @@ export default function ShoppingCart() {
         body: JSON.stringify({ quantity: newQuantity }),
       });
       fetchCart();
+
+      window.dispatchEvent(new Event("cart-updated"));
+
     } catch (err) {
       console.error("Error updating quantity:", err);
     }
@@ -49,6 +52,9 @@ export default function ShoppingCart() {
         credentials: "include",
       });
       fetchCart();
+
+      window.dispatchEvent(new Event("cart-updated"));
+
     } catch (err) {
       console.error("Error removing item:", err);
     }
@@ -62,7 +68,7 @@ export default function ShoppingCart() {
       <h1>Your shopping cart</h1>
 
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="empty-cart-msg">Your cart is empty.</p>
       ) : (
         <>
           <div className="cart-items">

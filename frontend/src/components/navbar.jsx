@@ -9,6 +9,7 @@ export default function Navbar() {
   // pre-render navbar after threshold
   const [renderNavbar, setRenderNavbar] = useState(!isLanding);
   const [visible, setVisible] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!isLanding) {
@@ -34,6 +35,36 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isLanding, renderNavbar]);
 
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        console.log("fetching cart..");
+        const res = await fetch("/api/cart/summary", {
+          credentials: "include",
+        });
+  
+        if (!res.ok) return;
+  
+        const data = await res.json();
+        console.log(data);
+  
+        setCount(
+          data.items.reduce((sum, item) => sum + item.quantity, 0)
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    fetchCart();
+  
+    window.addEventListener("cart-updated", fetchCart);
+  
+    return () => {
+      window.removeEventListener("cart-updated", fetchCart);
+    };
+  }, []);
+
   // If not yet rendered, return null
   if (!renderNavbar) return null;
 
@@ -55,7 +86,13 @@ export default function Navbar() {
 
       <div className="nav-right">
         <Link to="/shopping-cart" className="nav-cart">
-          <img src="/shopping-cart.svg" alt="Cart" />
+          <div className="cart-icon-wrapper">
+            <img src="/shopping-cart.svg" alt="Cart" />
+
+            {count > 0 && (
+              <span className="cart-badge">{count}</span>
+            )}
+          </div>
         </Link>
       </div>
     </nav>

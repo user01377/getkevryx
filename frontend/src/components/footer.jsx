@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <p className="footer-brand">© 2026 kevryx. All rights reserved.</p>
+        <p className="footer-brand">© 2026 <strong className="kevryx-brand">kevryx</strong>. All rights reserved.</p>
 
         <div className="social-icons">
           <a href="https://github.com/user01377/getkevryx"><img src="/github.svg" alt="GitHub"/></a>
@@ -14,7 +14,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <p>
-          <Link to="/privacy-policy" className="links-footer">Privacy Policy</Link> | <Link to="/terms-conditions" className="links-footer">Terms & Conditions</Link>
+          <Link to="/privacy-policy" className="links-footer" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link> | <Link to="/terms-conditions" className="links-footer" onClick={() => window.scrollTo(0, 0)}>Terms & Conditions</Link>
         </p>
       </div>
 

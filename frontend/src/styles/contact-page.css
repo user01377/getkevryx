@@ -22,10 +22,11 @@
 }
 
 .contact-title h1 {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-family: "Satoshi";
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
   font-weight: 500;
+  text-transform: uppercase;
   letter-spacing: 0.08em;
-  text-transform: lowercase;
 }
 
 .contact-status {
@@ -49,6 +50,8 @@
 .contact-intro {
   font-size: 1rem;
   color: #222;
+  max-width: 69ch;
+  margin: 0 auto;
 }
 
 .contact-faq {
@@ -80,10 +83,11 @@
 
 /* LABELS */
 .contact-form label {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: "Satoshi";
   font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: #000;
 }
 
@@ -110,10 +114,11 @@
 }
 
 /* Button */
-.contact-form button {
+.contact-form button[type="submit"] {
   margin-top: 1.5rem;
   align-self: flex-start;
   padding: 0.75rem 2.25rem;
+  font-family: "Satoshi";
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -121,12 +126,10 @@
   color: #fff;
   background-color: #000;
   border: none;
-  border-radius: 999px;
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
 .contact-form button:hover {
   opacity: 0.85;
-  transform: translateY(-1px);
 }

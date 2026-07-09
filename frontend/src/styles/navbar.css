@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 76px;
 
     display: flex;
     align-items: center;
@@ -54,9 +54,12 @@
 }
 
 .logo-text {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: "Satoshi";
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 500;
     color: #222;
+    letter-spacing: 0.16em;
 }
 
 /* center section for the links to pages */
@@ -66,13 +69,18 @@
     top: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    gap: 35px;
+    gap: 57px;
 }
 
 .nav-center .nav-link {
     position: relative;
-    font-size: 1.2rem;
-    font-weight: 500;
+    
+    font-family: "Satoshi";
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+
     color: black;
     text-decoration: none;
     padding-bottom: 4px;
@@ -85,7 +93,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: black;
     transform: scaleX(0);
     transform-origin: left;
@@ -100,6 +108,7 @@
 }
 
 /* right section of navbar with cart */
+/* right section of navbar with cart */
 .nav-right {
     display: flex;
     align-items: center;
@@ -109,13 +118,62 @@
     display: flex;
     align-items: center;
     transition: transform 0.2s ease;
+    text-decoration: none;
 }
 
 .nav-cart:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-cart img {
-    height: 28px;
-    width: auto;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.cart-badge {
+    font-family: "Inter";
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(6px);
+
+    color: #111;
+    font-size: 0.7rem;
+    font-weight: 350;
+    line-height: 1;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes badge-pop {
+    0% {
+        transform: scale(.4);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
