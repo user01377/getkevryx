@@ -15,12 +15,12 @@ export default function Contact() {
 
         <section className="contact-body">
           <p className="contact-intro">
-            have a question for our team? before submitting a message, please
+            Have a question for our team? Before submitting a message, please
             review our{" "}
-            <Link to="/faq" className="contact-faq">
-              faq page
+            <Link to="/faq" className="contact-faq" onClick={() => window.scrollTo(0, 0)}>
+              FAQ page
             </Link>
-            . if you still need assistance, feel free to reach out below.
+            . If you still need assistance, feel free to reach out below.
           </p>
 
           <form className="contact-form">
@@ -30,7 +30,6 @@ export default function Contact() {
                 type="text"
                 id="subject"
                 name="subject"
-                placeholder="please enter a subject"
                 required
               />
             </div>
