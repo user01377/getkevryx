@@ -52,7 +52,6 @@
 .body-content p {
     font-size: 1.15rem;
     line-height: 1.85;
-    color: #555;
     display: block;
     max-width: 85ch;
 
@@ -61,6 +60,7 @@
 
 .body-content strong {
     color: black;
+    font-weight: 450;
 }
 
 /* spacing between the info containers */
