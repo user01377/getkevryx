@@ -34,7 +34,7 @@ export default function Mission() {
 
                 <div className="bio-container">
                     <h1>who am i?</h1>
-                    <p>I’m someone who learned early that nothing is guaranteed and everything is earned. As a first-generation student coming from humble beginnings, I’ve spent my life carving my own path — one challenge, one step, one lesson at a time. <strong className="kevryx-brand">kevryx</strong> is rooted in that same spirit. It represents the bravery to dream bigger, the discipline to keep going, and the belief that anyone can forge their own way. This project isn’t just a brand concept — it’s a reflection of who I am and what I stand for.</p>
+                    <p>I’m someone who learned early that nothing is guaranteed and everything is earned. As a first-generation student coming from humble beginnings, I’ve spent my life carving my own path — one challenge, one step, one lesson at a time. <strong className="kevryx-brand">kevryx</strong> is rooted in that same spirit. It represents the bravery to dream bigger, the discipline to keep going, and the belief that anyone can forge their own way.</p>
                 </div>
 
             </div>
