@@ -124,7 +124,10 @@ export default function GarmentPage() {
           />
 
           <div className="toast-text">
-            <p className="toast-title">item added</p>
+            <p className="toast-title">Added to Cart</p>
+            <p className="toast-subtitle">
+              {product.name}
+            </p>
           </div>
         </div>
       )}
