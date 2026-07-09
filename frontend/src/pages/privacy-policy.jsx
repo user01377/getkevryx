@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
         <section className="privacy-body">
 
           <p className="privacy-intro">
-            Your privacy is important to us. this privacy policy explains how
+            Your privacy is important to us. This privacy policy explains how
             information is collected, used, and protected when you visit this
             website.
           </p>
