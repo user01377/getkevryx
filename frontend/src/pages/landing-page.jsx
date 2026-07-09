@@ -82,7 +82,7 @@ export default function LandingPage() {
           </div>
 
           {/* Image */}
-          <img src="https://placecats.com/neo_2/801/900" alt="Veilance product" />
+          <img src="https://placecats.com/neo_2/801/900" alt="Kevryx Image Here" />
         </div>
       </section>
 
