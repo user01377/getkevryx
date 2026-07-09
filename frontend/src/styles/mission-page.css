@@ -39,8 +39,9 @@
 
 /* section headings */
 .body-content h1 {
+    font-family: "Satoshi";
     font-size: 2.4rem;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 1rem;
@@ -53,15 +54,22 @@
     line-height: 1.85;
     color: #555;
     display: block;
-    max-width: 95%;
+    max-width: 85ch;
+
+    color: rgba(17, 17, 17, 0.85);
+}
+
+.body-content strong {
+    color: black;
 }
 
 /* spacing between the info containers */
 .mission-container,
 .motto-container,
-.bio-container,
-.why-container {
-    margin-bottom: 4rem;
+.why-container,
+.bio-container {
+    max-width: 800px;
+    margin: 0 auto 4rem;
     padding-bottom: 3rem;
     position: relative;
 }
