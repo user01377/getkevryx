@@ -68,7 +68,7 @@ export default function ShoppingCart() {
       <h1>Your shopping cart</h1>
 
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="empty-cart-msg">Your cart is empty.</p>
       ) : (
         <>
           <div className="cart-items">
