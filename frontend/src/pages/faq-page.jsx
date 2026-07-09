@@ -12,7 +12,7 @@ export default function FaqPage() {
                     className="hero-image"
                 />
                 <div className="hero-text">
-                    <h1>FAQ</h1> {/* might put heading text here later after real images are added */}
+                    {/* <h1>FAQ</h1> */}
                 </div>
             </section>
 
