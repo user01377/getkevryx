@@ -13,10 +13,22 @@ spec:
         app: backend
     spec:
       imagePullSecrets:
-      - name: ghcr-secret
+        - name: ghcr-secret
 
       containers:
-      - name: backend
-        image: ghcr.io/user01377/kevryx-backend:latest
-        ports:
-        - containerPort: 8000
+        - name: backend
+          image: ghcr.io/user01377/kevryx-backend:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
