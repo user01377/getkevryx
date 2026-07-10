@@ -16,7 +16,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432"
+      - "5432:5432"
 
   frontend:
     image: "ghcr.io/user01377/kevryx-frontend:${SHA:-latest}"
