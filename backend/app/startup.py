@@ -20,8 +20,8 @@ def wait_for_db(retries=10):
             with engine.connect() as conn:
                 conn.execute(text("SELECT 1"))
                 return
-        except Exception:
-            print("db unresponsive, retrying..")
+        except Exception as e:
+            print(f"Database Connection Error: {e}")
             time.sleep(2**i)
 
     raise Exception("DB offline")
