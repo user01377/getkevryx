@@ -4,7 +4,6 @@ metadata:
   name: kevryx
 spec:
   rules:
-  - host: getkevryx.tail837acd.ts.net
     http:
       paths:
       - path: /
