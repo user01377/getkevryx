@@ -27,7 +27,6 @@ jobs:
       - name: Run Tests
         run: |
           docker run --rm \
-            -e PYTHONPATH=/app \
             kevryx-backend:test \
             pytest -q --strict-markers
 
