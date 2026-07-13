@@ -18,8 +18,11 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u user01377 --password-stdin
 
       - name: Update Helm Chart
-        run: helm upgrade kevryx ./helm \
+        run: |
+          helm upgrade --install kevryx ./helm \
             -f ./helm/values-prod.yaml \
+            --namespace kevryx \
+            --create-namespace \
             --set backend.image=ghcr.io/user01377/kevryx-backend:${{ github.event.workflow_run.head_sha }} \
             --set frontend.image=ghcr.io/user01377/kevryx-frontend:${{ github.event.workflow_run.head_sha }} \
             --atomic \
