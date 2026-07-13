@@ -11,7 +11,6 @@ from app.main import create_app
 from app.database import Base, get_db
 from app.models import Product, ProductCategory
 
-from fastapi.testclient import TestClient
 
 class APIPrefixClient(TestClient):
     def request(self, method, url, *args, **kwargs):
@@ -19,6 +18,7 @@ class APIPrefixClient(TestClient):
             url = "/api" + url
 
         return super().request(method, url, *args, **kwargs)
+
 
 engine = create_engine(
     "sqlite://",
