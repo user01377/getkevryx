@@ -1,0 +1,9 @@
+apiVersion: v2
+name: kevryx
+description: Kubernetes deployment chart for the Kevryx application
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0.0"

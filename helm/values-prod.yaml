@@ -1,0 +1,5 @@
+backend:
+  image: ghcr.io/user01377/kevryx-backend:prod
+
+frontend:
+  image: ghcr.io/user01377/kevryx-frontend:prod
