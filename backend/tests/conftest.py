@@ -11,6 +11,15 @@ from app.main import create_app
 from app.database import Base, get_db
 from app.models import Product, ProductCategory
 
+
+class APIPrefixClient(TestClient):
+    def request(self, method, url, *args, **kwargs):
+        if url.startswith("/"):
+            url = "/api" + url
+
+        return super().request(method, url, *args, **kwargs)
+
+
 engine = create_engine(
     "sqlite://",
     connect_args={"check_same_thread": False},
@@ -79,7 +88,7 @@ def client(seed_products):
 
     app.dependency_overrides[get_db] = override_get_db
 
-    with TestClient(app) as client:
+    with APIPrefixClient(app) as client:
         yield client
 
     app.dependency_overrides.clear()

@@ -30,7 +30,7 @@ def create_app(enable_lifespan: bool = True):
         allow_headers=["*"],
     )
 
-    app.include_router(router)
+    app.include_router(router, prefix="/api")
 
     return app
 
