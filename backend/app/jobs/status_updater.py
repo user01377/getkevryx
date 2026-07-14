@@ -54,3 +54,6 @@ def update_order_status():
 
     finally:
         db.close()
+
+if __name__ == "__main__":
+    update_order_status()

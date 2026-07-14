@@ -43,3 +43,6 @@ def restock_products():
 
     finally:
         db.close()
+
+if __name__ == "__main__":
+    restock_products()
