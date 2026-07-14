@@ -4,8 +4,13 @@ metadata:
   name: order-status
 spec:
   schedule: "* * * * *"
+
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 120
       template:
         spec:
           restartPolicy: Never
