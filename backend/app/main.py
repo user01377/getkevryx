@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.routes import router
-from app.startup import startup_backend, shutdown_scheduler
+from app.startup import startup_backend
 
 
 def create_app(enable_lifespan: bool = True):
@@ -13,9 +13,6 @@ def create_app(enable_lifespan: bool = True):
             startup_backend()
 
         yield
-
-        if enable_lifespan:
-            shutdown_scheduler()
 
     app = FastAPI(lifespan=lifespan)
 
