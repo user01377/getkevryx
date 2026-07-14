@@ -25,6 +25,6 @@ jobs:
             --create-namespace \
             --set backend.image=ghcr.io/user01377/kevryx-backend:${{ github.event.workflow_run.head_sha }} \
             --set frontend.image=ghcr.io/user01377/kevryx-frontend:${{ github.event.workflow_run.head_sha }} \
-            --atomic \
+            --rollback-on-failure \
             --timeout=5m
         working-directory: /home/macser/getkevryx
