@@ -17,6 +17,7 @@ config = context.config
 user = os.getenv("POSTGRES_USER")
 password = os.getenv("POSTGRES_PASSWORD")
 
+#must change @db to localhost on local dev
 database_url = f"postgresql://{user}:{password}@db:5432/kevryx"
 
 config.set_main_option("sqlalchemy.url", database_url)
