@@ -9,6 +9,7 @@ FULFILLED_TIME = 10
 
 logger = logging.getLogger(__name__)
 
+
 def get_order_status(created_at):
     delta = datetime.now(timezone.utc) - created_at
 

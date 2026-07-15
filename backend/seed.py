@@ -1,6 +1,7 @@
 """
 DEV ONLY SEED FILE FOR DB
 """
+
 import json
 import os
 
@@ -15,17 +16,14 @@ load_dotenv()
 user = os.getenv("POSTGRES_USER")
 password = os.getenv("POSTGRES_PASSWORD")
 
-DATABASE_URL = (f"postgresql://{user}:{password}@localhost:5432/kevryx")
+DATABASE_URL = f"postgresql://{user}:{password}@db:5432/kevryx"
 FIXTURE_PATH = "./app/fixtures/data.json"
 # FIXTURE_PATH = "./app/fixtures/stress-test.json"
 
 engine = create_engine(DATABASE_URL)
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 
 def load_products():
     with open(FIXTURE_PATH, "r") as file:

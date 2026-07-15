@@ -3,7 +3,6 @@ import os
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from dotenv import load_dotenv
-import app.models
 from app.database import Base
 
 from alembic import context
@@ -17,7 +16,7 @@ config = context.config
 user = os.getenv("POSTGRES_USER")
 password = os.getenv("POSTGRES_PASSWORD")
 
-#must change @db to localhost on local dev
+# must change @db to localhost on local dev
 database_url = f"postgresql://{user}:{password}@db:5432/kevryx"
 
 config.set_main_option("sqlalchemy.url", database_url)
@@ -52,7 +51,7 @@ def run_migrations_offline() -> None:
 
     """
 
-    url=config.get_main_option("sqlalchemy.url"),
+    url = (config.get_main_option("sqlalchemy.url"),)
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -78,9 +77,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

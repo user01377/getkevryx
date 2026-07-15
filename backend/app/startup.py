@@ -8,7 +8,8 @@ but was moved here for modularity and SOC.
 
 import time
 from sqlalchemy import text
-from app.database import Base, engine
+from app.database import engine
+
 
 def wait_for_db(retries=10):
     for i in range(retries):

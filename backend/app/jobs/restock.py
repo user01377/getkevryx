@@ -7,6 +7,7 @@ RESTOCK_AMOUNT = {"top": 600, "bottom": 500, "outerwear": 300, "accessory": 200}
 
 logger = logging.getLogger(__name__)
 
+
 def restock_products():
     logger.info("Starting restock job")
 
