@@ -9,7 +9,6 @@ but was moved here for modularity and SOC.
 import time
 from sqlalchemy import text
 from app.database import Base, engine
-from app.seed import seed_products
 
 def wait_for_db(retries=10):
     for i in range(retries):
@@ -24,17 +23,7 @@ def wait_for_db(retries=10):
     raise Exception("DB offline")
 
 
-def init_database_tables():
-    Base.metadata.create_all(bind=engine)
-
-
 # THE MAIN APP STARTUP FUNCTION TO BE IMPORTED AND CALLED FROM MAIN.PY
 def startup_backend():
     # wait for db to become online and queryable
     wait_for_db()
-
-    # create tables
-    init_database_tables()
-
-    # seed database
-    seed_products()
