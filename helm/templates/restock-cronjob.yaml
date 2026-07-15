@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restock-service
+spec:
+  schedule: "*/2 * * * *"
+
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+          
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: restock-service
+              image: {{ .Values.backend.image }}
+              command:
+                - python
+                - -u
+                - -m
+                - app.jobs.restock
+              env:
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-secret
+                      key: POSTGRES_USER
+
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-secret
+                      key: POSTGRES_PASSWORD

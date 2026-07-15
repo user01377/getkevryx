@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kevryx-migration
+  annotations:
+    "helm.sh/hook": pre-upgrade,pre-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  backOffLimit: 1
+
+  template:
+    spec:
+      restartPolicy: Never
+
+      containers:
+        - name: migration
+
+          image: {{ .Values.backend.image }}
+
+          command:
+            - /bin/sh
+            - -c
+            - |
+              python - <<'EOF'
+              import os
+              import time
+              import psycopg2
+
+              while True:
+                  try:
+                      psycopg2.connect(
+                          host="db",
+                          dbname="kevryx",
+                          user=os.environ["POSTGRES_USER"],
+                          password=os.environ["POSTGRES_PASSWORD"],
+                      ).close()
+                      break
+                  except psycopg2.OperationalError:
+                      print("Waiting for PostgreSQL...")
+                      time.sleep(2)
+              EOF
+
+              alembic upgrade head
+            
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD

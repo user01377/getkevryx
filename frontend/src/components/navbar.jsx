@@ -38,7 +38,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        console.log("fetching cart..");
+        // console.log("fetching cart..");
         const res = await fetch("/api/cart/summary", {
           credentials: "include",
         });
@@ -46,7 +46,7 @@ export default function Navbar() {
         if (!res.ok) return;
   
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
   
         setCount(
           data.items.reduce((sum, item) => sum + item.quantity, 0)

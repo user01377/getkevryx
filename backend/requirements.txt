@@ -3,6 +3,7 @@ uvicorn[standard]
 apscheduler
 
 sqlalchemy
+alembic
 psycopg2-binary
 
 pydantic

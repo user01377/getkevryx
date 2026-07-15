@@ -1,10 +1,28 @@
+"""
+DEV ONLY SEED FILE FOR DB
+"""
+
 import json
-from app.database import SessionLocal
+import os
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from app.models import Product
 
-# this path only works inside docker containers
+load_dotenv()
+
+user = os.getenv("POSTGRES_USER")
+password = os.getenv("POSTGRES_PASSWORD")
+
+DATABASE_URL = f"postgresql://{user}:{password}@db:5432/kevryx"
 FIXTURE_PATH = "./app/fixtures/data.json"
 # FIXTURE_PATH = "./app/fixtures/stress-test.json"
+
+engine = create_engine(DATABASE_URL)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def load_products():
