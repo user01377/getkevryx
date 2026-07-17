@@ -103,6 +103,14 @@
   opacity: 0.8;
 }
 
+.no-products h1 {
+  font-family: "Satoshi";
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
 .skeleton-image,
 .skeleton-line {
   background: linear-gradient(
