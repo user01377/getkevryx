@@ -6,6 +6,7 @@ export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [noProducts, setNoProducts] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,6 +26,10 @@ export default function ProductsGrid() {
         setError("Unable to resolve products. Please Try Again Later.");
       } finally {
         setLoading(false);
+      }
+
+      if (products.length == 0) {
+        setNoProducts(true);
       }
     };
 
@@ -64,6 +69,17 @@ export default function ProductsGrid() {
         </div>
       </div>
     );
+  }
+
+  if (noProducts) {
+    return (
+      <div className="products-container">
+        <div className="no-products">
+          <h1>No Products Found.</h1>
+          <p>Fetch was successful but no products were found. Try refresh or contact support if issue persists.</p>
+        </div>
+      </div>
+    )
   }
 
   return (
