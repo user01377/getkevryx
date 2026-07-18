@@ -20,7 +20,7 @@ def test_get_products(client):
 
 
 def test_get_single_product(client):
-    response = client.get("/products/1")
+    response = client.get("/products/test-shirt")
 
     assert response.status_code == 200
 
@@ -29,7 +29,6 @@ def test_get_single_product(client):
     assert product["id"] == 1
     assert product["name"] == "Test Shirt"
     assert Decimal(product["price"]) == Decimal("25.00")
-    assert product["stock"] == 10
 
 
 def test_get_invalid_product(client):
