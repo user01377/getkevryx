@@ -11,9 +11,14 @@ spec:
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 120
+      
       template:
         spec:
+          imagePullSecrets:
+            - name: ghcr-secret
+
           restartPolicy: Never
+
           containers:
             - name: restock-service
               image: {{ .Values.backend.image }}
