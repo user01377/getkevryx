@@ -11,7 +11,6 @@ class ProductOut(BaseModel):
     slug: str
     description: str | None = None
     price: Decimal
-    stock: int
     category: str
 
     model_config = ConfigDict(from_attributes=True)
