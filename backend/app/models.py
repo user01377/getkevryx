@@ -28,6 +28,7 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False, index=True)
+    slug = Column(String(255), nullable=False, unique=True, index=True)
     description = Column(Text)
     price = Column(Numeric(10, 2), nullable=False)
     stock = Column(Integer, default=0)
