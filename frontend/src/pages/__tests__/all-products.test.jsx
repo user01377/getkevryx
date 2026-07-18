@@ -76,7 +76,7 @@ describe("ProductsGrid", () => {
       ok: true,
       json: async () => ({
         data: [
-          { id: 7, name: "Test Product", price: "10", description: "desc" },
+          { id: 7, name: "Test Product", slug: "test-product" ,price: "10", description: "desc" },
         ],
       }),
     });
@@ -89,7 +89,7 @@ describe("ProductsGrid", () => {
 
     const link = await screen.findByRole("link");
 
-    expect(link).toHaveAttribute("href", "/all-products/7");
+    expect(link).toHaveAttribute("href", "/all-products/test-product");
   });
 
   test("formats price correctly", async () => {
@@ -97,7 +97,7 @@ describe("ProductsGrid", () => {
       ok: true,
       json: async () => ({
         data: [
-          { id: 1, name: "Item", price: "5", description: "desc" },
+          { id: 1, name: "Item", slug: "item", price: "5", description: "desc" },
         ],
       }),
     });
