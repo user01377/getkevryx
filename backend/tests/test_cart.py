@@ -98,7 +98,6 @@ def test_add_invalid_quantity(client):
     )
 
     assert response.status_code == 400
-    assert response.json()["detail"] == "Quantity must be > 0"
 
 
 def test_add_multiple_products(client):

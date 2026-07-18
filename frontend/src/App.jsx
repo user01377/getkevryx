@@ -36,8 +36,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/track-order" element={<TrackOrder />} />
             <Route path="/all-products" element={<AllProducts />} />
-            <Route path="/all-products/:id" element={<GarmentPage />} />
-            {/* change to :slug when feature implemented */}
+            <Route path="/all-products/:slug" element={<GarmentPage />} />
             <Route path="/order/:id" element={<OrderSummaryPage />} />
           </Routes>
         </main>

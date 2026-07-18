@@ -7,6 +7,8 @@ export default function ProductsGrid() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const noProducts = !loading && products.length === 0;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -66,6 +68,17 @@ export default function ProductsGrid() {
     );
   }
 
+  if (noProducts) {
+    return (
+      <div className="products-container">
+        <div className="no-products">
+          <h1>No Products Found.</h1>
+          <p>Fetch was successful but no products were found. Try refresh or contact support if issue persists.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="products-container">
 
@@ -73,8 +86,8 @@ export default function ProductsGrid() {
 
         {products.map((p) => (
           <Link
-            key={p.id}
-            to={`/all-products/${p.id}`}
+            key={p.slug}
+            to={`/all-products/${p.slug}`}
             className="product-card"
           >
             <img

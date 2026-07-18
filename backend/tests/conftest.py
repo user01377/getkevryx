@@ -62,6 +62,7 @@ def seed_products(db):
         Product(
             name="Test Shirt",
             description="A test shirt",
+            slug="test-shirt",
             price=Decimal("25.00"),
             stock=10,
             category=ProductCategory.TOP,
@@ -69,6 +70,7 @@ def seed_products(db):
         Product(
             name="Test Hoodie",
             description="A test hoodie",
+            slug="test-hoodie",
             price=Decimal("50.00"),
             stock=5,
             category=ProductCategory.OUTERWEAR,

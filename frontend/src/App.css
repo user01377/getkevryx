@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Satoshi";
+    src: url("/Satoshi-Regular.woff2") format("woff2");
+}
+
 .page {
     display: block;
     width: 100%;

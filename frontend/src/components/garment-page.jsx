@@ -3,17 +3,31 @@ import { useEffect, useState } from "react";
 import "../styles/garment-page.css";
 
 export default function GarmentPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [toastVisible, setToastVisible] = useState(false);
+  const [toast, setToast] = useState(null);
   const [toastLeaving, setToastLeaving] = useState(false);
+
+  const showToast = (toastData) => {
+    setToast(toastData);
+    setToastLeaving(false);
+  
+    setTimeout(() => {
+      setToastLeaving(true);
+    }, 1800);
+  
+    setTimeout(() => {
+      setToast(null);
+      setToastLeaving(false);
+    }, 2100);
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`/api/products/${id}`);
+        const res = await fetch(`/api/products/${slug}`);
         const json = await res.json();
 
         const data = json.data ?? json;
@@ -26,7 +40,7 @@ export default function GarmentPage() {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [slug]);
 
   
   const handleAddToCart = async () => {
@@ -43,24 +57,25 @@ export default function GarmentPage() {
         }),
       });
   
-      if (!res.ok) throw new Error();
-  
-      setToastVisible(true);
-      setToastLeaving(false);
-  
-      setTimeout(() => {
-        setToastLeaving(true);
-      }, 1800);
-  
-      setTimeout(() => {
-        setToastVisible(false);
-        setToastLeaving(false);
-      }, 2100);
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.detail || "Failed to add item");
+      }
+      
+      showToast({
+        type: "success",
+        title: "Added to Cart",
+        message: product.name,
+      });
 
       window.dispatchEvent(new Event("cart-updated"));
   
     } catch (err) {
-      console.error(err);
+      showToast({
+        type: "error",
+        title: "Error",
+        message: err.message,
+      });
     }
   };
 
@@ -115,18 +130,24 @@ export default function GarmentPage() {
 
       </div>
 
-      {toastVisible && (
-        <div className={`toast ${toastLeaving ? "toast-hide" : ""}`}>
-          <img
-            src={`https://cataas.com/cat?width=800&height=1200&random=${product.id}`}
-            className="toast-image"
-            alt=""
-          />
+      {toast && (
+        <div className={`toast ${toastLeaving ? "toast-hide" : ""} ${toast.type}`}>
+          
+          {toast.type === "success" && (
+            <img
+              src={`https://cataas.com/cat?width=800&height=1200&random=${product.id}`}
+              className="toast-image"
+              alt=""
+            />
+          )}
 
           <div className="toast-text">
-            <p className="toast-title">Added to Cart</p>
+            <p className="toast-title">
+              {toast.title}
+            </p>
+
             <p className="toast-subtitle">
-              {product.name}
+              {toast.message}
             </p>
           </div>
         </div>
