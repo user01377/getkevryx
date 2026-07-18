@@ -175,7 +175,9 @@ def add_to_cart(
         )
 
     if payload.quantity <= 0 or payload.quantity > 10:
-        raise HTTPException(status_code=400, detail="Invalid Quantity. Must be > 0 and <= 10.")
+        raise HTTPException(
+            status_code=400, detail="Invalid Quantity. Must be > 0 and <= 10."
+        )
 
     product = db.query(Product).filter(Product.id == payload.product_id).first()
     if not product:
@@ -191,7 +193,10 @@ def add_to_cart(
 
     if item:
         if (item.quantity + payload.quantity) > 10:
-            raise HTTPException(status_code=400, detail="Total amount of product in cart must be less than or equal to 10.")
+            raise HTTPException(
+                status_code=400,
+                detail="Total amount of product in cart must be less than or equal to 10.",
+            )
 
         item.quantity += payload.quantity
     else:
@@ -298,14 +303,17 @@ def checkout(
                 raise HTTPException(400, f"Product {item.product_id} not found")
 
             if item.quantity <= 0 or item.quantity > 10:
-                raise HTTPException(status_code=400, detail="Invalid product quantity. Must be > 0 and <= 10.")
+                raise HTTPException(
+                    status_code=400,
+                    detail="Invalid product quantity. Must be > 0 and <= 10.",
+                )
 
             if product.stock < item.quantity:
                 raise HTTPException(
                     status_code=400,
-                    detail=f"Insufficient stock for product {product.id}"
+                    detail=f"Insufficient stock for product {product.id}",
                 )
-        
+
         for item in cart_items:
             product = product_map[item.product_id]
 
