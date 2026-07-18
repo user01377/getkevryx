@@ -8,6 +8,7 @@ from decimal import Decimal
 class ProductOut(BaseModel):
     id: int
     name: str
+    slug: str
     description: str | None = None
     price: Decimal
     stock: int
