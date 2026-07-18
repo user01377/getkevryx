@@ -3,6 +3,7 @@ import os
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from dotenv import load_dotenv
+from app import models
 from app.database import Base
 
 from alembic import context
