@@ -174,8 +174,8 @@ def add_to_cart(
             max_age=60 * 60 * 24 * 30,  # 30 day cookie age
         )
 
-    if payload.quantity <= 0:
-        raise HTTPException(status_code=400, detail="Quantity must be > 0")
+    if payload.quantity <= 0 or payload.quantity > 10:
+        raise HTTPException(status_code=400, detail="Invalid Quantity. > 0 and <= 10.")
 
     product = db.query(Product).filter(Product.id == payload.product_id).first()
     if not product:
@@ -190,6 +190,9 @@ def add_to_cart(
     )
 
     if item:
+        if (item.quantity + payload.quantity) > 10:
+            raise HTTPException(status_code=400, detail="Total amount of product in cart must be less than or equal to 10.")
+
         item.quantity += payload.quantity
     else:
         item = CartItem(
