@@ -6,7 +6,8 @@ export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [noProducts, setNoProducts] = useState(null);
+
+  const noProducts = !loading && products.length === 0;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,10 +27,6 @@ export default function ProductsGrid() {
         setError("Unable to resolve products. Please Try Again Later.");
       } finally {
         setLoading(false);
-      }
-
-      if (products.length == 0) {
-        setNoProducts(true);
       }
     };
 
