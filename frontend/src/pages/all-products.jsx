@@ -86,8 +86,8 @@ export default function ProductsGrid() {
 
         {products.map((p) => (
           <Link
-            key={p.id}
-            to={`/all-products/${p.id}`}
+            key={p.slug}
+            to={`/all-products/${p.slug}`}
             className="product-card"
           >
             <img

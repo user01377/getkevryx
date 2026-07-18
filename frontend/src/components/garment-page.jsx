@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/garment-page.css";
 
 export default function GarmentPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -27,7 +27,7 @@ export default function GarmentPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`/api/products/${id}`);
+        const res = await fetch(`/api/products/${slug}`);
         const json = await res.json();
 
         const data = json.data ?? json;
@@ -40,7 +40,7 @@ export default function GarmentPage() {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [slug]);
 
   
   const handleAddToCart = async () => {
