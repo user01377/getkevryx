@@ -1,6 +1,7 @@
 [
   {
     "name": "Apex Shell Jacket",
+    "slug": "apex-shell-jacket",
     "description": "Lightweight waterproof shell designed for alpine conditions with breathable GORE-TEX-inspired fabric and sealed seams.",
     "price": 220.00,
     "stock": 300,
@@ -8,6 +9,7 @@
   },
   {
     "name": "Summit Insulated Hoodie",
+    "slug": "summit-insulated-hoodie",
     "description": "Midweight insulated hoodie built for cold-weather layering with thermal lining and wind-resistant outer shell.",
     "price": 180.00,
     "stock": 600,
@@ -15,6 +17,7 @@
   },
   {
     "name": "Traverse Technical Tee",
+    "slug": "traverse-technical-tee",
     "description": "Moisture-wicking performance tee designed for hiking and high-output activity with quick-dry fabric.",
     "price": 65.00,
     "stock": 600,
@@ -22,6 +25,7 @@
   },
   {
     "name": "Ridge Trek Pants",
+    "slug": "ridge-trek-pants",
     "description": "Durable stretch hiking pants with reinforced knees, water-resistant coating, and articulated fit for mobility.",
     "price": 140.00,
     "stock": 500,
@@ -29,6 +33,7 @@
   },
   {
     "name": "Backcountry Cargo Pants",
+    "slug": "backcountry-cargo-pants",
     "description": "Rugged utility cargo pants designed for outdoor expeditions with multiple weatherproof storage pockets.",
     "price": 150.00,
     "stock": 500,
@@ -36,6 +41,7 @@
   },
   {
     "name": "Stormline Lightweight Shell",
+    "slug": "stormline-lightweight-shell",
     "description": "Packable windbreaker designed for unpredictable weather with ultra-light ripstop fabric.",
     "price": 130.00,
     "stock": 300,
@@ -43,6 +49,7 @@
   },
   {
     "name": "Alpine Down Jacket",
+    "slug": "alpine-down-jacket",
     "description": "High-loft insulated down jacket built for extreme cold with compressible fill and weather-resistant shell.",
     "price": 320.00,
     "stock": 300,
@@ -50,6 +57,7 @@
   },
   {
     "name": "Trail Fleece Midlayer",
+    "slug": "trail-fleece-midlayer",
     "description": "Breathable fleece midlayer optimized for hiking and layering in variable mountain conditions.",
     "price": 110.00,
     "stock": 600,
@@ -57,6 +65,7 @@
   },
   {
     "name": "Summit Utility Shorts",
+    "slug": "summit-utility-shorts",
     "description": "Lightweight outdoor shorts designed for warm-weather trekking with durable stretch fabric.",
     "price": 85.00,
     "stock": 500,
@@ -64,6 +73,7 @@
   },
   {
     "name": "Alpine Knit Beanie",
+    "slug": "alpine-knit-beanie",
     "description": "Warm merino-blend beanie designed for alpine environments with moisture control and thermal retention.",
     "price": 45.00,
     "stock": 200,
