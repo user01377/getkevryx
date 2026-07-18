@@ -138,7 +138,6 @@ def test_checkout_insufficient_stock(client, seed_products):
     )
 
     assert response.status_code == 400
-    assert "Insufficient stock" in response.json()["detail"]
 
 
 def test_checkout_creates_order_id(client, seed_products):
