@@ -1,4 +1,6 @@
-import os, logging, asyncio
+import os
+import logging
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -15,17 +17,23 @@ def create_app(enable_lifespan: bool = True):
             startup_backend()
 
             rates = [Rate(60, Duration.MINUTE), Rate(5, Duration.SECOND)]
-            redis = Redis(connection_pool=ConnectionPool.from_url(f"redis://:{os.getenv('REDIS_PASSWORD')}@{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"))
+            redis = Redis(
+                connection_pool=ConnectionPool.from_url(
+                    f"redis://:{os.getenv('REDIS_PASSWORD')}@{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"
+                )
+            )
 
-            for i in range(1,6):
+            for i in range(1, 6):
                 try:
                     logging.info("Connecting to redis..")
                     await redis.ping()
                     logging.info("Redis connected.")
                     break
-                except Exception as e:
-                    logging.error("Redis connection error, retrying in %s seconds", i * 2)
-                    await asyncio.sleep(i ** 2)
+                except Exception:
+                    logging.error(
+                        "Redis connection error, retrying in %s seconds", i * 2
+                    )
+                    await asyncio.sleep(i**2)
             else:
                 raise RuntimeError("Redis connection failed.")
 
@@ -38,7 +46,7 @@ def create_app(enable_lifespan: bool = True):
 
         if enable_lifespan:
             await app.state.redis.aclose()
-            
+
     app = FastAPI(lifespan=lifespan)
 
     origins = os.getenv("CORS_ORIGINS", "")

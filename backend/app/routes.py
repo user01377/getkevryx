@@ -26,6 +26,7 @@ from decimal import Decimal
 SHIPPING_RATE = Decimal("0.122")
 TAX_RATE = Decimal("0.0815")
 
+
 async def rate_limit(request: Request):
     limiter = request.app.state.limiter
     ip = request.client.host
@@ -41,6 +42,7 @@ async def rate_limit(request: Request):
             status_code=429,
             detail="Too many requests, try again later.",
         )
+
 
 router = APIRouter(dependencies=[Depends(rate_limit)])
 
