@@ -1,6 +1,7 @@
 # the file that contains the routes for the api, endpoints are logic are defined here
 
-from fastapi import APIRouter, Depends, HTTPException, Cookie, Response
+import logging
+from fastapi import APIRouter, Depends, HTTPException, Cookie, Response, Request
 from uuid import uuid4
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import text
@@ -25,7 +26,23 @@ from decimal import Decimal
 SHIPPING_RATE = Decimal("0.122")
 TAX_RATE = Decimal("0.0815")
 
-router = APIRouter()
+async def rate_limit(request: Request):
+    limiter = request.app.state.limiter
+    ip = request.client.host
+
+    allowed = await limiter.try_acquire_async(
+        ip,
+        blocking=False,
+    )
+
+    if not allowed:
+        logging.warning("%s reached rate limit", ip)
+        raise HTTPException(
+            status_code=429,
+            detail="Too many requests, try again later.",
+        )
+
+router = APIRouter(dependencies=[Depends(rate_limit)])
 
 
 # checks connection health to database
