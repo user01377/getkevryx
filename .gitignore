@@ -218,3 +218,4 @@ secret.yaml
 # Local Bash Dev Scripts
 .res-dock
 .start-local-k8
+seed.py
