@@ -14,8 +14,8 @@ def create_app(enable_lifespan: bool = True):
         if enable_lifespan:
             startup_backend()
 
-            rates = [Rate(20, Duration.MINUTE)]
-            redis = Redis(connection_pool=ConnectionPool.from_url(f"redis://:{os.getenv("REDIS_PASSWORD")}@{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"))
+            rates = [Rate(60, Duration.MINUTE), Rate(5, Duration.SECOND)]
+            redis = Redis(connection_pool=ConnectionPool.from_url(f"redis://:{os.getenv('REDIS_PASSWORD')}@{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"))
 
             for i in range(1,6):
                 try:
@@ -24,7 +24,7 @@ def create_app(enable_lifespan: bool = True):
                     logging.info("Redis connected.")
                     break
                 except Exception as e:
-                    logging.error("Redis connection error, retrying in %s seconds", i ** 2)
+                    logging.error("Redis connection error, retrying in %s seconds", i * 2)
                     await asyncio.sleep(i ** 2)
             else:
                 raise RuntimeError("Redis connection failed.")
