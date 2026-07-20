@@ -28,7 +28,11 @@ TAX_RATE = Decimal("0.0815")
 
 
 async def rate_limit(request: Request):
-    limiter = request.app.state.limiter
+    limiter = getattr(request.app.state, "limiter", None)
+
+    if limiter is None:
+        return
+
     ip = request.client.host
 
     allowed = await limiter.try_acquire_async(
@@ -42,6 +46,7 @@ async def rate_limit(request: Request):
             status_code=429,
             detail="Too many requests, try again later.",
         )
+
 
 
 router = APIRouter(dependencies=[Depends(rate_limit)])
