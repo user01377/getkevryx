@@ -1,6 +1,3 @@
-from fastapi.testclient import TestClient
-from app.main import create_app
-
 def test_security_headers(client):
     response = client.get("/products")
 
@@ -8,10 +5,7 @@ def test_security_headers(client):
 
     assert response.headers["X-Content-Type-Options"] == "nosniff"
     assert response.headers["X-Frame-Options"] == "DENY"
-    assert (
-        response.headers["Referrer-Policy"]
-        == "strict-origin-when-cross-origin"
-    )
+    assert response.headers["Referrer-Policy"] == "strict-origin-when-cross-origin"
     assert (
         response.headers["Permissions-Policy"]
         == "geolocation=(), camera=(), microphone=()"

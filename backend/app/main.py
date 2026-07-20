@@ -10,6 +10,7 @@ from redis.asyncio import ConnectionPool, Redis
 from pyrate_limiter import RedisBucket, Rate, Duration, Limiter
 from app.startup import startup_backend
 
+
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         response = await call_next(request)
