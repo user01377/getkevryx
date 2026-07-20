@@ -1,6 +1,7 @@
 fastapi
+pyrate-limiter
+redis
 uvicorn[standard]
-apscheduler
 
 sqlalchemy
 alembic

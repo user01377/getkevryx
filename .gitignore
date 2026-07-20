@@ -213,8 +213,10 @@ __marimo__/
 _assets
 
 # Kubernetes Secrets
-secret.yaml
+redis-secret.yaml
+postgres-secret.yaml
 
 # Local Bash Dev Scripts
 .res-dock
 .start-local-k8
+seed.py
