@@ -3,11 +3,25 @@ import logging
 import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from contextlib import asynccontextmanager
 from app.routes import router
 from redis.asyncio import ConnectionPool, Redis
 from pyrate_limiter import RedisBucket, Rate, Duration, Limiter
 from app.startup import startup_backend
+
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        response.headers["Permissions-Policy"] = (
+            "geolocation=(), camera=(), microphone=()"
+        )
+
+        return response
 
 
 def create_app(enable_lifespan: bool = True):
@@ -59,6 +73,8 @@ def create_app(enable_lifespan: bool = True):
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    app.add_middleware(SecurityHeadersMiddleware)
 
     app.include_router(router, prefix="/api")
 
