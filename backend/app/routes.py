@@ -48,7 +48,6 @@ async def rate_limit(request: Request):
         )
 
 
-
 router = APIRouter(dependencies=[Depends(rate_limit)])
 
 
