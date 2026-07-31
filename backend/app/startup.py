@@ -7,8 +7,14 @@ but was moved here for modularity and SOC.
 """
 
 import time
+
 from sqlalchemy import text
+
 from app.database import engine
+
+
+class DatabaseOfflineError(Exception):
+    """Raised when the database cannot be reached."""
 
 
 def wait_for_db(retries=10):
@@ -21,7 +27,7 @@ def wait_for_db(retries=10):
             print(f"Database Connection Error: {e}")
             time.sleep(2**i)
 
-    raise Exception("DB offline")
+    raise DatabaseOfflineError("DB offline")
 
 
 # THE MAIN APP STARTUP FUNCTION TO BE IMPORTED AND CALLED FROM MAIN.PY

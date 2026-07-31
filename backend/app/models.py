@@ -1,19 +1,21 @@
 # this file defines our actual database table looks like
 
+import enum
+
 from sqlalchemy import (
     Column,
+    DateTime,
+    Enum,
+    ForeignKey,
     Integer,
+    Numeric,
     String,
     Text,
-    Numeric,
-    DateTime,
-    ForeignKey,
-    Enum,
 )
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.database import Base
-import enum
 
 
 class ProductCategory(str, enum.Enum):

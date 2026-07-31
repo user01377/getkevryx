@@ -1,5 +1,6 @@
-from datetime import datetime, timezone, timedelta
 import logging
+from datetime import datetime, timedelta, timezone
+
 from app.database import SessionLocal
 from app.models import OrderPlaced, OrderStatus
 

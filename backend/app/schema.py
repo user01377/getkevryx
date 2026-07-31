@@ -1,8 +1,9 @@
 # this file validates api requests from users
 
-from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
 from decimal import Decimal
+
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 
 class ProductOut(BaseModel):
