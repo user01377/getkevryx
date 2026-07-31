@@ -9,6 +9,7 @@ from app.routes import router
 from redis.asyncio import ConnectionPool, Redis
 from pyrate_limiter import RedisBucket, Rate, Duration, Limiter
 from app.startup import startup_backend
+from prometheus_fastapi_instrumentator import Instrumentator
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
@@ -78,6 +79,8 @@ def create_app(enable_lifespan: bool = True):
     app.add_middleware(SecurityHeadersMiddleware)
 
     app.include_router(router, prefix="/api")
+
+    Instrumentator().instrument(app).expose(app)
 
     return app
 
