@@ -4,6 +4,10 @@ backend:
 frontend:
   image: ghcr.io/user01377/kevryx-frontend:prod
 
+migrateAnno:
+  hook: pre-upgrade,pre-install
+  hookDelete: before-hook-creation,hook-succeeded
+
 redis:
   enabled: true
 
@@ -26,3 +30,6 @@ redis:
       limits:
         cpu: 500m
         memory: 512Mi
+
+metrics:
+  enabled: true

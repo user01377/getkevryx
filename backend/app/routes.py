@@ -1,30 +1,34 @@
 # the file that contains the routes for the api, endpoints are logic are defined here
 
 import logging
-from fastapi import APIRouter, Depends, HTTPException, Cookie, Response, Request
+from decimal import Decimal
 from uuid import uuid4
-from sqlalchemy.orm import Session, joinedload
+
+from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response
 from sqlalchemy import text
+from sqlalchemy.orm import Session, joinedload
+
 from app.database import get_db
-from app.models import Product, Cart, CartItem, OrderPlaced, OrderItem
+from app.models import Cart, CartItem, OrderItem, OrderPlaced, Product
 from app.schema import (
-    ProductOut,
-    ProductListResponse,
     AddToCart,
     CartItemAddOut,
     CartOut,
-    UpdateCartItem,
-    CheckoutIn,
-    TrackOrderIn,
-    OrderOut,
-    OrderItemOut,
-    CartSummaryOut,
     CartSummaryItemOut,
+    CartSummaryOut,
+    CheckoutIn,
+    OrderItemOut,
+    OrderOut,
+    ProductListResponse,
+    ProductOut,
+    TrackOrderIn,
+    UpdateCartItem,
 )
-from decimal import Decimal
 
 SHIPPING_RATE = Decimal("0.122")
 TAX_RATE = Decimal("0.0815")
+
+logger = logging.getLogger(__name__)
 
 
 async def rate_limit(request: Request):
@@ -41,7 +45,7 @@ async def rate_limit(request: Request):
     )
 
     if not allowed:
-        logging.warning("%s reached rate limit", ip)
+        logger.warning("%s reached rate limit", ip)
         raise HTTPException(
             status_code=429,
             detail="Too many requests, try again later.",
@@ -133,10 +137,10 @@ def cart_summary(
     if not session_id:
         return CartSummaryOut(
             items=[],
-            subtotal=Decimal("0"),
-            shipping=Decimal("0"),
-            tax=Decimal("0"),
-            total=Decimal("0"),
+            subtotal=Decimal(0),
+            shipping=Decimal(0),
+            tax=Decimal(0),
+            total=Decimal(0),
         )
 
     cart = (
@@ -149,10 +153,10 @@ def cart_summary(
     if not cart:
         return CartSummaryOut(
             items=[],
-            subtotal=Decimal("0"),
-            shipping=Decimal("0"),
-            tax=Decimal("0"),
-            total=Decimal("0"),
+            subtotal=Decimal(0),
+            shipping=Decimal(0),
+            tax=Decimal(0),
+            total=Decimal(0),
         )
 
     subtotal = sum(

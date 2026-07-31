@@ -135,10 +135,10 @@ def test_empty_cart_summary(client):
     summary = response.json()
 
     assert summary["items"] == []
-    assert Decimal(summary["subtotal"]) == Decimal("0")
-    assert Decimal(summary["shipping"]) == Decimal("0")
-    assert Decimal(summary["tax"]) == Decimal("0")
-    assert Decimal(summary["total"]) == Decimal("0")
+    assert Decimal(summary["subtotal"]) == Decimal(0)
+    assert Decimal(summary["shipping"]) == Decimal(0)
+    assert Decimal(summary["tax"]) == Decimal(0)
+    assert Decimal(summary["total"]) == Decimal(0)
 
 
 def test_cart_summary(client):

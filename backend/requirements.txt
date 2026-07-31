@@ -1,6 +1,7 @@
 fastapi
 pyrate-limiter
 redis
+prometheus-fastapi-instrumentator
 uvicorn[standard]
 
 sqlalchemy

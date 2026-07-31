@@ -2,3 +2,6 @@ exclude = [
     "alembic/versions",
     "alembic/env.py"
 ]
+
+[lint]
+ignore = ["B008", "BLE001"]

@@ -1,14 +1,20 @@
-import os
-import logging
 import asyncio
+import logging
+import os
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-from contextlib import asynccontextmanager
-from app.routes import router
+from prometheus_fastapi_instrumentator import Instrumentator
+from pyrate_limiter import Duration, Limiter, Rate, RedisBucket
 from redis.asyncio import ConnectionPool, Redis
-from pyrate_limiter import RedisBucket, Rate, Duration, Limiter
+from redis.exceptions import ConnectionError
+from starlette.middleware.base import BaseHTTPMiddleware
+
+from app.routes import router
 from app.startup import startup_backend
+
+logger = logging.getLogger(__name__)
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
@@ -40,12 +46,12 @@ def create_app(enable_lifespan: bool = True):
 
             for i in range(1, 6):
                 try:
-                    logging.info("Connecting to redis..")
+                    logger.info("Connecting to redis..")
                     await redis.ping()
-                    logging.info("Redis connected.")
+                    logger.info("Redis connected.")
                     break
-                except Exception:
-                    logging.error(
+                except ConnectionError:
+                    logger.error(
                         "Redis connection error, retrying in %s seconds", i * 2
                     )
                     await asyncio.sleep(i**2)
@@ -78,6 +84,8 @@ def create_app(enable_lifespan: bool = True):
     app.add_middleware(SecurityHeadersMiddleware)
 
     app.include_router(router, prefix="/api")
+
+    Instrumentator().instrument(app).expose(app)
 
     return app
 
