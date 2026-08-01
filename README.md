@@ -104,7 +104,7 @@ flowchart TD
     J -->|No| L[Automatic Helm Rollback]
 ```
 
-## Full CI/CD Pipeline
+### Full CI/CD Pipeline
 
 ``` mermaid
 flowchart LR
@@ -129,4 +129,73 @@ flowchart LR
 
     K8s --> FrontendPod[Frontend Pod]
     K8s --> BackendPod[Backend Pod]
+```
+
+## Kubernetes Deployment
+```mermaid
+flowchart TB
+
+    User((User))
+
+    subgraph Kubernetes Cluster
+
+        Traefik[Traefik Ingress]
+
+        FrontendService["Frontend Service<br/>Load Balances Traffic"]
+        BackendService["Backend Service<br/>Load Balances Traffic"]
+
+        Frontend1["Frontend Pod 1<br/>React + NGINX"]
+        Frontend2["Frontend Pod 2<br/>React + NGINX"]
+
+        Backend1["Backend Pod 1<br/>FastAPI"]
+        Backend2["Backend Pod 2<br/>FastAPI"]
+
+        Redis[(Redis<br/>Shared Rate Limit Store)]
+        PostgreSQL[(PostgreSQL<br/>Application Database)]
+
+        User --> Traefik
+
+        Traefik -->|/| FrontendService
+        Traefik -->|/api| BackendService
+
+        FrontendService --> Frontend1
+        FrontendService --> Frontend2
+
+        BackendService --> Backend1
+        BackendService --> Backend2
+
+        Backend1 --> Redis
+        Backend2 --> Redis
+
+        Backend1 --> PostgreSQL
+        Backend2 --> PostgreSQL
+
+    end
+```
+### Kubernetes Request Flow
+```mermaid
+sequenceDiagram
+
+    actor User
+
+    participant Traefik as Traefik Ingress
+    participant Frontend as Frontend Service
+    participant Backend as Backend Service
+    participant Redis
+    participant PostgreSQL
+
+    User->>Traefik: GET /
+    Traefik->>Frontend: Route "/"
+    Frontend-->>User: React Application
+
+    User->>Traefik: GET /api/products
+    Traefik->>Backend: Route "/api"
+
+    Backend->>Redis: Check IP rate limit
+    Redis-->>Backend: Allow request
+
+    Backend->>PostgreSQL: Query data
+    PostgreSQL-->>Backend: Results
+
+    Backend-->>User: JSON Response
 ```
