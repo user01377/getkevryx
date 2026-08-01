@@ -12,7 +12,7 @@ There are two platforms which kevryx was deployed on. An **AWS EC2 instance** an
 
 Due to cost constraints, the deployment on AWS did not include any Kubernetes orchestration and was deployed from docker compose files.
 
-The local Ubuntu server deployment has all of the infrastructure mentioned and more.
+The locally run Ubuntu server deployment has all of the infrastructure mentioned and more.
 
 <br>
 
